@@ -7,7 +7,7 @@
 <aside id="sidebar" class="sidebar"><p class="nav-heading">DEVELOPER REFERENCE</p><nav aria-label="Documentation"><a href="index.html"><span>00</span>Overview</a><a href="getting-started.html"><span>01</span>Start here</a><a href="hardware.html"><span>02</span>Hardware</a><a href="pinouts.html" aria-current="page"><span>03</span>Pinouts</a><a href="expansion.html"><span>04</span>Expansion add-ons</a><a href="programming.html"><span>05</span>Programming</a><a href="batteries.html"><span>06</span>Batteries</a><a href="antennas.html"><span>07</span>Antennas</a><a href="troubleshooting.html"><span>08</span>Troubleshooting</a><a href="downloads.html"><span>09</span>Downloads</a><a href="revisions.html"><span>10</span>Reference + testing</a></nav><div class="sidebar-note"><span class="status-dot"></span>Cerberus base board<p>One onboard C5<br>Quad PSRAM · 1-bit SDMMC<br>40 MHz SDMMC target</p></div><a class="installer-link" href="https://463n7.github.io/Cerberus-Flasher/">Open USB installer ↗</a></aside>
 <div class="workspace"><div class="utility"><span>REFERENCE / PINOUTS</span><div class="search-wrap"><label class="sr-only" for="site-search">Search all documentation</label><input id="site-search" type="search" autocomplete="off" placeholder="Search documentation…"><div id="search-results" class="search-results" hidden aria-label="Search results" aria-live="polite"></div></div></div>
 <main id="main" tabindex="-1"><div class="page-eyebrow">CERBERUS DEV BOARD <span>/</span> TECHNICAL REFERENCE</div><article><h1 id="pinouts">Pinouts</h1>
-<p><strong>GPIO numbers refer to the ESP32-S3 unless a C5 column says otherwise.</strong> The expansion breakout table explicitly identifies each processor and its contact positions.</p>
+<p><strong>GPIO numbers refer to the ESP32-S3 unless labeled C5.</strong> The expansion breakout table identifies the processor for every GPIO.</p>
 <p>Jump to the <a href="#base-cerberus-board">base board</a>, <a href="#expansion-breakout-connections">expansion breakout connections</a>, or <a href="#six-c5-expansion-add-on-in-testing">six-C5 expansion add-on</a>. The RF/NFC add-on is in early testing and has no published pin map.</p>
 <div class="table-filter"><label for="pin-filter">Find a pin or signal</label><input id="pin-filter" type="search" placeholder="Try GPIO44, touch, MOSI, charger…"><p id="pin-filter-status" aria-live="polite"></p></div>
 
@@ -253,165 +253,174 @@
 </tbody>
 </table></div>
 <h2 id="expansion-breakout-connections">Expansion breakout connections</h2>
-<p><strong>Viewing orientation:</strong> the labeled face is toward you, with the board's long dimension vertical as shown in the photo. Read each side downward from its own upper square <strong>GND</strong> pad. The left labeled row starts higher on the board than the right labeled row.</p>
-<p>Positions 1–20 below are counted independently on each side. They are table position indices, not manufacturer connector pin numbers or an underside/mating-side view.</p>
-<details class="connector-photo"><summary>View the labeled expansion breakout photo</summary><figure><a href="assets/expansion-breakout.jpg"><img src="assets/expansion-breakout.jpg" alt="Labeled face of the Cerberus expansion breakout, with the C5 GPIO bracket on the upper left and S3 GPIOs on the lower left and right." width="720" height="1280" loading="lazy"></a><figcaption>Expansion breakout, labeled face. Each row begins at its own square GND pad.</figcaption></figure></details>
+<p><strong>Viewing orientation:</strong> the labeled face is toward you, with the board's long dimension vertical as shown in the photo. The left labeled row starts higher on the board than the right labeled row.</p>
+<p>The breakout exposes <strong>25 GPIO signals: 7 ESP32-C5 and 18 ESP32-S3</strong>. Each signal has its own row below, ordered top to bottom on the left side, then the right side. Power and ground contacts are omitted.</p>
+<details class="connector-photo"><summary>View the labeled expansion breakout photo</summary><figure><a href="assets/expansion-breakout.jpg"><img src="assets/expansion-breakout.jpg" alt="Labeled face of the Cerberus expansion breakout, with the C5 GPIO bracket on the upper left and S3 GPIOs on the lower left and right." width="720" height="1280" loading="lazy"></a><figcaption>Expansion breakout, labeled face. Read each side from top to bottom.</figcaption></figure></details>
 
 <div class="table-scroll"><table>
 <thead>
 <tr>
-<th>Position from top</th>
-<th>Left label</th>
-<th>Left connection</th>
-<th>Right label</th>
-<th>Right connection</th>
+<th>Processor</th>
+<th>GPIO</th>
+<th>Printed label</th>
+<th>Side</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td>GND</td>
-<td>Ground</td>
-<td>GND</td>
-<td>Ground</td>
-</tr>
-<tr>
-<td>2</td>
-<td>3v3</td>
-<td>3.3 V rail</td>
-<td>3v3</td>
-<td>3.3 V rail</td>
-</tr>
-<tr>
-<td>3</td>
-<td>5v</td>
-<td>5 V rail</td>
-<td>5v</td>
-<td>5 V rail</td>
-</tr>
-<tr>
-<td>4</td>
+<td>ESP32-C5</td>
+<td>GPIO0</td>
 <td>IO0</td>
-<td>ESP32-C5 GPIO0</td>
-<td>IO8</td>
-<td>ESP32-S3 GPIO8</td>
+<td>Left</td>
 </tr>
 <tr>
-<td>5</td>
+<td>ESP32-C5</td>
+<td>GPIO1</td>
 <td>IO1</td>
-<td>ESP32-C5 GPIO1</td>
-<td>IO9</td>
-<td>ESP32-S3 GPIO9</td>
+<td>Left</td>
 </tr>
 <tr>
-<td>6</td>
+<td>ESP32-C5</td>
+<td>GPIO10</td>
 <td>IO10</td>
-<td>ESP32-C5 GPIO10</td>
-<td>IO11</td>
-<td>ESP32-S3 GPIO11</td>
+<td>Left</td>
 </tr>
 <tr>
-<td>7</td>
+<td>ESP32-C5</td>
+<td>GPIO13</td>
 <td>IO13</td>
-<td>ESP32-C5 GPIO13</td>
-<td>IO12</td>
-<td>ESP32-S3 GPIO12</td>
+<td>Left</td>
 </tr>
 <tr>
-<td>8</td>
+<td>ESP32-C5</td>
+<td>GPIO14</td>
 <td>IO14</td>
-<td>ESP32-C5 GPIO14</td>
-<td>IO13</td>
-<td>ESP32-S3 GPIO13</td>
+<td>Left</td>
 </tr>
 <tr>
-<td>9</td>
+<td>ESP32-C5</td>
+<td>GPIO23</td>
 <td>IO23</td>
-<td>ESP32-C5 GPIO23</td>
-<td>IO1</td>
-<td>ESP32-S3 GPIO1</td>
+<td>Left</td>
 </tr>
 <tr>
-<td>10</td>
+<td>ESP32-C5</td>
+<td>GPIO24</td>
 <td>IO24</td>
-<td>ESP32-C5 GPIO24</td>
-<td>IO2</td>
-<td>ESP32-S3 GPIO2</td>
+<td>Left</td>
 </tr>
 <tr>
-<td>11</td>
-<td>GND</td>
-<td>Ground</td>
-<td>IO3</td>
-<td>ESP32-S3 GPIO3</td>
-</tr>
-<tr>
-<td>12</td>
-<td>3v3</td>
-<td>3.3 V rail</td>
-<td>IO14</td>
-<td>ESP32-S3 GPIO14</td>
-</tr>
-<tr>
-<td>13</td>
-<td>5v</td>
-<td>5 V rail</td>
-<td>IO15</td>
-<td>ESP32-S3 GPIO15</td>
-</tr>
-<tr>
-<td>14</td>
+<td>ESP32-S3</td>
+<td>GPIO38</td>
 <td>IO38</td>
-<td>ESP32-S3 GPIO38</td>
-<td>IO41</td>
-<td>ESP32-S3 GPIO41</td>
+<td>Left</td>
 </tr>
 <tr>
-<td>15</td>
+<td>ESP32-S3</td>
+<td>GPIO46</td>
 <td>IO46</td>
-<td>ESP32-S3 GPIO46</td>
-<td>IO42</td>
-<td>ESP32-S3 GPIO42</td>
+<td>Left</td>
 </tr>
 <tr>
-<td>16</td>
+<td>ESP32-S3</td>
+<td>GPIO47</td>
 <td>IO47</td>
-<td>ESP32-S3 GPIO47</td>
-<td>IO43</td>
-<td>ESP32-S3 GPIO43</td>
+<td>Left</td>
 </tr>
 <tr>
-<td>17</td>
+<td>ESP32-S3</td>
+<td>GPIO48</td>
 <td>IO48</td>
-<td>ESP32-S3 GPIO48</td>
+<td>Left</td>
+</tr>
+<tr>
+<td>ESP32-S3</td>
+<td>GPIO8</td>
+<td>IO8</td>
+<td>Right</td>
+</tr>
+<tr>
+<td>ESP32-S3</td>
+<td>GPIO9</td>
+<td>IO9</td>
+<td>Right</td>
+</tr>
+<tr>
+<td>ESP32-S3</td>
+<td>GPIO11</td>
+<td>IO11</td>
+<td>Right</td>
+</tr>
+<tr>
+<td>ESP32-S3</td>
+<td>GPIO12</td>
+<td>IO12</td>
+<td>Right</td>
+</tr>
+<tr>
+<td>ESP32-S3</td>
+<td>GPIO13</td>
+<td>IO13</td>
+<td>Right</td>
+</tr>
+<tr>
+<td>ESP32-S3</td>
+<td>GPIO1</td>
+<td>IO1</td>
+<td>Right</td>
+</tr>
+<tr>
+<td>ESP32-S3</td>
+<td>GPIO2</td>
+<td>IO2</td>
+<td>Right</td>
+</tr>
+<tr>
+<td>ESP32-S3</td>
+<td>GPIO3</td>
+<td>IO3</td>
+<td>Right</td>
+</tr>
+<tr>
+<td>ESP32-S3</td>
+<td>GPIO14</td>
+<td>IO14</td>
+<td>Right</td>
+</tr>
+<tr>
+<td>ESP32-S3</td>
+<td>GPIO15</td>
+<td>IO15</td>
+<td>Right</td>
+</tr>
+<tr>
+<td>ESP32-S3</td>
+<td>GPIO41</td>
+<td>IO41</td>
+<td>Right</td>
+</tr>
+<tr>
+<td>ESP32-S3</td>
+<td>GPIO42</td>
+<td>IO42</td>
+<td>Right</td>
+</tr>
+<tr>
+<td>ESP32-S3</td>
+<td>GPIO43</td>
+<td>IO43</td>
+<td>Right</td>
+</tr>
+<tr>
+<td>ESP32-S3</td>
+<td>GPIO45</td>
 <td>IO45</td>
-<td>ESP32-S3 GPIO45</td>
-</tr>
-<tr>
-<td>18</td>
-<td>5v</td>
-<td>5 V rail</td>
-<td>3v3</td>
-<td>3.3 V rail</td>
-</tr>
-<tr>
-<td>19</td>
-<td>GND</td>
-<td>Ground</td>
-<td>GND</td>
-<td>Ground</td>
-</tr>
-<tr>
-<td>20</td>
-<td>GND</td>
-<td>Ground</td>
-<td>GND</td>
-<td>Ground</td>
+<td>Right</td>
 </tr>
 </tbody>
 </table></div>
-<p>The <strong>ESP32-C5</strong> bracket covers left positions <strong>4–10</strong>. All other GPIO labels in this table are <strong>ESP32-S3</strong> connections. C5 GPIO numbers and S3 GPIO numbers are separate signal domains, even when the numbers match.</p>
-<p>The S3 SPI and I²C contacts share their base-board buses. Preserve the bus settings and startup-strapping requirements described above. The <strong>3v3</strong> and <strong>5v</strong> markings identify supply rails; no connector or rail current rating is specified here.</p>
+<p>The <strong>ESP32-C5</strong> bracket covers the seven upper-left GPIOs. All remaining GPIOs are <strong>ESP32-S3</strong> connections. A GPIO number on the C5 is a separate signal from the same number on the S3.</p>
+<p>The S3 SPI and I²C contacts share their base-board buses. Preserve the bus settings and startup-strapping requirements described above.</p>
 <p><a href="assets/expansion-breakout-pinout.csv">Download the expansion breakout CSV</a> · <a href="assets/expansion-breakout.jpg">Open the full-size photo</a></p>
 <h2 id="six-c5-expansion-add-on-in-testing">Six-C5 expansion add-on — in testing</h2>
 <p><strong>Optional expansion add-on · In testing.</strong> This board adds six WROOM C5 radios to the base board's onboard C5. Matching add-on firmware is required.</p>
@@ -512,7 +521,7 @@
 <p>Each expansion C5 uses the <code>c5-expansion-wroom</code> image; its radio identity follows the S3 chip-select slot. The memory baseline is <strong>4 MB flash / no PSRAM</strong>. Programming checks have passed on six modules; assembled multi-radio operation remains in testing.</p>
 <p>Download the <a href="assets/c5-expansion-pinout.csv">six-C5 expansion pinout CSV</a>.</p>
 <h2 id="developer-files">Developer files</h2>
-<p>The expansion breakout table shows the contact order on the labeled face. Connector part number, pitch, and current ratings are not specified here.</p>
+<p>The expansion breakout table lists GPIO signals as viewed from the labeled face. Connector part number, pitch, and current ratings are not specified here.</p>
 <p>Download the <a href="https://github.com/463N7/Cerberus-Dev-Board/blob/main/examples/cerberus_board_pins.h">base-board pin header</a>. The <a href="expansion.html">expansion add-ons page</a> has testing status, bus integration notes, and the expansion KiCad file area.</p>
 <p>Base-board source: <a href="https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/shared/cerberus_pins.h">Cerberus pin definitions</a>. The six-C5 expansion mapping above remains in testing.</p></article><div class="page-end"><a href="https://github.com/463N7/Cerberus-Dev-Board/blob/main/content/pinouts.md">View page source ↗</a><a href="https://github.com/463N7/Cerberus-Dev-Board/issues/new/choose">Suggest a correction ↗</a></div></main>
 <footer><span>CERBERUS / BUILD. EXPERIMENT. DOCUMENT.</span><span>Reference updated October 27, 2026</span></footer></div></body></html>

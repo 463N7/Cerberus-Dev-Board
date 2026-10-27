@@ -4,7 +4,7 @@ Cerberus has one base board. The **six-C5 bank** and **RF/NFC board** are option
 
 ## Base-board expansion connections
 
-The [expansion breakout table](pinouts.md#expansion-breakout-connections) lists both labeled rows, including the separate S3 and C5 GPIO groups and the ground, 3.3 V, and 5 V contacts. The photo shows the viewing orientation. [Download the breakout CSV](assets/expansion-breakout-pinout.csv).
+The [expansion breakout table](pinouts.md#expansion-breakout-connections) lists all 25 GPIO signals individually: 18 S3 and 7 C5. Each entry identifies the processor, printed label, and side. The photo shows the viewing orientation. [Download the breakout CSV](assets/expansion-breakout-pinout.csv).
 
 ## Six-C5 expansion add-on — in testing
 

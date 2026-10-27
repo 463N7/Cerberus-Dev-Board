@@ -78,7 +78,7 @@ def export_addon_pinouts(assets, heading, filename):
 
 
 def export_breakout_pinouts(assets):
-    """Export the photographed breakout contact order from its documentation table."""
+    """Export individual breakout GPIO signals from their documentation table."""
     source = (ROOT / "content" / "pinouts.md").read_text(encoding="utf-8")
     section = source.split("## Expansion breakout connections\n", 1)[1].split("\n## ", 1)[0]
     rows = []
@@ -86,18 +86,15 @@ def export_breakout_pinouts(assets):
         if not line.startswith("|"):
             continue
         cells = [cell.strip() for cell in line.strip("|").split("|")]
-        if not cells[0].isdigit():
+        if cells[0] not in ("ESP32-C5", "ESP32-S3"):
             continue
-        position, left_label, left_connection, right_label, right_connection = cells
-        rows.extend([
-            ["Left", position, left_label, left_connection, "Labeled face; top to bottom"],
-            ["Right", position, right_label, right_connection, "Labeled face; top to bottom"],
-        ])
-    if len(rows) != 40:
-        raise ValueError(f"Expected 40 breakout contacts, found {len(rows)}")
+        processor, gpio, label, side = cells
+        rows.append([processor, gpio, label, side, "Labeled face; top to bottom on each side"])
+    if len(rows) != 25:
+        raise ValueError(f"Expected 25 breakout GPIO signals, found {len(rows)}")
     with (assets / "expansion-breakout-pinout.csv").open("w", encoding="utf-8", newline="") as file:
         writer = csv.writer(file, lineterminator="\n")
-        writer.writerow(["side", "position_from_own_top_ground", "printed_label", "connection", "view"])
+        writer.writerow(["processor", "gpio", "printed_label", "side", "view"])
         writer.writerows(rows)
 
 
@@ -138,7 +135,7 @@ def build():
     export_addon_pinouts(assets, "Six-C5 expansion add-on — in testing", "c5-expansion-pinout.csv")
     export_breakout_pinouts(assets)
     (output / "404.html").write_text('''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Page not found | Cerberus Dev Board</title><body style="font-family:system-ui;padding:3rem;max-width:40rem"><h1>Page not found</h1><p>That reference may have moved.</p><a href="/Cerberus-Dev-Board/">Open Cerberus Dev Board</a></body></html>''', encoding="utf-8")
-    print(f"Built {len(PAGES)} pages, the 40-contact breakout CSV, and six-C5 pinout CSV.")
+    print(f"Built {len(PAGES)} pages, the 25-GPIO breakout CSV, and six-C5 pinout CSV.")
 
 
 if __name__ == "__main__":

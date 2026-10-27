@@ -1,6 +1,6 @@
 # Pinouts
 
-**GPIO numbers refer to the ESP32-S3 unless a C5 column says otherwise.** The expansion breakout table explicitly identifies each processor and its contact positions.
+**GPIO numbers refer to the ESP32-S3 unless labeled C5.** The expansion breakout table identifies the processor for every GPIO.
 
 Jump to the [base board](#base-cerberus-board), [expansion breakout connections](#expansion-breakout-connections), or [six-C5 expansion add-on](#six-c5-expansion-add-on-in-testing). The RF/NFC add-on is in early testing and has no published pin map.
 
@@ -78,38 +78,43 @@ GPIO44 is driven by the onboard C5. Keep other peripheral outputs off that wire.
 
 ## Expansion breakout connections
 
-**Viewing orientation:** the labeled face is toward you, with the board's long dimension vertical as shown in the photo. Read each side downward from its own upper square **GND** pad. The left labeled row starts higher on the board than the right labeled row.
+**Viewing orientation:** the labeled face is toward you, with the board's long dimension vertical as shown in the photo. The left labeled row starts higher on the board than the right labeled row.
 
-Positions 1–20 below are counted independently on each side. They are table position indices, not manufacturer connector pin numbers or an underside/mating-side view.
+The breakout exposes **25 GPIO signals: 7 ESP32-C5 and 18 ESP32-S3**. Each signal has its own row below, ordered top to bottom on the left side, then the right side. Power and ground contacts are omitted.
 
-<details class="connector-photo"><summary>View the labeled expansion breakout photo</summary><figure><a href="assets/expansion-breakout.jpg"><img src="assets/expansion-breakout.jpg" alt="Labeled face of the Cerberus expansion breakout, with the C5 GPIO bracket on the upper left and S3 GPIOs on the lower left and right." width="720" height="1280" loading="lazy"></a><figcaption>Expansion breakout, labeled face. Each row begins at its own square GND pad.</figcaption></figure></details>
+<details class="connector-photo"><summary>View the labeled expansion breakout photo</summary><figure><a href="assets/expansion-breakout.jpg"><img src="assets/expansion-breakout.jpg" alt="Labeled face of the Cerberus expansion breakout, with the C5 GPIO bracket on the upper left and S3 GPIOs on the lower left and right." width="720" height="1280" loading="lazy"></a><figcaption>Expansion breakout, labeled face. Read each side from top to bottom.</figcaption></figure></details>
 
-| Position from top | Left label | Left connection | Right label | Right connection |
-| --- | --- | --- | --- | --- |
-| 1 | GND | Ground | GND | Ground |
-| 2 | 3v3 | 3.3 V rail | 3v3 | 3.3 V rail |
-| 3 | 5v | 5 V rail | 5v | 5 V rail |
-| 4 | IO0 | ESP32-C5 GPIO0 | IO8 | ESP32-S3 GPIO8 |
-| 5 | IO1 | ESP32-C5 GPIO1 | IO9 | ESP32-S3 GPIO9 |
-| 6 | IO10 | ESP32-C5 GPIO10 | IO11 | ESP32-S3 GPIO11 |
-| 7 | IO13 | ESP32-C5 GPIO13 | IO12 | ESP32-S3 GPIO12 |
-| 8 | IO14 | ESP32-C5 GPIO14 | IO13 | ESP32-S3 GPIO13 |
-| 9 | IO23 | ESP32-C5 GPIO23 | IO1 | ESP32-S3 GPIO1 |
-| 10 | IO24 | ESP32-C5 GPIO24 | IO2 | ESP32-S3 GPIO2 |
-| 11 | GND | Ground | IO3 | ESP32-S3 GPIO3 |
-| 12 | 3v3 | 3.3 V rail | IO14 | ESP32-S3 GPIO14 |
-| 13 | 5v | 5 V rail | IO15 | ESP32-S3 GPIO15 |
-| 14 | IO38 | ESP32-S3 GPIO38 | IO41 | ESP32-S3 GPIO41 |
-| 15 | IO46 | ESP32-S3 GPIO46 | IO42 | ESP32-S3 GPIO42 |
-| 16 | IO47 | ESP32-S3 GPIO47 | IO43 | ESP32-S3 GPIO43 |
-| 17 | IO48 | ESP32-S3 GPIO48 | IO45 | ESP32-S3 GPIO45 |
-| 18 | 5v | 5 V rail | 3v3 | 3.3 V rail |
-| 19 | GND | Ground | GND | Ground |
-| 20 | GND | Ground | GND | Ground |
+| Processor | GPIO | Printed label | Side |
+| --- | --- | --- | --- |
+| ESP32-C5 | GPIO0 | IO0 | Left |
+| ESP32-C5 | GPIO1 | IO1 | Left |
+| ESP32-C5 | GPIO10 | IO10 | Left |
+| ESP32-C5 | GPIO13 | IO13 | Left |
+| ESP32-C5 | GPIO14 | IO14 | Left |
+| ESP32-C5 | GPIO23 | IO23 | Left |
+| ESP32-C5 | GPIO24 | IO24 | Left |
+| ESP32-S3 | GPIO38 | IO38 | Left |
+| ESP32-S3 | GPIO46 | IO46 | Left |
+| ESP32-S3 | GPIO47 | IO47 | Left |
+| ESP32-S3 | GPIO48 | IO48 | Left |
+| ESP32-S3 | GPIO8 | IO8 | Right |
+| ESP32-S3 | GPIO9 | IO9 | Right |
+| ESP32-S3 | GPIO11 | IO11 | Right |
+| ESP32-S3 | GPIO12 | IO12 | Right |
+| ESP32-S3 | GPIO13 | IO13 | Right |
+| ESP32-S3 | GPIO1 | IO1 | Right |
+| ESP32-S3 | GPIO2 | IO2 | Right |
+| ESP32-S3 | GPIO3 | IO3 | Right |
+| ESP32-S3 | GPIO14 | IO14 | Right |
+| ESP32-S3 | GPIO15 | IO15 | Right |
+| ESP32-S3 | GPIO41 | IO41 | Right |
+| ESP32-S3 | GPIO42 | IO42 | Right |
+| ESP32-S3 | GPIO43 | IO43 | Right |
+| ESP32-S3 | GPIO45 | IO45 | Right |
 
-The **ESP32-C5** bracket covers left positions **4–10**. All other GPIO labels in this table are **ESP32-S3** connections. C5 GPIO numbers and S3 GPIO numbers are separate signal domains, even when the numbers match.
+The **ESP32-C5** bracket covers the seven upper-left GPIOs. All remaining GPIOs are **ESP32-S3** connections. A GPIO number on the C5 is a separate signal from the same number on the S3.
 
-The S3 SPI and I²C contacts share their base-board buses. Preserve the bus settings and startup-strapping requirements described above. The **3v3** and **5v** markings identify supply rails; no connector or rail current rating is specified here.
+The S3 SPI and I²C contacts share their base-board buses. Preserve the bus settings and startup-strapping requirements described above.
 
 [Download the expansion breakout CSV](assets/expansion-breakout-pinout.csv) · [Open the full-size photo](assets/expansion-breakout.jpg)
 
@@ -147,7 +152,7 @@ Download the [six-C5 expansion pinout CSV](assets/c5-expansion-pinout.csv).
 
 ## Developer files
 
-The expansion breakout table shows the contact order on the labeled face. Connector part number, pitch, and current ratings are not specified here.
+The expansion breakout table lists GPIO signals as viewed from the labeled face. Connector part number, pitch, and current ratings are not specified here.
 
 Download the [base-board pin header](https://github.com/463N7/Cerberus-Dev-Board/blob/main/examples/cerberus_board_pins.h). The [expansion add-ons page](expansion.md) has testing status, bus integration notes, and the expansion KiCad file area.
 
