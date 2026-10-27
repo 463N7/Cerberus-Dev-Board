@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Programming | Cerberus Dev Board</title><meta name="description" content="Toolchain, memory settings, drivers, protocol, and bring-up.">
+<meta name="theme-color" content="#101817"><link rel="icon" href="assets/mark.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/style.css"><script src="assets/site.js" defer></script></head>
+<body class="reference"><a class="skip" href="#main">Skip to content</a>
+<header class="topbar"><a class="brand" href="index.html"><img src="assets/mark.svg" alt="" width="34" height="34"><span>CERBERUS<small>DEV BOARD</small></span></a><span class="top-label">HARDWARE / SOFTWARE / EXPANSION</span><a class="github" href="https://github.com/463N7/Cerberus-Dev-Board">GitHub <span aria-hidden="true">↗</span></a><button class="menu-button" type="button" aria-controls="sidebar" aria-expanded="false">Menu</button></header>
+<aside id="sidebar" class="sidebar"><p class="nav-heading">DEVELOPER REFERENCE</p><nav aria-label="Documentation"><a href="index.html"><span>00</span>Overview</a><a href="getting-started.html"><span>01</span>Start here</a><a href="hardware.html"><span>02</span>Hardware</a><a href="pinouts.html"><span>03</span>Built-in pinouts</a><a href="expansion.html"><span>04</span>Expansion boards</a><a href="programming.html" aria-current="page"><span>05</span>Programming</a><a href="batteries.html"><span>06</span>Batteries</a><a href="antennas.html"><span>07</span>Antennas</a><a href="troubleshooting.html"><span>08</span>Troubleshooting</a><a href="downloads.html"><span>09</span>Downloads</a><a href="revisions.html"><span>10</span>Revisions + evidence</a></nav><div class="sidebar-note"><span class="status-dot"></span>Production N16R2<p>One onboard C5<br>Quad PSRAM · 1-bit SDMMC</p></div><a class="installer-link" href="https://463n7.github.io/Cerberus-Flasher/">Open USB installer ↗</a></aside>
+<div class="workspace"><div class="utility"><span>REFERENCE / PROGRAMMING</span><div class="search-wrap"><label class="sr-only" for="site-search">Search all documentation</label><input id="site-search" type="search" autocomplete="off" placeholder="Search documentation…"><div id="search-results" class="search-results" hidden aria-label="Search results" aria-live="polite"></div></div></div>
+<main id="main" tabindex="-1"><div class="page-eyebrow">CERBERUS DEV BOARD <span>/</span> TECHNICAL REFERENCE</div><article><h1 id="programming-reference">Programming reference</h1>
+<p>The S3 runs application services. The onboard C5 runs a separate radio application. Their shared wire interface and protocol must agree; changing one processor's firmware can require rebuilding both.</p>
+<h2 id="reference-toolchain">Reference toolchain</h2>
+<p>The recorded production Sentinel toolchain is PlatformIO Core <strong>6.1.19</strong>, platform <strong>espressif32@7.0.1</strong>, and <strong>ESP-IDF 6.0.1</strong> (<code>framework-espidf@4.60001.0</code>). Use the pinned configuration and dependency lock files in the firmware repository.</p>
+<pre><code class="language-powershell"># Run inside a Cerberus-Sentinel checkout.
+python tools/build_sentinel.py --target s3
+python tools/build_sentinel.py --target c5
+python tools/build_sentinel.py --target bridge
+python tools/build_sentinel.py --target all --package
+</code></pre>
+<h2 id="memory-and-partitions">Memory and partitions</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Target</th>
+<th>Reference memory profile</th>
+<th>Application partition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Production S3</td>
+<td>16 MB flash, DIO 80 MHz; 2 MB quad PSRAM</td>
+<td><code>0x10000</code>, size <code>0x700000</code> in Sentinel</td>
+</tr>
+<tr>
+<td>Onboard C5</td>
+<td>Conservative 2 MB flash budget, PSRAM disabled</td>
+<td><code>0x10000</code>, size <code>0x1F0000</code> in Sentinel</td>
+</tr>
+<tr>
+<td>Temporary S3 bridge</td>
+<td>Production S3 profile</td>
+<td>Uses the S3 application slot temporarily</td>
+</tr>
+</tbody>
+</table></div>
+<p>These offsets belong to the referenced firmware layout, not every possible Cerberus application. Use each release's manifest and partition images when flashing. A detected 8 MB C5 does not justify changing its partition map without rebuilding and validation.</p>
+<p><strong>Keep production PSRAM in quad mode.</strong> Octal PSRAM can reserve GPIO35–37 used by microSD. DMA buffers and task stacks must follow ESP-IDF memory requirements; large optional UI buffers can explicitly request PSRAM and handle allocation failure.</p>
+<h2 id="source-layout-and-driver-entry-points">Source layout and driver entry points</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Location in Sentinel</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>shared/cerberus_pins.h</code></td>
+<td>Production board signal assignments</td>
+</tr>
+<tr>
+<td><code>shared/cerberus_protocol.h</code></td>
+<td>Shared message definitions, framing, capabilities, versions</td>
+</tr>
+<tr>
+<td><code>s3_main/main/display.c</code></td>
+<td>ST7796 SPI2 display and buffered updates</td>
+</tr>
+<tr>
+<td><code>s3_main/main/touch.c</code></td>
+<td>GT911 input</td>
+</tr>
+<tr>
+<td><code>s3_main/main/i2c_bus.c</code></td>
+<td>Shared I²C0 device registration</td>
+</tr>
+<tr>
+<td><code>s3_main/main/battery.c</code></td>
+<td>MAX17048 sampling and cached status</td>
+</tr>
+<tr>
+<td><code>s3_main/main/storage.c</code></td>
+<td>SDMMC and file service</td>
+</tr>
+<tr>
+<td><code>s3_main/main/c5_control.c</code></td>
+<td>Inverted reset/boot control</td>
+</tr>
+<tr>
+<td><code>s3_main/main/c5_spi_link.c</code></td>
+<td>SPI3 master and READY handling</td>
+</tr>
+<tr>
+<td><code>s3_main/main/c5_flash_bridge.c</code></td>
+<td>Temporary USB/UART bridge</td>
+</tr>
+<tr>
+<td><code>c5_firmware/</code></td>
+<td>Onboard C5 application</td>
+</tr>
+</tbody>
+</table></div>
+<p>Use those driver implementations when integrating into the same firmware. Adding a second independent SPI or I²C owner over existing pins will break the shared services.</p>
+<h2 id="s3c5-protocol">S3/C5 protocol</h2>
+<p>The current Sentinel header identifies protocol <strong>V2</strong>, with V1 fallback and a capability bitmap. Ordinary framed transfers are <strong>32 bytes</strong> with a <strong>22-byte payload</strong>; event batches have a separate <strong>64-byte</strong> transfer form. V2 framing includes CRC validation and bounded payload handling. Use the exact structures and helpers from the matching firmware commit.</p>
+<p>The normal READY line is <strong>C5 GPIO11 → S3 GPIO44</strong>. It reuses the C5 UART TX wire. Before clocking a request, the S3 waits for a queued C5 transfer; request/response timing and fallback handling belong to the link driver. The UART is not the normal runtime message path.</p>
+<p>The legacy seven-radio scanner uses different framing and IRQ behavior. Do not treat an identical SPI pinout as protocol compatibility.</p>
+<h2 id="c5-programming-through-the-s3">C5 programming through the S3</h2>
+<p>The bridge temporarily occupies the S3 application slot, sets C5 boot/reset control, and forwards USB to the C5 UART at <strong>115200 baud, 8N1</strong>. The established path uses the esptool stub, uncompressed writes, and <strong>4096-byte blocks</strong>.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Host-facing interface</th>
+<th>USB VID:PID</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Native S3 USB Serial/JTAG</td>
+<td><code>303A:1001</code></td>
+<td>Install bridge or final S3 firmware</td>
+</tr>
+<tr>
+<td>Cerberus C5 flash bridge</td>
+<td><code>303A:4001</code></td>
+<td>Reach onboard C5 ROM loader</td>
+</tr>
+</tbody>
+</table></div>
+<p>The bridge's USB line-coding requests are firmware-specific: 2400 requests C5 ROM reset/retry, 1200 returns to S3 ROM, and 9600 returns carrier identity. They do not change the physical C5 UART rate. Use the <a href="https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/docs/C5_USB_BRIDGE.md">full bridge contract</a> before writing a custom programmer. Compare device identity across port changes and always reinstall the final S3 application.</p>
+<h2 id="battery-gauge-integration">Battery gauge integration</h2>
+<p>Use the existing shared bus at 400 kHz and MAX17048 address <code>0x36</code>. Its voltage register is <code>0x02</code>, state-of-charge register <code>0x04</code>, and version register <code>0x08</code>. Words are read most-significant byte first. The documented conversions are <strong>78.125 µV per VCELL count</strong> and <strong>1/256 percent per SOC count</strong>. See the <a href="https://www.analog.com/en/products/max17048.html">Analog Devices datasheet</a>.</p>
+<p>Sentinel samples every 5 seconds, retries unavailable readings after 30 seconds, and exposes a cached read-only <code>battery</code> console command. A voltage or SOC reading is not proof of battery presence or charging. BQ25895 charging-state support is a separate charger integration; its actual configuration is not defined by the gauge driver.</p>
+<h2 id="bring-up-sequence-for-a-new-application">Bring-up sequence for a new application</h2>
+<ol>
+<li>Boot the correct memory profile and preserve native USB recovery.</li>
+<li>Bring up LCD, shared I²C, touch, and gauge without expansion attached.</li>
+<li>Initialize the C5 control pins, release reset, and validate protocol/capabilities.</li>
+<li>Mount and test SD with 1-bit SDMMC; never format an existing card automatically.</li>
+<li>Add one expansion device at a time with a unique select and correct bus settings.</li>
+<li>Repeat after cold power-cycling, with battery power, and with all intended peripherals present.</li>
+</ol>
+<p>The <a href="https://github.com/463N7/Cerberus-Dev-Board/tree/main/examples">examples folder</a> contains a standalone pin header and a read-only I²C identification example. It is not a complete BSP or a claim that a new binary was tested on hardware.</p></article><div class="page-end"><a href="https://github.com/463N7/Cerberus-Dev-Board/blob/main/content/programming.md">View page source ↗</a><a href="https://github.com/463N7/Cerberus-Dev-Board/issues/new/choose">Suggest a correction ↗</a></div></main>
+<footer><span>CERBERUS / BUILD. EXPERIMENT. DOCUMENT.</span><span>Reference updated October 27, 2026</span></footer></div></body></html>

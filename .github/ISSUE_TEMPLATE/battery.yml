@@ -1,0 +1,37 @@
+name: Battery compatibility
+description: Submit a tested battery or an explicitly untested should-fit candidate.
+title: "Battery: "
+body:
+  - type: dropdown
+    id: status
+    attributes:
+      label: Evidence level
+      options: [Tested on hardware, Should fit - dimensional comparison only]
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: Manufacturer, exact model, and product/datasheet link
+    validations:
+      required: true
+  - type: textarea
+    id: physical
+    attributes:
+      label: Dimensions, connector, polarity, and installed clearance
+      description: Give T × W × L in mm, lead length, connector series/pitch, and polarity photo. Do not attach device schematics.
+    validations:
+      required: true
+  - type: textarea
+    id: electrical
+    attributes:
+      label: Chemistry, charge ratings, protection, and board charger settings
+    validations:
+      required: true
+  - type: textarea
+    id: test
+    attributes:
+      label: Board/enclosure revision, firmware, date, workload, and results
+      description: State what was measured versus estimated; include runtime and fit results when tested.
+    validations:
+      required: true

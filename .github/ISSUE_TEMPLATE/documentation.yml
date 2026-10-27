@@ -1,0 +1,17 @@
+name: Documentation or pinout correction
+description: Report a reference error or submit missing hardware evidence.
+title: "Reference: "
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page and board revision
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Correction and supporting evidence
+      description: Distinguish source mapping, planning, continuity verification, and functional testing. Do not attach main-device schematics or design files.
+    validations:
+      required: true

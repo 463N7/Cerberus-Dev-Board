@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expansion boards | Cerberus Dev Board</title><meta name="description" content="C5 bank pinouts, RF/NFC plans, and expansion KiCad files.">
+<meta name="theme-color" content="#101817"><link rel="icon" href="assets/mark.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/style.css"><script src="assets/site.js" defer></script></head>
+<body class="reference"><a class="skip" href="#main">Skip to content</a>
+<header class="topbar"><a class="brand" href="index.html"><img src="assets/mark.svg" alt="" width="34" height="34"><span>CERBERUS<small>DEV BOARD</small></span></a><span class="top-label">HARDWARE / SOFTWARE / EXPANSION</span><a class="github" href="https://github.com/463N7/Cerberus-Dev-Board">GitHub <span aria-hidden="true">↗</span></a><button class="menu-button" type="button" aria-controls="sidebar" aria-expanded="false">Menu</button></header>
+<aside id="sidebar" class="sidebar"><p class="nav-heading">DEVELOPER REFERENCE</p><nav aria-label="Documentation"><a href="index.html"><span>00</span>Overview</a><a href="getting-started.html"><span>01</span>Start here</a><a href="hardware.html"><span>02</span>Hardware</a><a href="pinouts.html"><span>03</span>Built-in pinouts</a><a href="expansion.html" aria-current="page"><span>04</span>Expansion boards</a><a href="programming.html"><span>05</span>Programming</a><a href="batteries.html"><span>06</span>Batteries</a><a href="antennas.html"><span>07</span>Antennas</a><a href="troubleshooting.html"><span>08</span>Troubleshooting</a><a href="downloads.html"><span>09</span>Downloads</a><a href="revisions.html"><span>10</span>Revisions + evidence</a></nav><div class="sidebar-note"><span class="status-dot"></span>Production N16R2<p>One onboard C5<br>Quad PSRAM · 1-bit SDMMC</p></div><a class="installer-link" href="https://463n7.github.io/Cerberus-Flasher/">Open USB installer ↗</a></aside>
+<div class="workspace"><div class="utility"><span>REFERENCE / EXPANSION BOARDS</span><div class="search-wrap"><label class="sr-only" for="site-search">Search all documentation</label><input id="site-search" type="search" autocomplete="off" placeholder="Search documentation…"><div id="search-results" class="search-results" hidden aria-label="Search results" aria-live="polite"></div></div></div>
+<main id="main" tabindex="-1"><div class="page-eyebrow">CERBERUS DEV BOARD <span>/</span> TECHNICAL REFERENCE</div><article><h1 id="expansion-boards">Expansion boards</h1>
+<p>There are two different expansion efforts: the <strong>six-C5 scanner bank</strong>, with module programming records, and a <strong>planned RF/NFC board</strong> discussed for E01/E07/CC1101/PN532/GPS. Their GPIO assignments overlap. Select one board profile before writing drivers.</p>
+<h2 id="six-c5-bank-firmware-signal-map">Six-C5 bank — firmware signal map</h2>
+<p>All radios share the S3 SPI3 data signals. Radio identity follows the S3 chip-select slot; the six expansion modules use the same expansion firmware image.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>S3 GPIO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shared MOSI</td>
+<td>GPIO11</td>
+</tr>
+<tr>
+<td>Shared SCLK</td>
+<td>GPIO12</td>
+</tr>
+<tr>
+<td>Shared MISO</td>
+<td>GPIO13</td>
+</tr>
+<tr>
+<td>R0 onboard C5 CS</td>
+<td>GPIO10</td>
+</tr>
+<tr>
+<td>R1 expansion C5 CS</td>
+<td>GPIO14</td>
+</tr>
+<tr>
+<td>R2 expansion C5 CS</td>
+<td>GPIO15</td>
+</tr>
+<tr>
+<td>R3 expansion C5 CS</td>
+<td>GPIO41</td>
+</tr>
+<tr>
+<td>R4 expansion C5 CS</td>
+<td>GPIO42</td>
+</tr>
+<tr>
+<td>R5 expansion C5 CS</td>
+<td>GPIO45</td>
+</tr>
+<tr>
+<td>R6 expansion C5 CS</td>
+<td>GPIO48</td>
+</tr>
+<tr>
+<td>R0 legacy IRQ</td>
+<td>GPIO39; onboard C5 GPIO9</td>
+</tr>
+</tbody>
+</table></div>
+<p>GPIO11/12/13 are bus signals, not spare chip-select pins. The older scanner bank uses its own SPI protocol. It is not supported simply by attaching it to unmodified Sentinel.</p>
+<h2 id="c5-module-side-choose-the-matching-board">C5 module side — choose the matching board</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>Onboard C5</th>
+<th>WROOM expansion</th>
+<th>Historical XIAO prototype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SCLK</td>
+<td>GPIO4</td>
+<td>GPIO8</td>
+<td>GPIO8</td>
+</tr>
+<tr>
+<td>MOSI input</td>
+<td>GPIO5</td>
+<td>GPIO10</td>
+<td>GPIO9</td>
+</tr>
+<tr>
+<td>MISO output</td>
+<td>GPIO6</td>
+<td>GPIO9</td>
+<td>GPIO10</td>
+</tr>
+<tr>
+<td>CS</td>
+<td>GPIO8</td>
+<td>GPIO23</td>
+<td>GPIO7</td>
+</tr>
+<tr>
+<td>Legacy IRQ</td>
+<td>GPIO9</td>
+<td>Unused</td>
+<td>Unused</td>
+</tr>
+<tr>
+<td>Scanner build environment</td>
+<td><code>c5-onboard</code></td>
+<td><code>c5-expansion-wroom</code></td>
+<td><code>c5-expansion-xiao</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>The XIAO prototype routes MOSI/MISO differently from the dedicated WROOM board. Their binaries and wiring must not be substituted. Six WROOM modules reported 4 MB flash and passed programming verification on September 29, 2026. That verifies image writing, not simultaneous seven-radio operation; the assembled scan test remained pending in that record.</p>
+<h2 id="physical-connector-reference">Physical connector reference</h2>
+<p>GPIO38/41/42 were explicitly identified as expansion signals in the revised SDMMC routing discussion. The exact <strong>as-built connector position, pin-1 mark, viewing side, row direction, pitch, mating part, supply pins, and current rating</strong> are not yet supported by a recovered connector record.</p>
+<p>A 2×13 connector table appeared in the RF planning discussion, but it was a proposed redesign. It is not presented here as the physical header on existing devices. Before wiring, obtain the board revision's labeled connector photo or continuity-verified map.</p>
+<h2 id="rfnfc-expansion-latest-planning-variant">RF/NFC expansion — latest planning variant</h2>
+<p><strong>Planning reference only.</strong> The most recent discussed variant kept PN532 on SPI, moved the second E01's controls onto a TCA9534A, and added an Elechouse 915 MHz CC1101 with direct GDO inputs. No as-built KiCad release or assembled validation is included.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Device</th>
+<th>Signal</th>
+<th>Proposed connection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All SPI peripherals</td>
+<td>MOSI / SCLK / MISO</td>
+<td>GPIO11 / GPIO12 / GPIO13</td>
+</tr>
+<tr>
+<td>E07</td>
+<td>CSN</td>
+<td>GPIO14</td>
+</tr>
+<tr>
+<td>E07</td>
+<td>GDO0 / GDO2</td>
+<td>GPIO2 / GPIO47</td>
+</tr>
+<tr>
+<td>E07</td>
+<td>TX_EN / RX_EN</td>
+<td>GPIO45 / GPIO46; startup-strapping review required</td>
+</tr>
+<tr>
+<td>E01 #1</td>
+<td>CSN / CE</td>
+<td>GPIO15 / GPIO3; startup-strapping review required</td>
+</tr>
+<tr>
+<td>E01 #2</td>
+<td>CSN / CE</td>
+<td>TCA9534A P0 / P1</td>
+</tr>
+<tr>
+<td>PN532</td>
+<td>SS</td>
+<td>GPIO42</td>
+</tr>
+<tr>
+<td>GPS</td>
+<td>TX → S3 RX</td>
+<td>GPIO1</td>
+</tr>
+<tr>
+<td>GPS</td>
+<td>RX ← S3 TX</td>
+<td>GPIO48</td>
+</tr>
+<tr>
+<td>Added Elechouse CC1101</td>
+<td>CSN</td>
+<td>GPIO43; conflicts with C5 programming traffic</td>
+</tr>
+<tr>
+<td>Added Elechouse CC1101</td>
+<td>GDO0 / GDO2</td>
+<td>GPIO38 / GPIO41</td>
+</tr>
+<tr>
+<td>TCA9534A</td>
+<td>SDA / SCL</td>
+<td>GPIO8 / GPIO9</td>
+</tr>
+<tr>
+<td>TCA9534A</td>
+<td>Address</td>
+<td><code>0x38</code> when A0/A1/A2 are low</td>
+</tr>
+</tbody>
+</table></div>
+<p>This is the final proposal recovered from that planning chat, not a verified board definition. Earlier alternatives used other PN532, GPS, E01 CE, and GDO pins. Confirm GPIO output capability, startup straps, physical exposure, power, firmware support, and module suffixes against the actual expansion design before implementation.</p>
+<h2 id="shared-bus-development-rules">Shared-bus development rules</h2>
+<ul>
+<li>Register each SPI device with its own CS, clock rate, mode, and bit order. Do not apply the C5's 40 MHz setting to every peripheral.</li>
+<li>Serialize complete request/response sequences when the protocol requires it; preserve the C5 READY handshake when using Sentinel's link.</li>
+<li>Make every unused CS inactive before starting the bus. Use board-appropriate reset bias on selects and enables while preserving S3 startup straps.</li>
+<li>For a proposed expander, set its output latch to the desired state before enabling output directions. Slow I²C control signals are not substitutes for precise pulse capture or SPI clocks.</li>
+<li>Keep radio power separate from GPIO control. The E01 suffix changes peak current and footprint; the prior 2 A and 3 A supply proposals were design budgets, not measured Cerberus expansion-rail ratings.</li>
+<li>Power off before attaching/removing a board. Isolate or remove add-ons using GPIO43 before C5 programming.</li>
+</ul>
+<h2 id="kicad-files-have-a-home">KiCad files have a home</h2>
+<p>Use <a href="https://github.com/463N7/Cerberus-Dev-Board/tree/main/hardware/expansion"><code>hardware/expansion/</code></a> for expansion <strong>PCB/project files, footprints, and release notes</strong>. Add each design in a revision-named folder and include connector orientation, supported Cerberus revision, power budget, assembly notes, and validation status.</p>
+<p>No CAD files have been added yet. Main-device CAD and all schematic files are excluded. A folder is not a manufacturing release; only label a revision “tested” when there is a matching validation record.</p></article><div class="page-end"><a href="https://github.com/463N7/Cerberus-Dev-Board/blob/main/content/expansion.md">View page source ↗</a><a href="https://github.com/463N7/Cerberus-Dev-Board/issues/new/choose">Suggest a correction ↗</a></div></main>
+<footer><span>CERBERUS / BUILD. EXPERIMENT. DOCUMENT.</span><span>Reference updated October 27, 2026</span></footer></div></body></html>

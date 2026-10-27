@@ -1,0 +1,10 @@
+signal,s3_gpio,wroom_c5_gpio,xiao_c5_gpio,scope
+MOSI,11,10,9,shared bus
+SCLK,12,8,8,shared bus
+MISO,13,9,10,shared bus
+R1 CS,14,23,7,one module per slot; not physical header order
+R2 CS,15,23,7,one module per slot; not physical header order
+R3 CS,41,23,7,one module per slot; not physical header order
+R4 CS,42,23,7,one module per slot; not physical header order
+R5 CS,45,23,7,one module per slot; not physical header order
+R6 CS,48,23,7,one module per slot; not physical header order

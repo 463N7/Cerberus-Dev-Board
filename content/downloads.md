@@ -1,0 +1,26 @@
+# Downloads and project links
+
+## Firmware
+
+| Resource | Purpose |
+| --- | --- |
+| [Cerberus USB Installer](https://463n7.github.io/Cerberus-Flasher/) | Guided installation through the device USB connection |
+| [Cerberus Sentinel source](https://github.com/463N7/Cerberus-Sentinel) | Production application and built-in driver reference |
+| [Installer source](https://github.com/463N7/Cerberus-Flasher) | Public web installer and release metadata |
+
+Use matched release images and each package's checksums and offsets. This reference does not copy firmware binaries into a second release channel.
+
+## Developer files
+
+| File / folder | What is included | Status |
+| --- | --- | --- |
+| [Production board pin header](https://github.com/463N7/Cerberus-Dev-Board/blob/main/examples/cerberus_board_pins.h) | S3 and onboard C5 signal constants | Source-checked reference; no connector numbering |
+| [Read-only I²C identification example](https://github.com/463N7/Cerberus-Dev-Board/blob/main/examples/i2c-identify/main.c) | Probe GT911/MAX17048 addresses and log ACK results | Standalone ESP-IDF example; no physical test claimed |
+| [Six-radio expansion CSV](assets/c5-expansion-pinout.csv) | S3 CS slots and WROOM/XIAO SPI mapping | Exported from the documented scanner profile |
+| [Expansion KiCad area](https://github.com/463N7/Cerberus-Dev-Board/tree/main/hardware/expansion) | Revision folders for expansion PCB/project files and footprints | Prepared; no CAD release uploaded yet |
+
+## What belongs here
+
+The repository accepts development documentation, reviewed pin definitions, examples, compatibility records, and explicitly identified expansion PCB files. Main-device schematics, PCB files, netlists, Gerbers, and board fabrication archives are outside this publication. Schematic files are excluded throughout the repository.
+
+Before adding a manufacturing download, identify the exact expansion revision, supported base-board revision, connector orientation, KiCad version, license, and test status. Do not label a placeholder or untested layout as production-ready.

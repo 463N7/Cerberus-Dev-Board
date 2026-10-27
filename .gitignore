@@ -1,0 +1,18 @@
+__pycache__/
+.venv/
+.DS_Store
+Thumbs.db
+*.log
+*.kicad_prl
+*-backups/
+fp-info-cache
+# Main-device schematics are never part of this publication.
+*.kicad_sch
+*.sch
+*.net
+*.dsn
+*.brd
+.env
+.env.*
+*.pem
+*.key

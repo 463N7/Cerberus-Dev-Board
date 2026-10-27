@@ -1,0 +1,29 @@
+name: Antenna compatibility
+description: Add an exact antenna model and its evidence.
+title: "Antenna: "
+body:
+  - type: input
+    id: model
+    attributes:
+      label: Manufacturer, exact model, and datasheet link
+    validations:
+      required: true
+  - type: input
+    id: radio
+    attributes:
+      label: Radio/module, frequency band, and exact RF connector
+    validations:
+      required: true
+  - type: textarea
+    id: installation
+    attributes:
+      label: Cable, enclosure, placement, and active-antenna power if applicable
+    validations:
+      required: true
+  - type: textarea
+    id: test
+    attributes:
+      label: Tested or candidate; board revision, firmware, conditions, and results
+      description: Compare using the same setup. Avoid device schematics and private captured data.
+    validations:
+      required: true
