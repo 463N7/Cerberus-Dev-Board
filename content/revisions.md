@@ -1,43 +1,37 @@
-# Revisions and evidence
+# Reference and testing
 
-This reference was assembled on **October 27, 2026** from the current public Sentinel source, local production/scanner records, and earlier Cerberus hardware discussions. Source-confirmed pin assignments, hardware observations, and proposed designs are different evidence levels.
+This reference covers the **base Cerberus board**: ESP32-S3 N16R2, one onboard ESP32-C5 with a 4 MB flash / no-PSRAM memory baseline, ST7796 display, GT911 touch, shared I²C, native USB, and 1-bit SDMMC with a 40 MHz maximum clock target.
 
-## Reference baseline
+## Base-board reference
 
-The public source baseline is [Cerberus Sentinel commit 580c80d](https://github.com/463N7/Cerberus-Sentinel/tree/580c80d77e0eaa952028e65293b4b097be18c7cf). It provides the production pin map, toolchain, memory configuration, driver behavior, and C5 bridge contract. Upstream changes do not automatically change the baseline in these docs.
+The [Cerberus pin definitions](https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/shared/cerberus_pins.h) establish the built-in signal mappings. The [firmware build guide](https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/docs/SENTINEL_BUILD.md) documents the application memory layout and programming workflow. The website's 40 MHz SDMMC target requires matching firmware configuration; actual clock and stability depend on the card and assembled device.
 
-| Record | What it establishes | What it does not establish |
-| --- | --- | --- |
-| Production pin definitions | LCD, touch, SDMMC, S3/C5 SPI and READY signals | Physical connector position or every unit's assembly |
-| C5 memory specification | WROOM N4 baseline: 4 MB flash / no PSRAM, the smallest standard listed C5-WROOM memory option | A requirement for larger-memory modules; Sentinel's 2 MB firmware layout is a separate software allocation |
-| First-board flash record, October 11 | One S3 detected with 16 MB flash / 2 MB PSRAM; both processors programmed and verified | The memory specification for all production units |
-| Later battery/health verification | MAX17048 available with plausible voltage/SOC; later SD mount success recorded | Exact battery SKU, charging limits, runtime, or cell-presence sensing |
-| Six-C5 programming record, September 29 | Six 4 MB WROOM modules passed write verification | Completed cold-cycle seven-radio scan acceptance |
-| Earlier Rev A design discussion | BQ25895 charger identification and STAT LED discussion | Full recovered charger settings or exact battery product list |
-| Revised SDMMC routing discussion | GPIO38 expansion routing, SD on GPIO35/36/37 | A complete physical header orientation record |
-| RF/NFC expansion planning | E01/E07/PN532/GPS and later CC1101/expander proposals | Fabricated board, verified pinout, or working firmware support |
+The C5 memory specification uses the smallest standard WROOM option, **N4: 4 MB flash and no PSRAM**. Sentinel's current 2 MB firmware layout is a separate software allocation.
 
-## Revision boundaries
+## Expansion add-on status
 
-- **Production N16R2:** default device reference. Quad PSRAM, SDMMC 1-bit, ST7796/GT911, and onboard C5.
-- **Prototype SD wiring:** GPIO38 may be tied to DAT3/CS. Check the actual routing before reuse.
-- **R8 Arcade development:** octal memory and additional controls/audio are application-specific. Arcade audio on GPIO11/12/13 overlaps the C5 SPI bus; buttons also overlap expansion and GPS signals. These are not extra built-in features of the baseline board.
-- **WROOM versus XIAO expansion:** different MOSI/MISO/CS mappings, separate firmware targets.
+| Expansion add-on | Status | Recorded progress | Remaining validation |
+| --- | --- | --- | --- |
+| Six-C5 bank | **In testing** | Six 4 MB WROOM modules passed programming verification | Assembled multi-radio operation and integration |
+| RF/NFC board | **In testing** | Current signal map documented | Wiring, power, firmware integration, and assembled operation |
 
-## Next records to add
+Neither add-on is a different base-board model. Their signal assignments are listed separately on the [pinouts page](pinouts.md).
 
-1. Base-board revision label and clear connector photos with pin 1 and viewing side.
-2. A continuity-verified physical expansion-header map, mating connector, and power pin ratings.
-3. Exact battery connector and polarity, charger configured limits, enclosure cavity measurements, and known battery SKUs.
-4. Antenna module/connector part numbers and a tested antenna table with band-specific results.
-5. Expansion KiCad PCB releases, mechanical outline, assembly notes, and validation logs.
-6. A small standalone board-support project with a repeatable display/touch/SD/C5 test procedure.
+## Records still needed
+
+1. Connector photos with pin 1 and viewing side, plus a continuity-verified physical header map and mating connector details.
+2. Expansion supply contacts and current ratings.
+3. Battery connector/polarity, configured charge limits, enclosure cavity measurements, and exact tested battery models.
+4. Antenna connector and module part numbers, with band-specific compatibility results.
+5. Expansion KiCad PCB files, assembly notes, and matching validation records.
+6. Card-specific SDMMC read/write and cold-start results at the 40 MHz target.
 
 ## Documentation changelog
 
 | Date | Change |
 | --- | --- |
-| 2026-10-27 | Initial Cerberus Dev Board reference; production pinouts, expansion profiles, programming/recovery, battery/antenna record structures, and separate expansion CAD area |
-| 2026-10-27 | Set the C5 hardware memory baseline to the smallest standard WROOM option: N4, 4 MB flash and no PSRAM; distinguish the current 2 MB firmware layout |
+| 2026-10-27 | Initial Cerberus Dev Board hardware and programming reference |
+| 2026-10-27 | Set C5 memory baseline to WROOM N4: 4 MB flash, no PSRAM |
+| 2026-10-27 | Focused the reference on the base board; set SDMMC target to 40 MHz; consolidated both expansion add-on maps on Pinouts and marked both in testing |
 
-Use the [documentation issue form](https://github.com/463N7/Cerberus-Dev-Board/issues/new?template=documentation.yml) to submit an exact correction and its evidence. Hardware test claims should name the board revision, firmware, date, and test conditions.
+Use the [documentation issue form](https://github.com/463N7/Cerberus-Dev-Board/issues/new?template=documentation.yml) for corrections and supporting evidence. Hardware results should identify the firmware, date, attached add-on, and test conditions.

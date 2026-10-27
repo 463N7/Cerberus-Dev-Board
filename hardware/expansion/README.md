@@ -1,6 +1,6 @@
 # Expansion-board KiCad files
 
-This is the designated home for **Cerberus expansion boards only**. No CAD files have been uploaded yet.
+This is the designated home for **Cerberus expansion add-ons only**: the RF/NFC board and six-C5 bank. **Both are in testing.** No CAD files have been uploaded yet.
 
 For each board, create a revision folder such as `rf-nfc/rev-a/` or `c5-bank/rev-a/` and include:
 
@@ -11,4 +11,4 @@ For each board, create a revision folder such as `rf-nfc/rev-a/` or `c5-bank/rev
 
 Do not add the Cerberus main device's PCB, schematics, netlists, Gerbers, or fabrication archives. Schematic files are excluded throughout this repository. Review any image or exported drawing before upload so main-device design details are not accidentally included.
 
-The current documented expansion signal maps are in [`content/expansion.md`](../../content/expansion.md). Proposed connector designs in earlier planning are not the pin order of an existing assembled header.
+The expansion signal maps are on the shared [`Pinouts` page](../../content/pinouts.md). Physical connector numbering and orientation still need an as-built record.

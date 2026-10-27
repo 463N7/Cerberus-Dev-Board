@@ -4,10 +4,10 @@
 <meta name="theme-color" content="#101817"><link rel="icon" href="assets/mark.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/style.css"><script src="assets/site.js" defer></script></head>
 <body class="reference"><a class="skip" href="#main">Skip to content</a>
 <header class="topbar"><a class="brand" href="index.html"><img src="assets/mark.svg" alt="" width="34" height="34"><span>CERBERUS<small>DEV BOARD</small></span></a><span class="top-label">HARDWARE / SOFTWARE / EXPANSION</span><a class="github" href="https://github.com/463N7/Cerberus-Dev-Board">GitHub <span aria-hidden="true">↗</span></a><button class="menu-button" type="button" aria-controls="sidebar" aria-expanded="false">Menu</button></header>
-<aside id="sidebar" class="sidebar"><p class="nav-heading">DEVELOPER REFERENCE</p><nav aria-label="Documentation"><a href="index.html"><span>00</span>Overview</a><a href="getting-started.html"><span>01</span>Start here</a><a href="hardware.html" aria-current="page"><span>02</span>Hardware</a><a href="pinouts.html"><span>03</span>Built-in pinouts</a><a href="expansion.html"><span>04</span>Expansion boards</a><a href="programming.html"><span>05</span>Programming</a><a href="batteries.html"><span>06</span>Batteries</a><a href="antennas.html"><span>07</span>Antennas</a><a href="troubleshooting.html"><span>08</span>Troubleshooting</a><a href="downloads.html"><span>09</span>Downloads</a><a href="revisions.html"><span>10</span>Revisions + evidence</a></nav><div class="sidebar-note"><span class="status-dot"></span>Production N16R2<p>One onboard C5<br>Quad PSRAM · 1-bit SDMMC</p></div><a class="installer-link" href="https://463n7.github.io/Cerberus-Flasher/">Open USB installer ↗</a></aside>
+<aside id="sidebar" class="sidebar"><p class="nav-heading">DEVELOPER REFERENCE</p><nav aria-label="Documentation"><a href="index.html"><span>00</span>Overview</a><a href="getting-started.html"><span>01</span>Start here</a><a href="hardware.html" aria-current="page"><span>02</span>Hardware</a><a href="pinouts.html"><span>03</span>Pinouts</a><a href="expansion.html"><span>04</span>Expansion add-ons</a><a href="programming.html"><span>05</span>Programming</a><a href="batteries.html"><span>06</span>Batteries</a><a href="antennas.html"><span>07</span>Antennas</a><a href="troubleshooting.html"><span>08</span>Troubleshooting</a><a href="downloads.html"><span>09</span>Downloads</a><a href="revisions.html"><span>10</span>Reference + testing</a></nav><div class="sidebar-note"><span class="status-dot"></span>Cerberus base board<p>One onboard C5<br>Quad PSRAM · 1-bit SDMMC<br>40 MHz SDMMC target</p></div><a class="installer-link" href="https://463n7.github.io/Cerberus-Flasher/">Open USB installer ↗</a></aside>
 <div class="workspace"><div class="utility"><span>REFERENCE / HARDWARE</span><div class="search-wrap"><label class="sr-only" for="site-search">Search all documentation</label><input id="site-search" type="search" autocomplete="off" placeholder="Search documentation…"><div id="search-results" class="search-results" hidden aria-label="Search results" aria-live="polite"></div></div></div>
 <main id="main" tabindex="-1"><div class="page-eyebrow">CERBERUS DEV BOARD <span>/</span> TECHNICAL REFERENCE</div><article><h1 id="hardware-overview">Hardware overview</h1>
-<p>The production Cerberus reference is the <strong>ESP32-S3 N16R2</strong> device with one onboard <strong>ESP32-C5</strong>, ST7796 LCD, GT911 touch, microSD, native USB, and battery support.</p>
+<p>The base Cerberus board uses an <strong>ESP32-S3 N16R2</strong> with one onboard <strong>ESP32-C5</strong>, ST7796 LCD, GT911 touch, microSD, native USB, and battery support.</p>
 <h2 id="built-in-features">Built-in features</h2>
 <div class="table-scroll"><table>
 <thead>
@@ -26,7 +26,7 @@
 <tr>
 <td>S3 memory</td>
 <td>16 MB flash / 2 MB quad PSRAM</td>
-<td>Confirmed on a production unit; use the N16R2 configuration</td>
+<td>Use the N16R2 configuration</td>
 </tr>
 <tr>
 <td>Radio coprocessor</td>
@@ -50,8 +50,8 @@
 </tr>
 <tr>
 <td>microSD</td>
-<td>1-bit SDMMC</td>
-<td>CLK36 / CMD37 / DAT0 35; up to 20 MHz in reference firmware</td>
+<td>1-bit SDMMC, up to 40 MHz</td>
+<td>CLK36 / CMD37 / DAT0 35; configure firmware for the 40 MHz maximum target</td>
 </tr>
 <tr>
 <td>USB</td>
@@ -75,7 +75,7 @@
 </tr>
 </tbody>
 </table></div>
-<p>The C5 memory specification uses the smallest standard WROOM configuration listed by Espressif: <strong>N4, with 4 MB Quad SPI flash and no PSRAM</strong>. This applies to the memory baseline for both WROOM-1 and WROOM-1U; it does not select the device's antenna variant. Firmware can use a smaller partition layout within that capacity.</p>
+<p>The C5 memory specification uses the smallest standard WROOM configuration listed by Espressif: <strong>N4, with 4 MB Quad SPI flash and no PSRAM</strong>. Firmware can use a smaller partition layout within that capacity.</p>
 <p>The C5 silicon supports the listed radio families; an installed application may expose only a subset. Support for 802.15.4 does not itself establish a complete Zigbee or Thread application. The base device has no built-in LoRa, CC1101, nRF24, NFC reader, or GPS in this reference.</p>
 <h2 id="bus-ownership">Bus ownership</h2>
 <div class="table-scroll"><table>
@@ -100,7 +100,7 @@
 <tr>
 <td>microSD</td>
 <td>SDMMC</td>
-<td>1-bit, up to 20 MHz</td>
+<td>1-bit, up to 40 MHz; actual clock negotiated by card and firmware</td>
 </tr>
 <tr>
 <td>Touch + gauge</td>
@@ -114,53 +114,39 @@
 </tr>
 </tbody>
 </table></div>
-<p>The older wardriving transport uses a different SPI protocol and a conservative 250 kHz radio clock. Do not mix its C5 image with Sentinel or assume its IRQ39 wiring replaces the current READY44 handshake.</p>
-<h2 id="board-and-application-variants">Board and application variants</h2>
+<p>The 40 MHz SDMMC setting is the website's configuration target. Firmware must request high-speed operation, and card/board stability still needs validation. See the <a href="programming.html#sdmmc-1-bit-40-mhz-configuration">configuration example</a>.</p>
+<h2 id="optional-expansion-add-ons">Optional expansion add-ons</h2>
 <div class="table-scroll"><table>
 <thead>
 <tr>
-<th>Configuration</th>
-<th>Memory / routing distinction</th>
-<th>Compatibility</th>
+<th>Add-on</th>
+<th>Features</th>
+<th>Status</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Production N16R2</td>
-<td>16 MB flash, 2 MB quad PSRAM, 1-bit SDMMC</td>
-<td>Baseline for these docs and Sentinel</td>
-</tr>
-<tr>
-<td>Earlier prototype</td>
-<td>SD SPI used GPIO38 as CS / DAT3 test control</td>
-<td>Do not use GPIO38 for expansion until routing and firmware are checked</td>
-</tr>
-<tr>
-<td>R8 development / Arcade</td>
-<td>8 MB octal PSRAM in the R8 game profile</td>
-<td>Not a drop-in production memory configuration; GPIO35–37 conflict with octal memory use</td>
-</tr>
-<tr>
 <td>Six-C5 bank</td>
-<td>Six additional C5 modules, individual selects</td>
-<td>Optional expansion hardware and matching firmware</td>
+<td>Six additional WROOM C5 radios with individual selects</td>
+<td><strong>In testing</strong></td>
 </tr>
 <tr>
 <td>RF/NFC board</td>
-<td>E01/E07/CC1101/PN532/GPS concepts</td>
-<td>Planning variants; no assembled revision is certified here</td>
+<td>E01, E07, additional CC1101, PN532, GPS, and control expander</td>
+<td><strong>In testing</strong></td>
 </tr>
 </tbody>
 </table></div>
+<p>Both connect to the same base Cerberus board. Their signal assignments are on the <a href="pinouts.html">pinouts page</a>, with integration and file locations on <a href="expansion.html">Expansion add-ons</a>.</p>
 <h2 id="electrical-and-mechanical-reference">Electrical and mechanical reference</h2>
 <p>Treat S3/C5 signals as <strong>3.3 V logic</strong>. Do not connect 5 V signal outputs directly or infer supply capability from a GPIO label. Verify a peripheral's logic voltage separately from its supply input.</p>
-<p>Keep GPIO19/20 for USB, memory pins for flash/PSRAM, and GPIO0/3/45/46 startup strapping requirements intact. Do not treat an unassigned GPIO as physically exposed or safe to repurpose. The production SD pull-up network means GPIO38 is not an SD control in the production firmware.</p>
+<p>Keep GPIO19/20 for USB, memory pins for flash/PSRAM, and GPIO0/3/45/46 startup strapping requirements intact. Preserve the quad-PSRAM configuration and the SDMMC pull-up network. Do not treat an unassigned GPIO as physically exposed or safe to repurpose.</p>
 <p>The following need board-specific measurement before being advertised: expansion-rail current limits, charger input/charge limits, battery connector part number/polarity, enclosure battery cavity, board outline, mounting holes, antenna connector part numbers, and physical header numbering. A component's datasheet maximum is not the assembled board's rating.</p>
 <h2 id="references">References</h2>
 <ul>
-<li><a href="https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/shared/cerberus_pins.h">Public production pin definitions</a></li>
+<li><a href="https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/shared/cerberus_pins.h">Base-board pin definitions</a></li>
 <li><a href="https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/docs/SENTINEL_BUILD.md">Sentinel build and memory profile</a></li>
-<li><a href="https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/docs/FIRST_BOARD_FLASH.md">Recorded first-board flash detection</a></li>
+<li><a href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/sdmmc_host.html">Espressif SDMMC high-speed configuration</a></li>
 <li><a href="https://www.espressif.com/en/products/socs/esp32-c5">Espressif ESP32-C5 capabilities</a></li>
 <li><a href="https://documentation.espressif.com/esp32-c5-wroom-1_wroom-1u_datasheet_en.html">Espressif C5-WROOM series comparison and memory options</a></li>
 <li><a href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/gpio.html">Espressif ESP32-S3 GPIO restrictions</a></li>

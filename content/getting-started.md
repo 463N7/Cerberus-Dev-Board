@@ -1,10 +1,10 @@
 # Start developing
 
-Start with the production N16R2 board profile, a USB data cable, and a known firmware release. Keep the onboard S3 and C5 images from the same release.
+Start with the Cerberus N16R2 board profile, a USB data cable, and a known firmware release. Keep the onboard S3 and C5 images from the same release.
 
 ## 1. Identify your device
 
-Record the board revision, S3 memory suffix, installed expansion board, and firmware version. The production reference has 16 MB S3 flash and 2 MB quad PSRAM. The C5 memory baseline is WROOM N4: **4 MB flash and no PSRAM**. An S3 R8 development profile is a different target.
+Record the board revision, installed expansion board, and firmware version. Cerberus has 16 MB S3 flash and 2 MB quad PSRAM. The C5 memory baseline is WROOM N4: **4 MB flash and no PSRAM**.
 
 The device is independently programmable on both processors. The USB connection reaches the S3. A temporary S3 bridge exposes the onboard C5 for programming through that same connector.
 
@@ -16,7 +16,7 @@ Use a data-capable USB cable. Close applications that hold the serial port. The 
 
 ## 3. Get the firmware source
 
-The public [Cerberus Sentinel repository](https://github.com/463N7/Cerberus-Sentinel) provides a working production implementation of display, touch, battery status, SD, USB, and the S3/C5 link. This Dev Board repository contains reference material and small examples; it is not a complete firmware image.
+The public [Cerberus Sentinel repository](https://github.com/463N7/Cerberus-Sentinel) provides a working implementation of display, touch, battery status, SD, USB, and the S3/C5 link. This Dev Board repository contains reference material and small examples; it is not a complete firmware image.
 
 ```powershell
 git clone https://github.com/463N7/Cerberus-Sentinel.git
@@ -49,4 +49,4 @@ This recovery path is documented for Cerberus. Physical board controls must be i
 
 ## Next steps
 
-Use the [built-in pinouts](pinouts.md), choose an [expansion profile](expansion.md), and work through the [programming guide](programming.md). Record hardware results using the compatibility-report forms linked from the repository.
+Use the [pinouts](pinouts.md), review the [expansion add-ons](expansion.md), and work through the [programming guide](programming.md). The RF/NFC board and six-C5 bank are expansion add-ons, and both are still in testing. Record hardware results using the compatibility-report forms linked from the repository.

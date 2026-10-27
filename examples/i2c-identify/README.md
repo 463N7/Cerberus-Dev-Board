@@ -1,6 +1,6 @@
 # Identify the shared I²C devices
 
-Standalone **ESP-IDF 6.0.1** example for production Cerberus N16R2. Build it in an ESP-IDF environment with the S3 target:
+Standalone **ESP-IDF 6.0.1** example for Cerberus N16R2. Build it in an ESP-IDF environment with the S3 target:
 
 ```powershell
 idf.py set-target esp32s3
@@ -11,4 +11,4 @@ Flashing this replaces the installed S3 application. Preserve your recovery imag
 
 Expected log outcomes are an acknowledgment or an unavailable-address report for GT911 at `0x5D` and MAX17048 at `0x36`. An ACK identifies a responding address, not the device's model or health. GT911 power-on behavior may depend on the previously initialized state because its hardware reset is not connected.
 
-This example has not been physically tested. For a complete verified application, use the linked production firmware and its built-in diagnostics.
+This example has not been physically tested. For a complete verified application, use the linked Cerberus firmware and its built-in diagnostics.

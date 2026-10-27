@@ -4,7 +4,7 @@ The S3 runs application services. The onboard C5 runs a separate radio applicati
 
 ## Reference toolchain
 
-The recorded production Sentinel toolchain is PlatformIO Core **6.1.19**, platform **espressif32@7.0.1**, and **ESP-IDF 6.0.1** (`framework-espidf@4.60001.0`). Use the pinned configuration and dependency lock files in the firmware repository.
+The recorded Sentinel toolchain is PlatformIO Core **6.1.19**, platform **espressif32@7.0.1**, and **ESP-IDF 6.0.1** (`framework-espidf@4.60001.0`). Use the pinned configuration and dependency lock files in the firmware repository.
 
 ```powershell
 # Run inside a Cerberus-Sentinel checkout.
@@ -18,19 +18,40 @@ python tools/build_sentinel.py --target all --package
 
 | Target | Reference memory profile | Application partition |
 | --- | --- | --- |
-| Production S3 | 16 MB flash, DIO 80 MHz; 2 MB quad PSRAM | `0x10000`, size `0x700000` in Sentinel |
+| S3 | 16 MB flash, DIO 80 MHz; 2 MB quad PSRAM | `0x10000`, size `0x700000` in Sentinel |
 | Onboard C5 | 4 MB flash / no PSRAM (WROOM N4 baseline); current Sentinel layout uses 2 MB | `0x10000`, size `0x1F0000` in Sentinel |
-| Temporary S3 bridge | Production S3 profile | Uses the S3 application slot temporarily |
+| Temporary S3 bridge | Same S3 memory profile | Uses the S3 application slot temporarily |
 
 The C5 hardware reference is the smallest standard C5-WROOM memory option: **4 MB flash and no PSRAM**. Sentinel's current 2 MB image layout is a software allocation within that capacity, not the module's physical flash specification. These offsets belong to the referenced firmware layout. Use each release's manifest and partition images when flashing; partition changes require rebuilding and validation.
 
-**Keep production PSRAM in quad mode.** Octal PSRAM can reserve GPIO35–37 used by microSD. DMA buffers and task stacks must follow ESP-IDF memory requirements; large optional UI buffers can explicitly request PSRAM and handle allocation failure.
+**Keep PSRAM in quad mode** to preserve GPIO35–37 for microSD. DMA buffers and task stacks must follow ESP-IDF memory requirements; large optional UI buffers can explicitly request PSRAM and handle allocation failure.
+
+## SDMMC 1-bit 40 MHz configuration
+
+Use **1-bit SDMMC with a 40 MHz maximum** on GPIO35/36/37. The ESP-IDF host and slot configuration is:
+
+```c
+#include "driver/sdmmc_host.h"
+
+sdmmc_host_t host = SDMMC_HOST_DEFAULT();
+host.slot = SDMMC_HOST_SLOT_1;
+host.max_freq_khz = SDMMC_FREQ_HIGHSPEED; // 40,000 kHz maximum
+
+sdmmc_slot_config_t slot = SDMMC_SLOT_CONFIG_DEFAULT();
+slot.width = 1;
+slot.clk = GPIO_NUM_36;
+slot.cmd = GPIO_NUM_37;
+slot.d0 = GPIO_NUM_35;
+slot.flags |= SDMMC_SLOT_FLAG_INTERNAL_PULLUP;
+```
+
+The actual card clock is negotiated by the card and firmware; 40 MHz is the configured maximum, not a measured guarantee. Firmware must request high-speed operation for normal mounting and USB storage access. This website setting does not update an installed image. Validate card mounting, file reads/writes, and USB storage access when applying it. See [Espressif's SDMMC frequency configuration](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/sdmmc_host.html).
 
 ## Source layout and driver entry points
 
 | Location in Sentinel | Responsibility |
 | --- | --- |
-| `shared/cerberus_pins.h` | Production board signal assignments |
+| `shared/cerberus_pins.h` | Cerberus board signal assignments |
 | `shared/cerberus_protocol.h` | Shared message definitions, framing, capabilities, versions |
 | `s3_main/main/display.c` | ST7796 SPI2 display and buffered updates |
 | `s3_main/main/touch.c` | GT911 input |
@@ -50,7 +71,7 @@ The current Sentinel header identifies protocol **V2**, with V1 fallback and a c
 
 The normal READY line is **C5 GPIO11 → S3 GPIO44**. It reuses the C5 UART TX wire. Before clocking a request, the S3 waits for a queued C5 transfer; request/response timing and fallback handling belong to the link driver. The UART is not the normal runtime message path.
 
-The legacy seven-radio scanner uses different framing and IRQ behavior. Do not treat an identical SPI pinout as protocol compatibility.
+The six-C5 bank is an expansion add-on still in testing and requires matching expansion firmware. An identical SPI pinout does not establish protocol compatibility.
 
 ## C5 programming through the S3
 

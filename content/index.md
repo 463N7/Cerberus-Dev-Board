@@ -4,7 +4,7 @@ One handheld. Two processors. A practical reference for writing firmware, connec
 
 <div class="hero-actions"><a class="button" href="getting-started.html">Start developing <span aria-hidden="true">↗</span></a><a class="button secondary" href="pinouts.html">Explore the pinouts</a></div>
 
-<div class="stats"><div><strong>ESP32-S3</strong><span>Application + interface</span></div><div><strong>ESP32-C5</strong><span>Dual-band radio coprocessor</span></div><div><strong>320 × 480</strong><span>ST7796 + GT911 touch</span></div><div><strong>16 MB / 2 MB</strong><span>Production S3 flash / PSRAM</span></div></div>
+<div class="stats"><div><strong>ESP32-S3</strong><span>Application + interface</span></div><div><strong>ESP32-C5</strong><span>Dual-band radio coprocessor</span></div><div><strong>320 × 480</strong><span>ST7796 + GT911 touch</span></div><div><strong>16 MB / 2 MB</strong><span>S3 flash / PSRAM</span></div></div>
 
 ## The device, documented.
 
@@ -14,12 +14,12 @@ Cerberus pairs a touchscreen application processor with an independently program
 
 ## Find what you need
 
-<div class="guide-grid"><a href="pinouts.html"><span>01 / HARDWARE</span><h3>Every built-in connection</h3><p>GPIO tables, bus ownership, I²C addresses, and the S3-to-C5 link.</p></a><a href="programming.html"><span>02 / FIRMWARE</span><h3>Program both processors</h3><p>Production memory settings, toolchain, protocol, and first-build checks.</p></a><a href="expansion.html"><span>03 / EXPANSION</span><h3>Make room for more</h3><p>Six-radio expansion, peripheral plans, and a dedicated KiCad file area.</p></a><a href="batteries.html"><span>04 / COMPATIBILITY</span><h3>Power it with confidence</h3><p>Tested batteries and dimensional candidates kept in separate lists.</p></a><a href="antennas.html"><span>05 / RF</span><h3>Match the right antenna</h3><p>Band coverage, connectors, cables, and repeatable test records.</p></a><a href="troubleshooting.html"><span>06 / SUPPORT</span><h3>Get back to building</h3><p>USB recovery and checks for C5, display, SD, and battery readings.</p></a></div>
+<div class="guide-grid"><a href="pinouts.html"><span>01 / HARDWARE</span><h3>Every connection in one place</h3><p>Base-board GPIOs, built-in interfaces, and both expansion add-on pinouts.</p></a><a href="programming.html"><span>02 / FIRMWARE</span><h3>Program both processors</h3><p>Memory settings, toolchain, protocol, and first-build checks.</p></a><a href="expansion.html"><span>03 / EXPANSION</span><h3>Make room for more</h3><p>RF/NFC and six-C5 add-ons, both in testing, with a dedicated KiCad file area.</p></a><a href="batteries.html"><span>04 / COMPATIBILITY</span><h3>Power it with confidence</h3><p>Tested batteries and dimensional candidates kept in separate lists.</p></a><a href="antennas.html"><span>05 / RF</span><h3>Match the right antenna</h3><p>Band coverage, connectors, cables, and repeatable test records.</p></a><a href="troubleshooting.html"><span>06 / SUPPORT</span><h3>Get back to building</h3><p>USB recovery and checks for C5, display, SD, and battery readings.</p></a></div>
 
-## Know your hardware revision
+## One base board. Room to expand.
 
-The baseline here is the production **N16R2** device with one onboard C5 and **1-bit SDMMC**. The six-C5 expansion and Arcade wiring are separate configurations. GPS and RF/NFC add-ons are expansion features, not built-in parts of the base device.
+Cerberus uses an **S3 N16R2**, one onboard C5 with **4 MB flash and no PSRAM**, and **1-bit SDMMC with a 40 MHz maximum clock target**. The **six-C5 bank** and **RF/NFC board** are optional expansion add-ons. **Both are in testing.**
 
-Each guide distinguishes source-confirmed mappings, recorded hardware tests, and plans. Battery model validation, exact antenna connector part numbers, and an as-built expansion-header orientation still need records before they can be presented as confirmed compatibility. See [revisions and evidence](revisions.md).
+The [pinouts page](pinouts.md) includes the base board and each add-on in separate sections. Battery model validation, exact antenna connector part numbers, and physical expansion-header orientation still need records before they can be presented as confirmed compatibility. See [reference and testing](revisions.md).
 
 <div class="callout"><strong>A developer reference without device schematics.</strong><p>Pin assignments, software interfaces, and expansion information are published here. Cerberus main-board design files are excluded.</p></div>

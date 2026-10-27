@@ -4,12 +4,12 @@
 <meta name="theme-color" content="#101817"><link rel="icon" href="assets/mark.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/style.css"><script src="assets/site.js" defer></script></head>
 <body class="reference"><a class="skip" href="#main">Skip to content</a>
 <header class="topbar"><a class="brand" href="index.html"><img src="assets/mark.svg" alt="" width="34" height="34"><span>CERBERUS<small>DEV BOARD</small></span></a><span class="top-label">HARDWARE / SOFTWARE / EXPANSION</span><a class="github" href="https://github.com/463N7/Cerberus-Dev-Board">GitHub <span aria-hidden="true">↗</span></a><button class="menu-button" type="button" aria-controls="sidebar" aria-expanded="false">Menu</button></header>
-<aside id="sidebar" class="sidebar"><p class="nav-heading">DEVELOPER REFERENCE</p><nav aria-label="Documentation"><a href="index.html"><span>00</span>Overview</a><a href="getting-started.html"><span>01</span>Start here</a><a href="hardware.html"><span>02</span>Hardware</a><a href="pinouts.html"><span>03</span>Built-in pinouts</a><a href="expansion.html"><span>04</span>Expansion boards</a><a href="programming.html" aria-current="page"><span>05</span>Programming</a><a href="batteries.html"><span>06</span>Batteries</a><a href="antennas.html"><span>07</span>Antennas</a><a href="troubleshooting.html"><span>08</span>Troubleshooting</a><a href="downloads.html"><span>09</span>Downloads</a><a href="revisions.html"><span>10</span>Revisions + evidence</a></nav><div class="sidebar-note"><span class="status-dot"></span>Production N16R2<p>One onboard C5<br>Quad PSRAM · 1-bit SDMMC</p></div><a class="installer-link" href="https://463n7.github.io/Cerberus-Flasher/">Open USB installer ↗</a></aside>
+<aside id="sidebar" class="sidebar"><p class="nav-heading">DEVELOPER REFERENCE</p><nav aria-label="Documentation"><a href="index.html"><span>00</span>Overview</a><a href="getting-started.html"><span>01</span>Start here</a><a href="hardware.html"><span>02</span>Hardware</a><a href="pinouts.html"><span>03</span>Pinouts</a><a href="expansion.html"><span>04</span>Expansion add-ons</a><a href="programming.html" aria-current="page"><span>05</span>Programming</a><a href="batteries.html"><span>06</span>Batteries</a><a href="antennas.html"><span>07</span>Antennas</a><a href="troubleshooting.html"><span>08</span>Troubleshooting</a><a href="downloads.html"><span>09</span>Downloads</a><a href="revisions.html"><span>10</span>Reference + testing</a></nav><div class="sidebar-note"><span class="status-dot"></span>Cerberus base board<p>One onboard C5<br>Quad PSRAM · 1-bit SDMMC<br>40 MHz SDMMC target</p></div><a class="installer-link" href="https://463n7.github.io/Cerberus-Flasher/">Open USB installer ↗</a></aside>
 <div class="workspace"><div class="utility"><span>REFERENCE / PROGRAMMING</span><div class="search-wrap"><label class="sr-only" for="site-search">Search all documentation</label><input id="site-search" type="search" autocomplete="off" placeholder="Search documentation…"><div id="search-results" class="search-results" hidden aria-label="Search results" aria-live="polite"></div></div></div>
 <main id="main" tabindex="-1"><div class="page-eyebrow">CERBERUS DEV BOARD <span>/</span> TECHNICAL REFERENCE</div><article><h1 id="programming-reference">Programming reference</h1>
 <p>The S3 runs application services. The onboard C5 runs a separate radio application. Their shared wire interface and protocol must agree; changing one processor's firmware can require rebuilding both.</p>
 <h2 id="reference-toolchain">Reference toolchain</h2>
-<p>The recorded production Sentinel toolchain is PlatformIO Core <strong>6.1.19</strong>, platform <strong>espressif32@7.0.1</strong>, and <strong>ESP-IDF 6.0.1</strong> (<code>framework-espidf@4.60001.0</code>). Use the pinned configuration and dependency lock files in the firmware repository.</p>
+<p>The recorded Sentinel toolchain is PlatformIO Core <strong>6.1.19</strong>, platform <strong>espressif32@7.0.1</strong>, and <strong>ESP-IDF 6.0.1</strong> (<code>framework-espidf@4.60001.0</code>). Use the pinned configuration and dependency lock files in the firmware repository.</p>
 <pre><code class="language-powershell"># Run inside a Cerberus-Sentinel checkout.
 python tools/build_sentinel.py --target s3
 python tools/build_sentinel.py --target c5
@@ -27,7 +27,7 @@ python tools/build_sentinel.py --target all --package
 </thead>
 <tbody>
 <tr>
-<td>Production S3</td>
+<td>S3</td>
 <td>16 MB flash, DIO 80 MHz; 2 MB quad PSRAM</td>
 <td><code>0x10000</code>, size <code>0x700000</code> in Sentinel</td>
 </tr>
@@ -38,13 +38,29 @@ python tools/build_sentinel.py --target all --package
 </tr>
 <tr>
 <td>Temporary S3 bridge</td>
-<td>Production S3 profile</td>
+<td>Same S3 memory profile</td>
 <td>Uses the S3 application slot temporarily</td>
 </tr>
 </tbody>
 </table></div>
 <p>The C5 hardware reference is the smallest standard C5-WROOM memory option: <strong>4 MB flash and no PSRAM</strong>. Sentinel's current 2 MB image layout is a software allocation within that capacity, not the module's physical flash specification. These offsets belong to the referenced firmware layout. Use each release's manifest and partition images when flashing; partition changes require rebuilding and validation.</p>
-<p><strong>Keep production PSRAM in quad mode.</strong> Octal PSRAM can reserve GPIO35–37 used by microSD. DMA buffers and task stacks must follow ESP-IDF memory requirements; large optional UI buffers can explicitly request PSRAM and handle allocation failure.</p>
+<p><strong>Keep PSRAM in quad mode</strong> to preserve GPIO35–37 for microSD. DMA buffers and task stacks must follow ESP-IDF memory requirements; large optional UI buffers can explicitly request PSRAM and handle allocation failure.</p>
+<h2 id="sdmmc-1-bit-40-mhz-configuration">SDMMC 1-bit 40 MHz configuration</h2>
+<p>Use <strong>1-bit SDMMC with a 40 MHz maximum</strong> on GPIO35/36/37. The ESP-IDF host and slot configuration is:</p>
+<pre><code class="language-c">#include &quot;driver/sdmmc_host.h&quot;
+
+sdmmc_host_t host = SDMMC_HOST_DEFAULT();
+host.slot = SDMMC_HOST_SLOT_1;
+host.max_freq_khz = SDMMC_FREQ_HIGHSPEED; // 40,000 kHz maximum
+
+sdmmc_slot_config_t slot = SDMMC_SLOT_CONFIG_DEFAULT();
+slot.width = 1;
+slot.clk = GPIO_NUM_36;
+slot.cmd = GPIO_NUM_37;
+slot.d0 = GPIO_NUM_35;
+slot.flags |= SDMMC_SLOT_FLAG_INTERNAL_PULLUP;
+</code></pre>
+<p>The actual card clock is negotiated by the card and firmware; 40 MHz is the configured maximum, not a measured guarantee. Firmware must request high-speed operation for normal mounting and USB storage access. This website setting does not update an installed image. Validate card mounting, file reads/writes, and USB storage access when applying it. See <a href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/sdmmc_host.html">Espressif's SDMMC frequency configuration</a>.</p>
 <h2 id="source-layout-and-driver-entry-points">Source layout and driver entry points</h2>
 <div class="table-scroll"><table>
 <thead>
@@ -56,7 +72,7 @@ python tools/build_sentinel.py --target all --package
 <tbody>
 <tr>
 <td><code>shared/cerberus_pins.h</code></td>
-<td>Production board signal assignments</td>
+<td>Cerberus board signal assignments</td>
 </tr>
 <tr>
 <td><code>shared/cerberus_protocol.h</code></td>
@@ -104,7 +120,7 @@ python tools/build_sentinel.py --target all --package
 <h2 id="s3c5-protocol">S3/C5 protocol</h2>
 <p>The current Sentinel header identifies protocol <strong>V2</strong>, with V1 fallback and a capability bitmap. Ordinary framed transfers are <strong>32 bytes</strong> with a <strong>22-byte payload</strong>; event batches have a separate <strong>64-byte</strong> transfer form. V2 framing includes CRC validation and bounded payload handling. Use the exact structures and helpers from the matching firmware commit.</p>
 <p>The normal READY line is <strong>C5 GPIO11 → S3 GPIO44</strong>. It reuses the C5 UART TX wire. Before clocking a request, the S3 waits for a queued C5 transfer; request/response timing and fallback handling belong to the link driver. The UART is not the normal runtime message path.</p>
-<p>The legacy seven-radio scanner uses different framing and IRQ behavior. Do not treat an identical SPI pinout as protocol compatibility.</p>
+<p>The six-C5 bank is an expansion add-on still in testing and requires matching expansion firmware. An identical SPI pinout does not establish protocol compatibility.</p>
 <h2 id="c5-programming-through-the-s3">C5 programming through the S3</h2>
 <p>The bridge temporarily occupies the S3 application slot, sets C5 boot/reset control, and forwards USB to the C5 UART at <strong>115200 baud, 8N1</strong>. The established path uses the esptool stub, uncompressed writes, and <strong>4096-byte blocks</strong>.</p>
 <div class="table-scroll"><table>

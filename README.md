@@ -11,17 +11,17 @@ This repository documents the device itself, independently of a particular firmw
 | Guide | Contents |
 | --- | --- |
 | [Start here](content/getting-started.md) | Identify the board, install firmware, build, and recover USB |
-| [Hardware](content/hardware.md) | Processors, memory, buses, power devices, and board variants |
-| [Pinouts](content/pinouts.md) | Display, touch, microSD, I²C devices, USB, and S3/C5 connections |
-| [Expansion](content/expansion.md) | Six-C5 bank, module-side pins, shared bus rules, and planned RF/NFC options |
+| [Hardware](content/hardware.md) | Base-board processors, memory, buses, and power devices |
+| [Pinouts](content/pinouts.md) | Base-board interfaces plus complete six-C5 and RF/NFC add-on maps |
+| [Expansion add-ons](content/expansion.md) | Six-C5 bank and RF/NFC board; both in testing |
 | [Programming](content/programming.md) | Toolchain, source layout, memory setup, protocol, and bring-up |
 | [Batteries](content/batteries.md) | Tested batteries, “should fit” candidates, dimensions, polarity, and test evidence |
 | [Antennas](content/antennas.md) | Radio-specific antenna requirements, connector checks, and comparison records |
 | [Troubleshooting](content/troubleshooting.md) | USB, C5, display, touch, SD, battery, and expansion issues |
 | [Downloads](content/downloads.md) | Firmware, reusable pin definitions, examples, and expansion CAD location |
-| [Revisions and evidence](content/revisions.md) | What is confirmed, historical, planned, or still awaiting measurement |
+| [Reference and testing](content/revisions.md) | Base-board reference, add-on testing status, and remaining measurements |
 
-The production reference is the **S3 N16R2 / one onboard C5 / 1-bit SDMMC** board. The C5 memory specification uses the smallest standard [C5-WROOM option](https://documentation.espressif.com/esp32-c5-wroom-1_wroom-1u_datasheet_en.html): **N4, 4 MB flash and no PSRAM**. Sentinel's current 2 MB firmware layout is a separate software allocation. Development R8 and historical prototypes have different constraints. A GPIO assignment is not a connector position.
+Cerberus uses an **S3 N16R2, one onboard C5, and 1-bit SDMMC with a 40 MHz maximum target**. The C5 memory specification uses the smallest standard [C5-WROOM option](https://documentation.espressif.com/esp32-c5-wroom-1_wroom-1u_datasheet_en.html): **N4, 4 MB flash and no PSRAM**. Sentinel's current 2 MB firmware layout is a separate software allocation. The RF/NFC board and six-C5 bank are optional expansion add-ons, both in testing. A GPIO assignment is not a connector position.
 
 ## Maintaining the website
 
