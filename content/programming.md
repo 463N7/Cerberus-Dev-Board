@@ -19,10 +19,10 @@ python tools/build_sentinel.py --target all --package
 | Target | Reference memory profile | Application partition |
 | --- | --- | --- |
 | Production S3 | 16 MB flash, DIO 80 MHz; 2 MB quad PSRAM | `0x10000`, size `0x700000` in Sentinel |
-| Onboard C5 | Conservative 2 MB flash budget, PSRAM disabled | `0x10000`, size `0x1F0000` in Sentinel |
+| Onboard C5 | 4 MB flash / no PSRAM (WROOM N4 baseline); current Sentinel layout uses 2 MB | `0x10000`, size `0x1F0000` in Sentinel |
 | Temporary S3 bridge | Production S3 profile | Uses the S3 application slot temporarily |
 
-These offsets belong to the referenced firmware layout, not every possible Cerberus application. Use each release's manifest and partition images when flashing. A detected 8 MB C5 does not justify changing its partition map without rebuilding and validation.
+The C5 hardware reference is the smallest standard C5-WROOM memory option: **4 MB flash and no PSRAM**. Sentinel's current 2 MB image layout is a software allocation within that capacity, not the module's physical flash specification. These offsets belong to the referenced firmware layout. Use each release's manifest and partition images when flashing; partition changes require rebuilding and validation.
 
 **Keep production PSRAM in quad mode.** Octal PSRAM can reserve GPIO35–37 used by microSD. DMA buffers and task stacks must follow ESP-IDF memory requirements; large optional UI buffers can explicitly request PSRAM and handle allocation failure.
 

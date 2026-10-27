@@ -9,7 +9,7 @@
 <main id="main" tabindex="-1"><div class="page-eyebrow">CERBERUS DEV BOARD <span>/</span> TECHNICAL REFERENCE</div><article><h1 id="start-developing">Start developing</h1>
 <p>Start with the production N16R2 board profile, a USB data cable, and a known firmware release. Keep the onboard S3 and C5 images from the same release.</p>
 <h2 id="1-identify-your-device">1. Identify your device</h2>
-<p>Record the board revision, S3 memory suffix, installed expansion board, and firmware version. The production reference has 16 MB S3 flash and 2 MB quad PSRAM. An R8 development profile is a different target.</p>
+<p>Record the board revision, S3 memory suffix, installed expansion board, and firmware version. The production reference has 16 MB S3 flash and 2 MB quad PSRAM. The C5 memory baseline is WROOM N4: <strong>4 MB flash and no PSRAM</strong>. An S3 R8 development profile is a different target.</p>
 <p>The device is independently programmable on both processors. The USB connection reaches the S3. A temporary S3 bridge exposes the onboard C5 for programming through that same connector.</p>
 <h2 id="2-install-a-working-baseline">2. Install a working baseline</h2>
 <p>Open the <a href="https://463n7.github.io/Cerberus-Flasher/">Cerberus USB Installer</a> in a supported desktop browser and follow its S3 bridge → C5 → final S3 sequence. The final S3 application must be installed and verified before the device is ready to use. The <a href="https://github.com/463N7/Cerberus-Flasher">installer repository</a> contains maintenance information.</p>

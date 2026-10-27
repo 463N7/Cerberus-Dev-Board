@@ -9,7 +9,8 @@ The public source baseline is [Cerberus Sentinel commit 580c80d](https://github.
 | Record | What it establishes | What it does not establish |
 | --- | --- | --- |
 | Production pin definitions | LCD, touch, SDMMC, S3/C5 SPI and READY signals | Physical connector position or every unit's assembly |
-| First-board flash record, October 11 | One S3 detected with 16 MB flash / 2 MB PSRAM; one C5 with 8 MB physical flash | A guarantee that every C5 has that capacity |
+| C5 memory specification | WROOM N4 baseline: 4 MB flash / no PSRAM, the smallest standard listed C5-WROOM memory option | A requirement for larger-memory modules; Sentinel's 2 MB firmware layout is a separate software allocation |
+| First-board flash record, October 11 | One S3 detected with 16 MB flash / 2 MB PSRAM; both processors programmed and verified | The memory specification for all production units |
 | Later battery/health verification | MAX17048 available with plausible voltage/SOC; later SD mount success recorded | Exact battery SKU, charging limits, runtime, or cell-presence sensing |
 | Six-C5 programming record, September 29 | Six 4 MB WROOM modules passed write verification | Completed cold-cycle seven-radio scan acceptance |
 | Earlier Rev A design discussion | BQ25895 charger identification and STAT LED discussion | Full recovered charger settings or exact battery product list |
@@ -37,5 +38,6 @@ The public source baseline is [Cerberus Sentinel commit 580c80d](https://github.
 | Date | Change |
 | --- | --- |
 | 2026-10-27 | Initial Cerberus Dev Board reference; production pinouts, expansion profiles, programming/recovery, battery/antenna record structures, and separate expansion CAD area |
+| 2026-10-27 | Set the C5 hardware memory baseline to the smallest standard WROOM option: N4, 4 MB flash and no PSRAM; distinguish the current 2 MB firmware layout |
 
 Use the [documentation issue form](https://github.com/463N7/Cerberus-Dev-Board/issues/new?template=documentation.yml) to submit an exact correction and its evidence. Hardware test claims should name the board revision, firmware, date, and test conditions.

@@ -9,7 +9,7 @@ The production Cerberus reference is the **ESP32-S3 N16R2** device with one onbo
 | Main processor | ESP32-S3, up to 240 MHz in the board profile | Runs UI, display, touch, storage, and USB |
 | S3 memory | 16 MB flash / 2 MB quad PSRAM | Confirmed on a production unit; use the N16R2 configuration |
 | Radio coprocessor | ESP32-C5 | Wi-Fi 2.4/5 GHz, BLE, and 802.15.4 depend on firmware support |
-| Onboard C5 memory | 8 MB physical flash detected on one tested unit | Sentinel uses a conservative 2 MB partition budget; verify each unit |
+| Onboard C5 memory | 4 MB flash / no PSRAM | Minimum ESP32-C5-WROOM-1/1U N4 configuration; Sentinel currently uses a 2 MB firmware layout |
 | Display | ST7796, 320 × 480 portrait, RGB565 | SPI2 at 40 MHz in Sentinel; landscape is firmware dependent |
 | Touch | GT911 | Shared I²C, 7-bit address `0x5D`; INT on GPIO7; no dedicated reset connection |
 | microSD | 1-bit SDMMC | CLK36 / CMD37 / DAT0 35; up to 20 MHz in reference firmware |
@@ -17,6 +17,8 @@ The production Cerberus reference is the **ESP32-S3 N16R2** device with one onbo
 | Battery fuel gauge | MAX17048 | Shared I²C at `0x36`; voltage and state-of-charge estimate |
 | Battery charger | BQ25895, identified in prior board design discussion | I²C address `0x6A` per TI; assembled bus access and charger settings need confirmation |
 | Expansion | Shared SPI3 and additional GPIOs | Physical header numbering/orientation awaits an as-built connector record |
+
+The C5 memory specification uses the smallest standard WROOM configuration listed by Espressif: **N4, with 4 MB Quad SPI flash and no PSRAM**. This applies to the memory baseline for both WROOM-1 and WROOM-1U; it does not select the device's antenna variant. Firmware can use a smaller partition layout within that capacity.
 
 The C5 silicon supports the listed radio families; an installed application may expose only a subset. Support for 802.15.4 does not itself establish a complete Zigbee or Thread application. The base device has no built-in LoRa, CC1101, nRF24, NFC reader, or GPS in this reference.
 
@@ -56,6 +58,7 @@ The following need board-specific measurement before being advertised: expansion
 - [Sentinel build and memory profile](https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/docs/SENTINEL_BUILD.md)
 - [Recorded first-board flash detection](https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/docs/FIRST_BOARD_FLASH.md)
 - [Espressif ESP32-C5 capabilities](https://www.espressif.com/en/products/socs/esp32-c5)
+- [Espressif C5-WROOM series comparison and memory options](https://documentation.espressif.com/esp32-c5-wroom-1_wroom-1u_datasheet_en.html)
 - [Espressif ESP32-S3 GPIO restrictions](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/gpio.html)
 - [Analog Devices MAX17048](https://www.analog.com/en/products/max17048.html)
 - [TI BQ25895 product and datasheet](https://www.ti.com/product/BQ25895)

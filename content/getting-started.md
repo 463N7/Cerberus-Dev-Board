@@ -4,7 +4,7 @@ Start with the production N16R2 board profile, a USB data cable, and a known fir
 
 ## 1. Identify your device
 
-Record the board revision, S3 memory suffix, installed expansion board, and firmware version. The production reference has 16 MB S3 flash and 2 MB quad PSRAM. An R8 development profile is a different target.
+Record the board revision, S3 memory suffix, installed expansion board, and firmware version. The production reference has 16 MB S3 flash and 2 MB quad PSRAM. The C5 memory baseline is WROOM N4: **4 MB flash and no PSRAM**. An S3 R8 development profile is a different target.
 
 The device is independently programmable on both processors. The USB connection reaches the S3. A temporary S3 bridge exposes the onboard C5 for programming through that same connector.
 

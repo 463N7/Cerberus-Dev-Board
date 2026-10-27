@@ -21,7 +21,7 @@ This repository documents the device itself, independently of a particular firmw
 | [Downloads](content/downloads.md) | Firmware, reusable pin definitions, examples, and expansion CAD location |
 | [Revisions and evidence](content/revisions.md) | What is confirmed, historical, planned, or still awaiting measurement |
 
-The production reference is the **S3 N16R2 / one onboard C5 / 1-bit SDMMC** board. Development R8 and historical prototypes have different constraints. A firmware profile is not proof of physical flash capacity, and a GPIO assignment is not a connector position.
+The production reference is the **S3 N16R2 / one onboard C5 / 1-bit SDMMC** board. The C5 memory specification uses the smallest standard [C5-WROOM option](https://documentation.espressif.com/esp32-c5-wroom-1_wroom-1u_datasheet_en.html): **N4, 4 MB flash and no PSRAM**. Sentinel's current 2 MB firmware layout is a separate software allocation. Development R8 and historical prototypes have different constraints. A GPIO assignment is not a connector position.
 
 ## Maintaining the website
 

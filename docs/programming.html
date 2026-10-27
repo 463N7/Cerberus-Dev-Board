@@ -33,7 +33,7 @@ python tools/build_sentinel.py --target all --package
 </tr>
 <tr>
 <td>Onboard C5</td>
-<td>Conservative 2 MB flash budget, PSRAM disabled</td>
+<td>4 MB flash / no PSRAM (WROOM N4 baseline); current Sentinel layout uses 2 MB</td>
 <td><code>0x10000</code>, size <code>0x1F0000</code> in Sentinel</td>
 </tr>
 <tr>
@@ -43,7 +43,7 @@ python tools/build_sentinel.py --target all --package
 </tr>
 </tbody>
 </table></div>
-<p>These offsets belong to the referenced firmware layout, not every possible Cerberus application. Use each release's manifest and partition images when flashing. A detected 8 MB C5 does not justify changing its partition map without rebuilding and validation.</p>
+<p>The C5 hardware reference is the smallest standard C5-WROOM memory option: <strong>4 MB flash and no PSRAM</strong>. Sentinel's current 2 MB image layout is a software allocation within that capacity, not the module's physical flash specification. These offsets belong to the referenced firmware layout. Use each release's manifest and partition images when flashing; partition changes require rebuilding and validation.</p>
 <p><strong>Keep production PSRAM in quad mode.</strong> Octal PSRAM can reserve GPIO35–37 used by microSD. DMA buffers and task stacks must follow ESP-IDF memory requirements; large optional UI buffers can explicitly request PSRAM and handle allocation failure.</p>
 <h2 id="source-layout-and-driver-entry-points">Source layout and driver entry points</h2>
 <div class="table-scroll"><table>

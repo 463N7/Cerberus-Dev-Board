@@ -35,8 +35,8 @@
 </tr>
 <tr>
 <td>Onboard C5 memory</td>
-<td>8 MB physical flash detected on one tested unit</td>
-<td>Sentinel uses a conservative 2 MB partition budget; verify each unit</td>
+<td>4 MB flash / no PSRAM</td>
+<td>Minimum ESP32-C5-WROOM-1/1U N4 configuration; Sentinel currently uses a 2 MB firmware layout</td>
 </tr>
 <tr>
 <td>Display</td>
@@ -75,6 +75,7 @@
 </tr>
 </tbody>
 </table></div>
+<p>The C5 memory specification uses the smallest standard WROOM configuration listed by Espressif: <strong>N4, with 4 MB Quad SPI flash and no PSRAM</strong>. This applies to the memory baseline for both WROOM-1 and WROOM-1U; it does not select the device's antenna variant. Firmware can use a smaller partition layout within that capacity.</p>
 <p>The C5 silicon supports the listed radio families; an installed application may expose only a subset. Support for 802.15.4 does not itself establish a complete Zigbee or Thread application. The base device has no built-in LoRa, CC1101, nRF24, NFC reader, or GPS in this reference.</p>
 <h2 id="bus-ownership">Bus ownership</h2>
 <div class="table-scroll"><table>
@@ -161,6 +162,7 @@
 <li><a href="https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/docs/SENTINEL_BUILD.md">Sentinel build and memory profile</a></li>
 <li><a href="https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/docs/FIRST_BOARD_FLASH.md">Recorded first-board flash detection</a></li>
 <li><a href="https://www.espressif.com/en/products/socs/esp32-c5">Espressif ESP32-C5 capabilities</a></li>
+<li><a href="https://documentation.espressif.com/esp32-c5-wroom-1_wroom-1u_datasheet_en.html">Espressif C5-WROOM series comparison and memory options</a></li>
 <li><a href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/gpio.html">Espressif ESP32-S3 GPIO restrictions</a></li>
 <li><a href="https://www.analog.com/en/products/max17048.html">Analog Devices MAX17048</a></li>
 <li><a href="https://www.ti.com/product/BQ25895">TI BQ25895 product and datasheet</a></li>
