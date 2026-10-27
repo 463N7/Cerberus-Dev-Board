@@ -7,33 +7,51 @@
 <aside id="sidebar" class="sidebar"><p class="nav-heading">DEVELOPER REFERENCE</p><nav aria-label="Documentation"><a href="index.html"><span>00</span>Overview</a><a href="getting-started.html"><span>01</span>Start here</a><a href="hardware.html"><span>02</span>Hardware</a><a href="pinouts.html"><span>03</span>Pinouts</a><a href="expansion.html"><span>04</span>Expansion add-ons</a><a href="programming.html"><span>05</span>Programming</a><a href="batteries.html" aria-current="page"><span>06</span>Batteries</a><a href="antennas.html"><span>07</span>Antennas</a><a href="troubleshooting.html"><span>08</span>Troubleshooting</a><a href="downloads.html"><span>09</span>Downloads</a><a href="revisions.html"><span>10</span>Reference + testing</a></nav><div class="sidebar-note"><span class="status-dot"></span>Cerberus base board<p>One onboard C5<br>Quad PSRAM · 1-bit SDMMC<br>40 MHz SDMMC target</p></div><a class="installer-link" href="https://463n7.github.io/Cerberus-Flasher/">Open USB installer ↗</a></aside>
 <div class="workspace"><div class="utility"><span>REFERENCE / BATTERIES</span><div class="search-wrap"><label class="sr-only" for="site-search">Search all documentation</label><input id="site-search" type="search" autocomplete="off" placeholder="Search documentation…"><div id="search-results" class="search-results" hidden aria-label="Search results" aria-live="polite"></div></div></div>
 <main id="main" tabindex="-1"><div class="page-eyebrow">CERBERUS DEV BOARD <span>/</span> TECHNICAL REFERENCE</div><article><h1 id="batteries">Batteries</h1>
-<p>Battery compatibility has two separate questions: <strong>does it fit</strong>, and <strong>has it been tested electrically in this device</strong>? A capacity label or similar-looking connector does not answer either question completely.</p>
+<p>Four battery packs have been tested with Cerberus. The list below identifies the tested packs by their printed labels and the reference photo.</p>
 <h2 id="tested-batteries">Tested batteries</h2>
-<p><strong>No exact battery model is yet documented in this public reference.</strong> Prior board discussions describe operation with a battery installed, and recorded firmware checks show a working MAX17048 reading. Neither record identifies a cell model, dimensions, connector polarity, charge rating, or runtime test, so neither is listed as a tested battery product.</p>
+<p><strong>All four packs below are confirmed tested with Cerberus.</strong> Voltage and capacity figures are the ratings printed on each pack.</p>
 <div class="table-scroll"><table>
 <thead>
 <tr>
-<th>Model / product link</th>
-<th>Dimensions (T × W × L)</th>
-<th>Connector + polarity</th>
-<th>Board / enclosure</th>
-<th>Charge / runtime result</th>
-<th>Status</th>
+<th>Battery / printed label</th>
+<th>Nominal voltage</th>
+<th>Labeled capacity</th>
+<th>Identification in photo</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Awaiting exact model record</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
-<td>No model-level test claim</td>
+<td>PL 606090 pouch</td>
+<td>3.7 V</td>
+<td>4000 mAh</td>
+<td>Top; shown installed in the Cerberus enclosure</td>
+</tr>
+<tr>
+<td>PL 505573 pouch</td>
+<td>3.7 V</td>
+<td>2500 mAh</td>
+<td>Lower left</td>
+</tr>
+<tr>
+<td>PL 695084 pouch</td>
+<td>3.7 V</td>
+<td>3200 mAh</td>
+<td>Lower right; additional marking <code>2803</code></td>
+</tr>
+<tr>
+<td>BATMAX BT-PS3 — PS3 DualShock 3 replacement battery</td>
+<td>3.7 V</td>
+<td>1800 mAh / 6.66 Wh</td>
+<td>Small black pack</td>
 </tr>
 </tbody>
 </table></div>
+<p>The BATMAX label lists replacement references <strong>LIP1359, LIP1859, and LIP1427</strong>, with controller compatibility <strong>CECHZC2E / CECHZC2U</strong>. The pouch packs are identified by their printed PL codes; their manufacturer is not listed.</p>
+<details class="connector-photo"><summary>View the tested battery photo</summary><figure><a href="assets/tested-batteries.jpg"><img src="assets/tested-batteries.jpg" alt="Four tested Cerberus batteries: PL 606090 4000 mAh installed at the top, PL 505573 2500 mAh at lower left, PL 695084 3200 mAh at lower right, and a black BATMAX BT-PS3 1800 mAh PS3 DualShock 3 replacement pack." width="4590" height="8160" loading="lazy"></a><figcaption>Tested packs and their printed labels. Select the photo to view it at full size.</figcaption></figure></details>
+
+<p>Measured dimensions, connector series and pin order, charger settings, measured capacity, and runtime are not yet recorded here. The pouch codes are identifiers, not measured dimensions. Only the 4000 mAh pack is shown installed in this photo.</p>
 <h2 id="should-fit-untested-candidates">Should fit — untested candidates</h2>
-<p>This section is reserved for candidates whose dimensions and connector have been compared with the actual enclosure and board. The battery cavity dimensions and connector part/polarity have not been recovered from the available records, so no product is marked “should fit” yet.</p>
+<p>No untested candidates are listed yet. Add a pack here once its dimensions and connector have been compared with the actual enclosure and board.</p>
 <div class="table-scroll"><table>
 <thead>
 <tr>
@@ -60,7 +78,7 @@
 <h2 id="what-is-known-about-battery-support">What is known about battery support</h2>
 <ul>
 <li>The onboard <strong>MAX17048</strong> fuel gauge is at I²C address <code>0x36</code>. It provides voltage and an estimated percentage.</li>
-<li><strong>BQ25895</strong> is the charger identified in the earlier Cerberus board design discussion. TI documents it as a single-cell charger; its configured limits on the assembled board still need a record.</li>
+<li>The <strong>BQ25895</strong> charger shares I²C0: SDA GPIO8, SCL GPIO9, address <code>0x6A</code>. Its configured charge limits are not yet listed here.</li>
 <li>The gauge's reading does not establish charging status. USB attachment alone does not establish charging status either.</li>
 <li>The charger STAT LED is a charge/fault indicator, not a general device power light. LED-off and blinking states have more than one possible cause; inspect charger status before assigning a cause.</li>
 </ul>

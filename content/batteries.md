@@ -1,18 +1,27 @@
 # Batteries
 
-Battery compatibility has two separate questions: **does it fit**, and **has it been tested electrically in this device**? A capacity label or similar-looking connector does not answer either question completely.
+Four battery packs have been tested with Cerberus. The list below identifies the tested packs by their printed labels and the reference photo.
 
 ## Tested batteries
 
-**No exact battery model is yet documented in this public reference.** Prior board discussions describe operation with a battery installed, and recorded firmware checks show a working MAX17048 reading. Neither record identifies a cell model, dimensions, connector polarity, charge rating, or runtime test, so neither is listed as a tested battery product.
+**All four packs below are confirmed tested with Cerberus.** Voltage and capacity figures are the ratings printed on each pack.
 
-| Model / product link | Dimensions (T × W × L) | Connector + polarity | Board / enclosure | Charge / runtime result | Status |
-| --- | --- | --- | --- | --- | --- |
-| Awaiting exact model record | — | — | — | — | No model-level test claim |
+| Battery / printed label | Nominal voltage | Labeled capacity | Identification in photo |
+| --- | --- | --- | --- |
+| PL 606090 pouch | 3.7 V | 4000 mAh | Top; shown installed in the Cerberus enclosure |
+| PL 505573 pouch | 3.7 V | 2500 mAh | Lower left |
+| PL 695084 pouch | 3.7 V | 3200 mAh | Lower right; additional marking `2803` |
+| BATMAX BT-PS3 — PS3 DualShock 3 replacement battery | 3.7 V | 1800 mAh / 6.66 Wh | Small black pack |
+
+The BATMAX label lists replacement references **LIP1359, LIP1859, and LIP1427**, with controller compatibility **CECHZC2E / CECHZC2U**. The pouch packs are identified by their printed PL codes; their manufacturer is not listed.
+
+<details class="connector-photo"><summary>View the tested battery photo</summary><figure><a href="assets/tested-batteries.jpg"><img src="assets/tested-batteries.jpg" alt="Four tested Cerberus batteries: PL 606090 4000 mAh installed at the top, PL 505573 2500 mAh at lower left, PL 695084 3200 mAh at lower right, and a black BATMAX BT-PS3 1800 mAh PS3 DualShock 3 replacement pack." width="4590" height="8160" loading="lazy"></a><figcaption>Tested packs and their printed labels. Select the photo to view it at full size.</figcaption></figure></details>
+
+Measured dimensions, connector series and pin order, charger settings, measured capacity, and runtime are not yet recorded here. The pouch codes are identifiers, not measured dimensions. Only the 4000 mAh pack is shown installed in this photo.
 
 ## Should fit — untested candidates
 
-This section is reserved for candidates whose dimensions and connector have been compared with the actual enclosure and board. The battery cavity dimensions and connector part/polarity have not been recovered from the available records, so no product is marked “should fit” yet.
+No untested candidates are listed yet. Add a pack here once its dimensions and connector have been compared with the actual enclosure and board.
 
 | Candidate / product link | Published size (T × W × L) | Available clearance | Connector match | Electrical checks remaining | Status |
 | --- | --- | --- | --- | --- | --- |
@@ -23,7 +32,7 @@ This section is reserved for candidates whose dimensions and connector have been
 ## What is known about battery support
 
 - The onboard **MAX17048** fuel gauge is at I²C address `0x36`. It provides voltage and an estimated percentage.
-- **BQ25895** is the charger identified in the earlier Cerberus board design discussion. TI documents it as a single-cell charger; its configured limits on the assembled board still need a record.
+- The **BQ25895** charger shares I²C0: SDA GPIO8, SCL GPIO9, address `0x6A`. Its configured charge limits are not yet listed here.
 - The gauge's reading does not establish charging status. USB attachment alone does not establish charging status either.
 - The charger STAT LED is a charge/fault indicator, not a general device power light. LED-off and blinking states have more than one possible cause; inspect charger status before assigning a cause.
 

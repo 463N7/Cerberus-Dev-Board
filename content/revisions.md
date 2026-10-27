@@ -27,5 +27,6 @@ Both are optional add-ons to the base board. The six-C5 signal assignments are l
 | 2026-10-27 | Confirmed BQ25895 on shared I²C0, GPIO8/9 at 0x6A; removed the RF/NFC map and download during early testing |
 | 2026-10-27 | Added labeled expansion breakout contact order, processor domains, photo, and CSV |
 | 2026-10-27 | Listed each expansion GPIO individually; removed power and ground contacts from the table and CSV |
+| 2026-10-27 | Added four tested batteries: PL 606090, PL 505573, PL 695084, and BATMAX BT-PS3, with a reference photo |
 
 Use the [documentation issue form](https://github.com/463N7/Cerberus-Dev-Board/issues/new?template=documentation.yml) for corrections and supporting evidence. Hardware results should identify the firmware, date, attached add-on, and test conditions.

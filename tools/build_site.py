@@ -102,7 +102,7 @@ def build():
     output = ROOT / "docs"
     assets = output / "assets"
     assets.mkdir(parents=True, exist_ok=True)
-    for name in ("style.css", "site.js", "mark.svg", "expansion-breakout.jpg"):
+    for name in ("style.css", "site.js", "mark.svg", "expansion-breakout.jpg", "tested-batteries.jpg"):
         (assets / name).write_bytes((ROOT / "site" / name).read_bytes())
     (output / ".nojekyll").write_text("", encoding="utf-8")
     index = []
