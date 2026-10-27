@@ -9,7 +9,7 @@
 <main id="main" tabindex="-1"><div class="page-eyebrow">CERBERUS DEV BOARD <span>/</span> TECHNICAL REFERENCE</div><article><h1 id="programming-reference">Programming reference</h1>
 <p>The S3 runs application services. The onboard C5 runs a separate radio application. Their shared wire interface and protocol must agree; changing one processor's firmware can require rebuilding both.</p>
 <h2 id="reference-toolchain">Reference toolchain</h2>
-<p>The recorded Sentinel toolchain is PlatformIO Core <strong>6.1.19</strong>, platform <strong>espressif32@7.0.1</strong>, and <strong>ESP-IDF 6.0.1</strong> (<code>framework-espidf@4.60001.0</code>). Use the pinned configuration and dependency lock files in the firmware repository.</p>
+<p>The Sentinel toolchain uses PlatformIO Core <strong>6.1.19</strong>, platform <strong>espressif32@7.0.1</strong>, and <strong>ESP-IDF 6.0.1</strong> (<code>framework-espidf@4.60001.0</code>). Use the pinned configuration and dependency lock files in the firmware repository.</p>
 <pre><code class="language-powershell"># Run inside a Cerberus-Sentinel checkout.
 python tools/build_sentinel.py --target s3
 python tools/build_sentinel.py --target c5
@@ -60,7 +60,7 @@ slot.cmd = GPIO_NUM_37;
 slot.d0 = GPIO_NUM_35;
 slot.flags |= SDMMC_SLOT_FLAG_INTERNAL_PULLUP;
 </code></pre>
-<p>The actual card clock is negotiated by the card and firmware; 40 MHz is the configured maximum, not a measured guarantee. Firmware must request high-speed operation for normal mounting and USB storage access. This website setting does not update an installed image. Validate card mounting, file reads/writes, and USB storage access when applying it. See <a href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/sdmmc_host.html">Espressif's SDMMC frequency configuration</a>.</p>
+<p>The card and firmware negotiate the actual clock, up to the configured 40 MHz maximum. Enable high-speed operation for both normal mounting and USB storage access. Validate card mounting, file reads/writes, and USB storage access after changing the clock. See <a href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/sdmmc_host.html">Espressif's SDMMC frequency configuration</a>.</p>
 <h2 id="source-layout-and-driver-entry-points">Source layout and driver entry points</h2>
 <div class="table-scroll"><table>
 <thead>
@@ -157,5 +157,5 @@ slot.flags |= SDMMC_SLOT_FLAG_INTERNAL_PULLUP;
 <li>Add one expansion device at a time with a unique select and correct bus settings.</li>
 <li>Repeat after cold power-cycling, with battery power, and with all intended peripherals present.</li>
 </ol>
-<p>The <a href="https://github.com/463N7/Cerberus-Dev-Board/tree/main/examples">examples folder</a> contains a standalone pin header and a read-only I²C identification example. It is not a complete BSP or a claim that a new binary was tested on hardware.</p></article><div class="page-end"><a href="https://github.com/463N7/Cerberus-Dev-Board/blob/main/content/programming.md">View page source ↗</a><a href="https://github.com/463N7/Cerberus-Dev-Board/issues/new/choose">Suggest a correction ↗</a></div></main>
+<p>The <a href="https://github.com/463N7/Cerberus-Dev-Board/tree/main/examples">examples folder</a> contains a board pin header and a standalone, read-only I²C identification example. The I²C example is awaiting hardware testing.</p></article><div class="page-end"><a href="https://github.com/463N7/Cerberus-Dev-Board/blob/main/content/programming.md">View page source ↗</a><a href="https://github.com/463N7/Cerberus-Dev-Board/issues/new/choose">Suggest a correction ↗</a></div></main>
 <footer><span>CERBERUS / BUILD. EXPERIMENT. DOCUMENT.</span><span>Reference updated October 27, 2026</span></footer></div></body></html>

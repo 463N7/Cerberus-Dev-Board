@@ -9,7 +9,7 @@
 <main id="main" tabindex="-1"><div class="page-eyebrow">CERBERUS DEV BOARD <span>/</span> TECHNICAL REFERENCE</div><article><h1 id="reference-and-testing">Reference and testing</h1>
 <p>This reference covers the <strong>base Cerberus board</strong>: ESP32-S3 N16R2, one onboard ESP32-C5 with a 4 MB flash / no-PSRAM memory baseline, ST7796 display, GT911 touch, shared I²C, native USB, and 1-bit SDMMC with a 40 MHz maximum clock target.</p>
 <h2 id="base-board-reference">Base-board reference</h2>
-<p>The <a href="https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/shared/cerberus_pins.h">Cerberus pin definitions</a> establish the built-in signal mappings. The <a href="https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/docs/SENTINEL_BUILD.md">firmware build guide</a> documents the application memory layout and programming workflow. The website's 40 MHz SDMMC target requires matching firmware configuration; actual clock and stability depend on the card and assembled device.</p>
+<p>The <a href="https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/shared/cerberus_pins.h">Cerberus pin definitions</a> list the built-in signal mappings. The <a href="https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/docs/SENTINEL_BUILD.md">firmware build guide</a> covers the application memory layout and programming workflow. SDMMC uses a 40 MHz maximum setting; the card and firmware negotiate the actual clock.</p>
 <p>The C5 memory specification uses the smallest standard WROOM option, <strong>N4: 4 MB flash and no PSRAM</strong>. Sentinel's current 2 MB firmware layout is a separate software allocation.</p>
 <h2 id="expansion-add-on-status">Expansion add-on status</h2>
 <div class="table-scroll"><table>
@@ -17,8 +17,8 @@
 <tr>
 <th>Expansion add-on</th>
 <th>Status</th>
-<th>Recorded progress</th>
-<th>Remaining validation</th>
+<th>Completed checks</th>
+<th>Testing scope</th>
 </tr>
 </thead>
 <tbody>
@@ -37,15 +37,6 @@
 </tbody>
 </table></div>
 <p>Neither add-on is a different base-board model. Their signal assignments are listed separately on the <a href="pinouts.html">pinouts page</a>.</p>
-<h2 id="records-still-needed">Records still needed</h2>
-<ol>
-<li>Connector photos with pin 1 and viewing side, plus a continuity-verified physical header map and mating connector details.</li>
-<li>Expansion supply contacts and current ratings.</li>
-<li>Battery connector/polarity, configured charge limits, enclosure cavity measurements, and exact tested battery models.</li>
-<li>Antenna connector and module part numbers, with band-specific compatibility results.</li>
-<li>Expansion KiCad PCB files, assembly notes, and matching validation records.</li>
-<li>Card-specific SDMMC read/write and cold-start results at the 40 MHz target.</li>
-</ol>
 <h2 id="documentation-changelog">Documentation changelog</h2>
 <div class="table-scroll"><table>
 <thead>

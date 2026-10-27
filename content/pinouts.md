@@ -34,7 +34,7 @@ Display setup: 320 × 480 portrait, RGB565, SPI2 at 40 MHz. Pixel orientation an
 | Touch RESET | Not connected | No dedicated reset GPIO |
 | GT911 address | `0x5D` | 7-bit I²C address |
 | MAX17048 fuel gauge | `0x36` on GPIO8/9 | Battery voltage and estimated percentage |
-| BQ25895 charger | Datasheet address `0x6A` | Confirm assembled bus access before using |
+| BQ25895 charger | `0x6A` | Charger control/status; host-bus routing pending confirmation |
 
 Register added I²C devices on the existing bus. Check address conflicts and combined pull-up strength.
 
@@ -159,7 +159,7 @@ Download the [RF/NFC expansion pinout CSV](assets/rf-nfc-expansion-pinout.csv).
 
 ## Connector orientation and developer files
 
-These tables provide GPIO-to-signal mappings. Physical header numbering, viewing side, pin-1 orientation, supply contacts, and current ratings need an as-built connector record before they are listed as verified.
+These tables provide GPIO-to-signal mappings. Physical connector pin order and power ratings are not listed.
 
 Download the [base-board pin header](https://github.com/463N7/Cerberus-Dev-Board/blob/main/examples/cerberus_board_pins.h). The [expansion add-ons page](expansion.md) has testing status, bus integration notes, and the expansion KiCad file area.
 

@@ -65,13 +65,13 @@
 </tr>
 <tr>
 <td>Battery charger</td>
-<td>BQ25895, identified in prior board design discussion</td>
-<td>I²C address <code>0x6A</code> per TI; assembled bus access and charger settings need confirmation</td>
+<td>BQ25895</td>
+<td>I²C address <code>0x6A</code>; battery charging and power-path control</td>
 </tr>
 <tr>
 <td>Expansion</td>
 <td>Shared SPI3 and additional GPIOs</td>
-<td>Physical header numbering/orientation awaits an as-built connector record</td>
+<td>RF/NFC and six-C5 expansion add-ons; both in testing</td>
 </tr>
 </tbody>
 </table></div>
@@ -114,7 +114,7 @@
 </tr>
 </tbody>
 </table></div>
-<p>The 40 MHz SDMMC setting is the website's configuration target. Firmware must request high-speed operation, and card/board stability still needs validation. See the <a href="programming.html#sdmmc-1-bit-40-mhz-configuration">configuration example</a>.</p>
+<p>Configure firmware for 1-bit SDMMC with a 40 MHz maximum clock. See the <a href="programming.html#sdmmc-1-bit-40-mhz-configuration">configuration example</a>.</p>
 <h2 id="optional-expansion-add-ons">Optional expansion add-ons</h2>
 <div class="table-scroll"><table>
 <thead>
@@ -141,7 +141,6 @@
 <h2 id="electrical-and-mechanical-reference">Electrical and mechanical reference</h2>
 <p>Treat S3/C5 signals as <strong>3.3 V logic</strong>. Do not connect 5 V signal outputs directly or infer supply capability from a GPIO label. Verify a peripheral's logic voltage separately from its supply input.</p>
 <p>Keep GPIO19/20 for USB, memory pins for flash/PSRAM, and GPIO0/3/45/46 startup strapping requirements intact. Preserve the quad-PSRAM configuration and the SDMMC pull-up network. Do not treat an unassigned GPIO as physically exposed or safe to repurpose.</p>
-<p>The following need board-specific measurement before being advertised: expansion-rail current limits, charger input/charge limits, battery connector part number/polarity, enclosure battery cavity, board outline, mounting holes, antenna connector part numbers, and physical header numbering. A component's datasheet maximum is not the assembled board's rating.</p>
 <h2 id="references">References</h2>
 <ul>
 <li><a href="https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/shared/cerberus_pins.h">Base-board pin definitions</a></li>

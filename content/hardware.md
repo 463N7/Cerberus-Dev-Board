@@ -15,8 +15,8 @@ The base Cerberus board uses an **ESP32-S3 N16R2** with one onboard **ESP32-C5**
 | microSD | 1-bit SDMMC, up to 40 MHz | CLK36 / CMD37 / DAT0 35; configure firmware for the 40 MHz maximum target |
 | USB | ESP32-S3 native USB | GPIO19 D− / GPIO20 D+; serial, programming, and firmware-dependent device modes |
 | Battery fuel gauge | MAX17048 | Shared I²C at `0x36`; voltage and state-of-charge estimate |
-| Battery charger | BQ25895, identified in prior board design discussion | I²C address `0x6A` per TI; assembled bus access and charger settings need confirmation |
-| Expansion | Shared SPI3 and additional GPIOs | Physical header numbering/orientation awaits an as-built connector record |
+| Battery charger | BQ25895 | I²C address `0x6A`; battery charging and power-path control |
+| Expansion | Shared SPI3 and additional GPIOs | RF/NFC and six-C5 expansion add-ons; both in testing |
 
 The C5 memory specification uses the smallest standard WROOM configuration listed by Espressif: **N4, with 4 MB Quad SPI flash and no PSRAM**. Firmware can use a smaller partition layout within that capacity.
 
@@ -32,7 +32,7 @@ The C5 silicon supports the listed radio families; an installed application may 
 | Touch + gauge | I²C0 | 400 kHz in Sentinel |
 | C5 programming | UART | 115200 baud, 8N1 through the temporary USB bridge |
 
-The 40 MHz SDMMC setting is the website's configuration target. Firmware must request high-speed operation, and card/board stability still needs validation. See the [configuration example](programming.md#sdmmc-1-bit-40-mhz-configuration).
+Configure firmware for 1-bit SDMMC with a 40 MHz maximum clock. See the [configuration example](programming.md#sdmmc-1-bit-40-mhz-configuration).
 
 ## Optional expansion add-ons
 
@@ -48,8 +48,6 @@ Both connect to the same base Cerberus board. Their signal assignments are on th
 Treat S3/C5 signals as **3.3 V logic**. Do not connect 5 V signal outputs directly or infer supply capability from a GPIO label. Verify a peripheral's logic voltage separately from its supply input.
 
 Keep GPIO19/20 for USB, memory pins for flash/PSRAM, and GPIO0/3/45/46 startup strapping requirements intact. Preserve the quad-PSRAM configuration and the SDMMC pull-up network. Do not treat an unassigned GPIO as physically exposed or safe to repurpose.
-
-The following need board-specific measurement before being advertised: expansion-rail current limits, charger input/charge limits, battery connector part number/polarity, enclosure battery cavity, board outline, mounting holes, antenna connector part numbers, and physical header numbering. A component's datasheet maximum is not the assembled board's rating.
 
 ## References
 

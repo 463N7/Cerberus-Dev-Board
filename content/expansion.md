@@ -24,12 +24,8 @@ Wiring, firmware integration, power, and assembled operation remain in testing. 
 - Serialize complete request/response sequences where required by the device protocol, and preserve the C5 READY handshake when using its base-board link.
 - Make unused selects inactive before starting the bus. Preserve S3 startup-strapping states when adding control circuitry.
 - Set the TCA9534A output latch before enabling output directions. I²C expander outputs are for control signals, not SPI clocks or precise pulse capture.
-- Use a supply sized for the exact radio modules. GPIOs provide control signals; the base-board expansion-rail current rating still needs verification.
+- Use a supply sized for the exact radio modules. GPIOs provide logic signals, not module power.
 - Power off before attaching or removing an add-on. Isolate circuitry using GPIO43 before programming the onboard C5.
-
-## Connector reference
-
-The [pinouts page](pinouts.md) provides base-board and add-on signal mappings together. Physical header positions, pin-1 orientation, viewing side, mating part, and supply contacts need an as-built connector record before they can be listed as verified.
 
 ## Expansion KiCad files
 

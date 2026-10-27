@@ -4,7 +4,7 @@ The S3 runs application services. The onboard C5 runs a separate radio applicati
 
 ## Reference toolchain
 
-The recorded Sentinel toolchain is PlatformIO Core **6.1.19**, platform **espressif32@7.0.1**, and **ESP-IDF 6.0.1** (`framework-espidf@4.60001.0`). Use the pinned configuration and dependency lock files in the firmware repository.
+The Sentinel toolchain uses PlatformIO Core **6.1.19**, platform **espressif32@7.0.1**, and **ESP-IDF 6.0.1** (`framework-espidf@4.60001.0`). Use the pinned configuration and dependency lock files in the firmware repository.
 
 ```powershell
 # Run inside a Cerberus-Sentinel checkout.
@@ -45,7 +45,7 @@ slot.d0 = GPIO_NUM_35;
 slot.flags |= SDMMC_SLOT_FLAG_INTERNAL_PULLUP;
 ```
 
-The actual card clock is negotiated by the card and firmware; 40 MHz is the configured maximum, not a measured guarantee. Firmware must request high-speed operation for normal mounting and USB storage access. This website setting does not update an installed image. Validate card mounting, file reads/writes, and USB storage access when applying it. See [Espressif's SDMMC frequency configuration](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/sdmmc_host.html).
+The card and firmware negotiate the actual clock, up to the configured 40 MHz maximum. Enable high-speed operation for both normal mounting and USB storage access. Validate card mounting, file reads/writes, and USB storage access after changing the clock. See [Espressif's SDMMC frequency configuration](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/sdmmc_host.html).
 
 ## Source layout and driver entry points
 
@@ -99,4 +99,4 @@ Sentinel samples every 5 seconds, retries unavailable readings after 30 seconds,
 5. Add one expansion device at a time with a unique select and correct bus settings.
 6. Repeat after cold power-cycling, with battery power, and with all intended peripherals present.
 
-The [examples folder](https://github.com/463N7/Cerberus-Dev-Board/tree/main/examples) contains a standalone pin header and a read-only I²C identification example. It is not a complete BSP or a claim that a new binary was tested on hardware.
+The [examples folder](https://github.com/463N7/Cerberus-Dev-Board/tree/main/examples) contains a board pin header and a standalone, read-only I²C identification example. The I²C example is awaiting hardware testing.

@@ -103,8 +103,8 @@
 </tr>
 <tr>
 <td>BQ25895 charger</td>
-<td>Datasheet address <code>0x6A</code></td>
-<td>Confirm assembled bus access before using</td>
+<td><code>0x6A</code></td>
+<td>Charger control/status; host-bus routing pending confirmation</td>
 </tr>
 </tbody>
 </table></div>
@@ -532,7 +532,7 @@
 <p>E07 TX_EN and RX_EN must not be asserted together. The add-on requires compatible drivers and per-device SPI clock/mode settings. Its GPIO assignments overlap the six-C5 add-on, so use each add-on's own map and firmware configuration.</p>
 <p>Download the <a href="assets/rf-nfc-expansion-pinout.csv">RF/NFC expansion pinout CSV</a>.</p>
 <h2 id="connector-orientation-and-developer-files">Connector orientation and developer files</h2>
-<p>These tables provide GPIO-to-signal mappings. Physical header numbering, viewing side, pin-1 orientation, supply contacts, and current ratings need an as-built connector record before they are listed as verified.</p>
+<p>These tables provide GPIO-to-signal mappings. Physical connector pin order and power ratings are not listed.</p>
 <p>Download the <a href="https://github.com/463N7/Cerberus-Dev-Board/blob/main/examples/cerberus_board_pins.h">base-board pin header</a>. The <a href="expansion.html">expansion add-ons page</a> has testing status, bus integration notes, and the expansion KiCad file area.</p>
 <p>Base-board source: <a href="https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/shared/cerberus_pins.h">Cerberus pin definitions</a>. Add-on mappings are documented separately above and remain in testing.</p></article><div class="page-end"><a href="https://github.com/463N7/Cerberus-Dev-Board/blob/main/content/pinouts.md">View page source ↗</a><a href="https://github.com/463N7/Cerberus-Dev-Board/issues/new/choose">Suggest a correction ↗</a></div></main>
 <footer><span>CERBERUS / BUILD. EXPERIMENT. DOCUMENT.</span><span>Reference updated October 27, 2026</span></footer></div></body></html>

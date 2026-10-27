@@ -20,6 +20,6 @@ Cerberus pairs a touchscreen application processor with an independently program
 
 Cerberus uses an **S3 N16R2**, one onboard C5 with **4 MB flash and no PSRAM**, and **1-bit SDMMC with a 40 MHz maximum clock target**. The **six-C5 bank** and **RF/NFC board** are optional expansion add-ons. **Both are in testing.**
 
-The [pinouts page](pinouts.md) includes the base board and each add-on in separate sections. Battery model validation, exact antenna connector part numbers, and physical expansion-header orientation still need records before they can be presented as confirmed compatibility. See [reference and testing](revisions.md).
+The [pinouts page](pinouts.md) includes the base board and each add-on in separate sections. See [reference and testing](revisions.md) for the board reference and add-on status.
 
 <div class="callout"><strong>A developer reference without device schematics.</strong><p>Pin assignments, software interfaces, and expansion information are published here. Cerberus main-board design files are excluded.</p></div>

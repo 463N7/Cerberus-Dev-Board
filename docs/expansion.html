@@ -22,11 +22,9 @@
 <li>Serialize complete request/response sequences where required by the device protocol, and preserve the C5 READY handshake when using its base-board link.</li>
 <li>Make unused selects inactive before starting the bus. Preserve S3 startup-strapping states when adding control circuitry.</li>
 <li>Set the TCA9534A output latch before enabling output directions. I²C expander outputs are for control signals, not SPI clocks or precise pulse capture.</li>
-<li>Use a supply sized for the exact radio modules. GPIOs provide control signals; the base-board expansion-rail current rating still needs verification.</li>
+<li>Use a supply sized for the exact radio modules. GPIOs provide logic signals, not module power.</li>
 <li>Power off before attaching or removing an add-on. Isolate circuitry using GPIO43 before programming the onboard C5.</li>
 </ul>
-<h2 id="connector-reference">Connector reference</h2>
-<p>The <a href="pinouts.html">pinouts page</a> provides base-board and add-on signal mappings together. Physical header positions, pin-1 orientation, viewing side, mating part, and supply contacts need an as-built connector record before they can be listed as verified.</p>
 <h2 id="expansion-kicad-files">Expansion KiCad files</h2>
 <p>Use <a href="https://github.com/463N7/Cerberus-Dev-Board/tree/main/hardware/expansion"><code>hardware/expansion/</code></a> for expansion PCB/project files, footprints, and release notes. Keep the RF/NFC and six-C5 designs in separate folders with their own test records.</p>
 <p>No CAD files have been uploaded yet. Each design should identify the compatible Cerberus connector, KiCad version, power budget, assembly notes, license, and testing status. Cerberus main-device design files and all schematic files are excluded.</p></article><div class="page-end"><a href="https://github.com/463N7/Cerberus-Dev-Board/blob/main/content/expansion.md">View page source ↗</a><a href="https://github.com/463N7/Cerberus-Dev-Board/issues/new/choose">Suggest a correction ↗</a></div></main>

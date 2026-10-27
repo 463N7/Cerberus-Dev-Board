@@ -45,7 +45,7 @@ Begin expansion work only after these baseline checks pass. Keep a recovery imag
 3. Release BOOT, select the native S3 USB port, and reinstall the final S3 firmware.
 4. Reset or power-cycle into the application and confirm its version.
 
-This recovery path is documented for Cerberus. Physical board controls must be identified on your actual revision; their positions are not inferred from a generic ESP32 development board.
+Use the board's S3 BOOT and RESET controls for recovery.
 
 ## Next steps
 
