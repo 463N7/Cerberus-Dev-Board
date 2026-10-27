@@ -1,0 +1,41 @@
+side,position_from_own_top_ground,printed_label,connection,view
+Left,1,GND,Ground,Labeled face; top to bottom
+Right,1,GND,Ground,Labeled face; top to bottom
+Left,2,3v3,3.3 V rail,Labeled face; top to bottom
+Right,2,3v3,3.3 V rail,Labeled face; top to bottom
+Left,3,5v,5 V rail,Labeled face; top to bottom
+Right,3,5v,5 V rail,Labeled face; top to bottom
+Left,4,IO0,ESP32-C5 GPIO0,Labeled face; top to bottom
+Right,4,IO8,ESP32-S3 GPIO8,Labeled face; top to bottom
+Left,5,IO1,ESP32-C5 GPIO1,Labeled face; top to bottom
+Right,5,IO9,ESP32-S3 GPIO9,Labeled face; top to bottom
+Left,6,IO10,ESP32-C5 GPIO10,Labeled face; top to bottom
+Right,6,IO11,ESP32-S3 GPIO11,Labeled face; top to bottom
+Left,7,IO13,ESP32-C5 GPIO13,Labeled face; top to bottom
+Right,7,IO12,ESP32-S3 GPIO12,Labeled face; top to bottom
+Left,8,IO14,ESP32-C5 GPIO14,Labeled face; top to bottom
+Right,8,IO13,ESP32-S3 GPIO13,Labeled face; top to bottom
+Left,9,IO23,ESP32-C5 GPIO23,Labeled face; top to bottom
+Right,9,IO1,ESP32-S3 GPIO1,Labeled face; top to bottom
+Left,10,IO24,ESP32-C5 GPIO24,Labeled face; top to bottom
+Right,10,IO2,ESP32-S3 GPIO2,Labeled face; top to bottom
+Left,11,GND,Ground,Labeled face; top to bottom
+Right,11,IO3,ESP32-S3 GPIO3,Labeled face; top to bottom
+Left,12,3v3,3.3 V rail,Labeled face; top to bottom
+Right,12,IO14,ESP32-S3 GPIO14,Labeled face; top to bottom
+Left,13,5v,5 V rail,Labeled face; top to bottom
+Right,13,IO15,ESP32-S3 GPIO15,Labeled face; top to bottom
+Left,14,IO38,ESP32-S3 GPIO38,Labeled face; top to bottom
+Right,14,IO41,ESP32-S3 GPIO41,Labeled face; top to bottom
+Left,15,IO46,ESP32-S3 GPIO46,Labeled face; top to bottom
+Right,15,IO42,ESP32-S3 GPIO42,Labeled face; top to bottom
+Left,16,IO47,ESP32-S3 GPIO47,Labeled face; top to bottom
+Right,16,IO43,ESP32-S3 GPIO43,Labeled face; top to bottom
+Left,17,IO48,ESP32-S3 GPIO48,Labeled face; top to bottom
+Right,17,IO45,ESP32-S3 GPIO45,Labeled face; top to bottom
+Left,18,5v,5 V rail,Labeled face; top to bottom
+Right,18,3v3,3.3 V rail,Labeled face; top to bottom
+Left,19,GND,Ground,Labeled face; top to bottom
+Right,19,GND,Ground,Labeled face; top to bottom
+Left,20,GND,Ground,Labeled face; top to bottom
+Right,20,GND,Ground,Labeled face; top to bottom

@@ -25,5 +25,6 @@ Both are optional add-ons to the base board. The six-C5 signal assignments are l
 | 2026-10-27 | Set C5 memory baseline to WROOM N4: 4 MB flash, no PSRAM |
 | 2026-10-27 | Focused the reference on the base board and set SDMMC target to 40 MHz |
 | 2026-10-27 | Confirmed BQ25895 on shared I²C0, GPIO8/9 at 0x6A; removed the RF/NFC map and download during early testing |
+| 2026-10-27 | Added labeled expansion breakout contact order, processor domains, photo, and CSV |
 
 Use the [documentation issue form](https://github.com/463N7/Cerberus-Dev-Board/issues/new?template=documentation.yml) for corrections and supporting evidence. Hardware results should identify the firmware, date, attached add-on, and test conditions.

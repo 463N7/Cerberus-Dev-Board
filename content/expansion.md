@@ -2,6 +2,10 @@
 
 Cerberus has one base board. The **six-C5 bank** and **RF/NFC board** are optional expansion add-ons. **Both are in testing.**
 
+## Base-board expansion connections
+
+The [expansion breakout table](pinouts.md#expansion-breakout-connections) lists both labeled rows, including the separate S3 and C5 GPIO groups and the ground, 3.3 V, and 5 V contacts. The photo shows the viewing orientation. [Download the breakout CSV](assets/expansion-breakout-pinout.csv).
+
 ## Six-C5 expansion add-on — in testing
 
 Adds six WROOM C5 radios to the onboard C5 using a shared SPI bus and individual chip selects. Each expansion module uses the same `c5-expansion-wroom` image; the S3 identifies it by chip-select slot. The memory baseline is 4 MB flash with no PSRAM per expansion C5.

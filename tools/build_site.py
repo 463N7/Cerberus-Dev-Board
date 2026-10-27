@@ -13,7 +13,7 @@ PAGES = [
     ("index", "Overview", "A developer reference for the Cerberus handheld."),
     ("getting-started", "Start here", "Identify, install, build, and recover your Cerberus."),
     ("hardware", "Hardware", "Processors, memory, built-in features, and electrical constraints."),
-    ("pinouts", "Pinouts", "Base-board GPIOs and the six-C5 expansion add-on pinout."),
+    ("pinouts", "Pinouts", "Base-board GPIOs, labeled expansion breakout connections, and the six-C5 add-on pinout."),
     ("expansion", "Expansion add-ons", "Six-C5 and RF/NFC add-ons, both in testing, plus expansion KiCad files."),
     ("programming", "Programming", "Toolchain, memory settings, drivers, protocol, and bring-up."),
     ("batteries", "Batteries", "Tested batteries and should-fit candidates, with evidence."),
@@ -77,11 +77,35 @@ def export_addon_pinouts(assets, heading, filename):
         writer.writerows(rows)
 
 
+def export_breakout_pinouts(assets):
+    """Export the photographed breakout contact order from its documentation table."""
+    source = (ROOT / "content" / "pinouts.md").read_text(encoding="utf-8")
+    section = source.split("## Expansion breakout connections\n", 1)[1].split("\n## ", 1)[0]
+    rows = []
+    for line in section.splitlines():
+        if not line.startswith("|"):
+            continue
+        cells = [cell.strip() for cell in line.strip("|").split("|")]
+        if not cells[0].isdigit():
+            continue
+        position, left_label, left_connection, right_label, right_connection = cells
+        rows.extend([
+            ["Left", position, left_label, left_connection, "Labeled face; top to bottom"],
+            ["Right", position, right_label, right_connection, "Labeled face; top to bottom"],
+        ])
+    if len(rows) != 40:
+        raise ValueError(f"Expected 40 breakout contacts, found {len(rows)}")
+    with (assets / "expansion-breakout-pinout.csv").open("w", encoding="utf-8", newline="") as file:
+        writer = csv.writer(file, lineterminator="\n")
+        writer.writerow(["side", "position_from_own_top_ground", "printed_label", "connection", "view"])
+        writer.writerows(rows)
+
+
 def build():
     output = ROOT / "docs"
     assets = output / "assets"
     assets.mkdir(parents=True, exist_ok=True)
-    for name in ("style.css", "site.js", "mark.svg"):
+    for name in ("style.css", "site.js", "mark.svg", "expansion-breakout.jpg"):
         (assets / name).write_bytes((ROOT / "site" / name).read_bytes())
     (output / ".nojekyll").write_text("", encoding="utf-8")
     index = []
@@ -112,8 +136,9 @@ def build():
         (output / f"{slug}.html").write_text(page, encoding="utf-8", newline="\n")
     (assets / "search-index.json").write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     export_addon_pinouts(assets, "Six-C5 expansion add-on — in testing", "c5-expansion-pinout.csv")
+    export_breakout_pinouts(assets)
     (output / "404.html").write_text('''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Page not found | Cerberus Dev Board</title><body style="font-family:system-ui;padding:3rem;max-width:40rem"><h1>Page not found</h1><p>That reference may have moved.</p><a href="/Cerberus-Dev-Board/">Open Cerberus Dev Board</a></body></html>''', encoding="utf-8")
-    print(f"Built {len(PAGES)} documentation pages and the six-C5 expansion pinout CSV.")
+    print(f"Built {len(PAGES)} pages, the 40-contact breakout CSV, and six-C5 pinout CSV.")
 
 
 if __name__ == "__main__":

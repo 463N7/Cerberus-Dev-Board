@@ -16,7 +16,7 @@ The base Cerberus board uses an **ESP32-S3 N16R2** with one onboard **ESP32-C5**
 | USB | ESP32-S3 native USB | GPIO19 D− / GPIO20 D+; serial, programming, and firmware-dependent device modes |
 | Battery fuel gauge | MAX17048 | Shared I²C at `0x36`; voltage and state-of-charge estimate |
 | Battery charger | BQ25895 | Shared I²C0: SDA GPIO8, SCL GPIO9, address `0x6A`; battery charging and power-path control |
-| Expansion | Shared SPI3 and additional GPIOs | RF/NFC and six-C5 expansion add-ons; both in testing |
+| Expansion | Shared SPI3, I²C, S3/C5 GPIOs, and power rails | [Labeled breakout connections](pinouts.md#expansion-breakout-connections); optional add-ons remain in testing |
 
 The C5 memory specification uses the smallest standard WROOM configuration listed by Espressif: **N4, with 4 MB Quad SPI flash and no PSRAM**. Firmware can use a smaller partition layout within that capacity.
 

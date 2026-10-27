@@ -12,7 +12,7 @@ This repository documents the device itself, independently of a particular firmw
 | --- | --- |
 | [Start here](content/getting-started.md) | Identify the board, install firmware, build, and recover USB |
 | [Hardware](content/hardware.md) | Base-board processors, memory, buses, and power devices |
-| [Pinouts](content/pinouts.md) | Base-board interfaces and six-C5 expansion pinout; RF/NFC map not published during early testing |
+| [Pinouts](content/pinouts.md) | Base-board interfaces, labeled expansion breakout, and six-C5 expansion pinout; RF/NFC map not published during early testing |
 | [Expansion add-ons](content/expansion.md) | Six-C5 bank and RF/NFC board; both in testing |
 | [Programming](content/programming.md) | Toolchain, source layout, memory setup, protocol, and bring-up |
 | [Batteries](content/batteries.md) | Tested batteries, “should fit” candidates, dimensions, polarity, and test evidence |
@@ -21,7 +21,7 @@ This repository documents the device itself, independently of a particular firmw
 | [Downloads](content/downloads.md) | Firmware, reusable pin definitions, examples, and expansion CAD location |
 | [Reference and testing](content/revisions.md) | Base-board reference, add-on testing status, and remaining measurements |
 
-Cerberus uses an **S3 N16R2, one onboard C5, and 1-bit SDMMC with a 40 MHz maximum target**. The C5 memory specification uses the smallest standard [C5-WROOM option](https://documentation.espressif.com/esp32-c5-wroom-1_wroom-1u_datasheet_en.html): **N4, 4 MB flash and no PSRAM**. Sentinel's current 2 MB firmware layout is a separate software allocation. The RF/NFC board and six-C5 bank are optional expansion add-ons, both in testing. A GPIO assignment is not a connector position.
+Cerberus uses an **S3 N16R2, one onboard C5, and 1-bit SDMMC with a 40 MHz maximum target**. The C5 memory specification uses the smallest standard [C5-WROOM option](https://documentation.espressif.com/esp32-c5-wroom-1_wroom-1u_datasheet_en.html): **N4, 4 MB flash and no PSRAM**. Sentinel's current 2 MB firmware layout is a separate software allocation. The RF/NFC board and six-C5 bank are optional expansion add-ons, both in testing. The expansion breakout table identifies contact positions as viewed from its labeled face.
 
 ## Maintaining the website
 

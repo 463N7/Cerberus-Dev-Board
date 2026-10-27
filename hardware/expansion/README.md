@@ -11,4 +11,4 @@ For each board, create a revision folder such as `rf-nfc/rev-a/` or `c5-bank/rev
 
 Do not add the Cerberus main device's PCB, schematics, netlists, Gerbers, or fabrication archives. Schematic files are excluded throughout this repository. Review any image or exported drawing before upload so main-device design details are not accidentally included.
 
-The six-C5 GPIO signal map is on the shared [`Pinouts` page](../../content/pinouts.md). The RF/NFC add-on is in early testing and has no published pin map. Physical connector pin order and power ratings are not listed.
+The labeled breakout contact order, photo, and six-C5 GPIO signal map are on the shared [`Pinouts` page](../../content/pinouts.md). The RF/NFC add-on is in early testing and has no published pin map. Connector part number, pitch, and current ratings are not specified.

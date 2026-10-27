@@ -8,6 +8,8 @@
 <div class="workspace"><div class="utility"><span>REFERENCE / EXPANSION ADD-ONS</span><div class="search-wrap"><label class="sr-only" for="site-search">Search all documentation</label><input id="site-search" type="search" autocomplete="off" placeholder="Search documentation…"><div id="search-results" class="search-results" hidden aria-label="Search results" aria-live="polite"></div></div></div>
 <main id="main" tabindex="-1"><div class="page-eyebrow">CERBERUS DEV BOARD <span>/</span> TECHNICAL REFERENCE</div><article><h1 id="expansion-add-ons">Expansion add-ons</h1>
 <p>Cerberus has one base board. The <strong>six-C5 bank</strong> and <strong>RF/NFC board</strong> are optional expansion add-ons. <strong>Both are in testing.</strong></p>
+<h2 id="base-board-expansion-connections">Base-board expansion connections</h2>
+<p>The <a href="pinouts.html#expansion-breakout-connections">expansion breakout table</a> lists both labeled rows, including the separate S3 and C5 GPIO groups and the ground, 3.3 V, and 5 V contacts. The photo shows the viewing orientation. <a href="assets/expansion-breakout-pinout.csv">Download the breakout CSV</a>.</p>
 <h2 id="six-c5-expansion-add-on-in-testing">Six-C5 expansion add-on — in testing</h2>
 <p>Adds six WROOM C5 radios to the onboard C5 using a shared SPI bus and individual chip selects. Each expansion module uses the same <code>c5-expansion-wroom</code> image; the S3 identifies it by chip-select slot. The memory baseline is 4 MB flash with no PSRAM per expansion C5.</p>
 <p>Six modules have passed programming verification. Assembled multi-radio operation and compatibility remain in testing.</p>
