@@ -12,6 +12,10 @@
 
 <div class="stats"><div><strong>ESP32-S3</strong><span>Application + interface</span></div><div><strong>ESP32-C5</strong><span>Dual-band radio coprocessor</span></div><div><strong>320 × 480</strong><span>ST7796 + GT911 touch</span></div><div><strong>16 MB / 2 MB</strong><span>S3 flash / PSRAM</span></div></div>
 
+<h2 id="get-cerberus-and-join-the-community">Get Cerberus and join the community</h2>
+<p>Visit the Cerberus store page for board details and ordering. Join the Discord community to discuss firmware, expansion boards, and your builds.</p>
+<div class="hero-actions"><a class="button" href="https://463n7.io/products/cerberus-development-board">Cerberus store <span aria-hidden="true">↗</span></a><a class="button secondary" href="https://discord.gg/CGmQdeVnJv">Join Discord <span aria-hidden="true">↗</span></a></div>
+
 <h2 id="the-device-documented">The device, documented.</h2>
 <p>Cerberus pairs a touchscreen application processor with an independently programmable radio processor. The S3 handles the display, touch, storage, USB, and user interface. The C5 handles radio work and exchanges structured messages over SPI. Different firmware can make use of the same hardware.</p>
 <div class="architecture" aria-label="Cerberus system overview"><div class="arch-peripherals">Display · Touch · microSD · USB · Battery gauge</div><div class="arch-main"><span>APPLICATION PROCESSOR</span><strong>ESP32-S3</strong><small>SPI2 display / SDMMC storage / shared I²C</small></div><div class="arch-link">SPI3 data + READY <span>UART for programming</span></div><div class="arch-radio"><span>RADIO COPROCESSOR</span><strong>ESP32-C5</strong><small>2.4 / 5 GHz Wi-Fi · Bluetooth LE · 802.15.4</small></div></div>

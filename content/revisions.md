@@ -28,5 +28,6 @@ Both are optional add-ons to the base board. The six-C5 signal assignments are l
 | 2026-10-27 | Added labeled expansion breakout contact order, processor domains, photo, and CSV |
 | 2026-10-27 | Listed each expansion GPIO individually; removed power and ground contacts from the table and CSV |
 | 2026-10-27 | Added four tested batteries: PL 606090, PL 505573, PL 695084, and BATMAX BT-PS3, with a reference photo |
+| 2026-10-27 | Added Cerberus store and Discord community links to the overview |
 
 Use the [documentation issue form](https://github.com/463N7/Cerberus-Dev-Board/issues/new?template=documentation.yml) for corrections and supporting evidence. Hardware results should identify the firmware, date, attached add-on, and test conditions.

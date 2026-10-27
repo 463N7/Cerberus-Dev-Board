@@ -6,6 +6,12 @@ One handheld. Two processors. A practical reference for writing firmware, connec
 
 <div class="stats"><div><strong>ESP32-S3</strong><span>Application + interface</span></div><div><strong>ESP32-C5</strong><span>Dual-band radio coprocessor</span></div><div><strong>320 × 480</strong><span>ST7796 + GT911 touch</span></div><div><strong>16 MB / 2 MB</strong><span>S3 flash / PSRAM</span></div></div>
 
+## Get Cerberus and join the community
+
+Visit the Cerberus store page for board details and ordering. Join the Discord community to discuss firmware, expansion boards, and your builds.
+
+<div class="hero-actions"><a class="button" href="https://463n7.io/products/cerberus-development-board">Cerberus store <span aria-hidden="true">↗</span></a><a class="button secondary" href="https://discord.gg/CGmQdeVnJv">Join Discord <span aria-hidden="true">↗</span></a></div>
+
 ## The device, documented.
 
 Cerberus pairs a touchscreen application processor with an independently programmable radio processor. The S3 handles the display, touch, storage, USB, and user interface. The C5 handles radio work and exchanges structured messages over SPI. Different firmware can make use of the same hardware.
