@@ -102,7 +102,7 @@ def build():
     output = ROOT / "docs"
     assets = output / "assets"
     assets.mkdir(parents=True, exist_ok=True)
-    for name in ("style.css", "site.js", "mark.svg", "expansion-breakout.jpg", "tested-batteries.jpg"):
+    for name in ("style.css", "site.js", "mark.svg", "cerberus-logo.svg", "expansion-breakout.jpg", "tested-batteries.jpg"):
         (assets / name).write_bytes((ROOT / "site" / name).read_bytes())
     (output / ".nojekyll").write_text("", encoding="utf-8")
     index = []
@@ -123,7 +123,7 @@ def build():
         page = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)} | Cerberus Dev Board</title><meta name="description" content="{html.escape(description, quote=True)}">
-<meta name="theme-color" content="#101817"><link rel="icon" href="assets/mark.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/style.css"><script src="assets/site.js" defer></script></head>
+<meta name="theme-color" content="#101817"><link rel="icon" href="assets/cerberus-logo.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/style.css"><script src="assets/site.js" defer></script></head>
 <body class="{'home' if slug == 'index' else 'reference'}"><a class="skip" href="#main">Skip to content</a>
 <header class="topbar"><a class="brand" href="index.html"><img src="assets/mark.svg" alt="" width="34" height="34"><span>CERBERUS<small>DEV BOARD</small></span></a><span class="top-label">HARDWARE / SOFTWARE / EXPANSION</span><a class="github" href="https://github.com/463N7/Cerberus-Dev-Board">GitHub <span aria-hidden="true">↗</span></a><button class="menu-button" type="button" aria-controls="sidebar" aria-expanded="false">Menu</button></header>
 <aside id="sidebar" class="sidebar"><p class="nav-heading">DEVELOPER REFERENCE</p><nav aria-label="Documentation">{navigation}</nav><div class="sidebar-note"><span class="status-dot"></span>Cerberus base board<p>One onboard C5<br>Quad PSRAM · 1-bit SDMMC<br>40 MHz SDMMC target</p></div><a class="installer-link" href="https://463n7.github.io/Cerberus-Flasher/">Open USB installer ↗</a></aside>
@@ -134,7 +134,7 @@ def build():
     (assets / "search-index.json").write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     export_addon_pinouts(assets, "Six-C5 expansion add-on — in testing", "c5-expansion-pinout.csv")
     export_breakout_pinouts(assets)
-    (output / "404.html").write_text('''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Page not found | Cerberus Dev Board</title><body style="font-family:system-ui;padding:3rem;max-width:40rem"><h1>Page not found</h1><p>That reference may have moved.</p><a href="/Cerberus-Dev-Board/">Open Cerberus Dev Board</a></body></html>''', encoding="utf-8")
+    (output / "404.html").write_text('''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Page not found | Cerberus Dev Board</title><link rel="icon" href="https://463n7.github.io/Cerberus-Dev-Board/assets/cerberus-logo.svg" type="image/svg+xml"><body style="font-family:system-ui;padding:3rem;max-width:40rem"><h1>Page not found</h1><p>That reference may have moved.</p><a href="/Cerberus-Dev-Board/">Open Cerberus Dev Board</a></body></html>''', encoding="utf-8")
     print(f"Built {len(PAGES)} pages, the 25-GPIO breakout CSV, and six-C5 pinout CSV.")
 
 
