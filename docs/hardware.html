@@ -66,7 +66,7 @@
 <tr>
 <td>Battery charger</td>
 <td>BQ25895</td>
-<td>I²C address <code>0x6A</code>; battery charging and power-path control</td>
+<td>Shared I²C0: SDA GPIO8, SCL GPIO9, address <code>0x6A</code>; battery charging and power-path control</td>
 </tr>
 <tr>
 <td>Expansion</td>
@@ -103,9 +103,9 @@
 <td>1-bit, up to 40 MHz; actual clock negotiated by card and firmware</td>
 </tr>
 <tr>
-<td>Touch + gauge</td>
+<td>Touch + gauge + charger</td>
 <td>I²C0</td>
-<td>400 kHz in Sentinel</td>
+<td>SDA GPIO8 / SCL GPIO9; 400 kHz in Sentinel</td>
 </tr>
 <tr>
 <td>C5 programming</td>
@@ -132,12 +132,12 @@
 </tr>
 <tr>
 <td>RF/NFC board</td>
-<td>E01, E07, additional CC1101, PN532, GPS, and control expander</td>
-<td><strong>In testing</strong></td>
+<td>Optional RF and NFC expansion</td>
+<td><strong>Early testing; pin map not published</strong></td>
 </tr>
 </tbody>
 </table></div>
-<p>Both connect to the same base Cerberus board. Their signal assignments are on the <a href="pinouts.html">pinouts page</a>, with integration and file locations on <a href="expansion.html">Expansion add-ons</a>.</p>
+<p>Both connect to the same base Cerberus board. The six-C5 signal assignments are on the <a href="pinouts.html">pinouts page</a>, with add-on status and file locations on <a href="expansion.html">Expansion add-ons</a>.</p>
 <h2 id="electrical-and-mechanical-reference">Electrical and mechanical reference</h2>
 <p>Treat S3/C5 signals as <strong>3.3 V logic</strong>. Do not connect 5 V signal outputs directly or infer supply capability from a GPIO label. Verify a peripheral's logic voltage separately from its supply input.</p>
 <p>Keep GPIO19/20 for USB, memory pins for flash/PSRAM, and GPIO0/3/45/46 startup strapping requirements intact. Preserve the quad-PSRAM configuration and the SDMMC pull-up network. Do not treat an unassigned GPIO as physically exposed or safe to repurpose.</p>

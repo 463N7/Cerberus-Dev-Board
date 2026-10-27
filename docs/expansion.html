@@ -7,21 +7,18 @@
 <aside id="sidebar" class="sidebar"><p class="nav-heading">DEVELOPER REFERENCE</p><nav aria-label="Documentation"><a href="index.html"><span>00</span>Overview</a><a href="getting-started.html"><span>01</span>Start here</a><a href="hardware.html"><span>02</span>Hardware</a><a href="pinouts.html"><span>03</span>Pinouts</a><a href="expansion.html" aria-current="page"><span>04</span>Expansion add-ons</a><a href="programming.html"><span>05</span>Programming</a><a href="batteries.html"><span>06</span>Batteries</a><a href="antennas.html"><span>07</span>Antennas</a><a href="troubleshooting.html"><span>08</span>Troubleshooting</a><a href="downloads.html"><span>09</span>Downloads</a><a href="revisions.html"><span>10</span>Reference + testing</a></nav><div class="sidebar-note"><span class="status-dot"></span>Cerberus base board<p>One onboard C5<br>Quad PSRAM · 1-bit SDMMC<br>40 MHz SDMMC target</p></div><a class="installer-link" href="https://463n7.github.io/Cerberus-Flasher/">Open USB installer ↗</a></aside>
 <div class="workspace"><div class="utility"><span>REFERENCE / EXPANSION ADD-ONS</span><div class="search-wrap"><label class="sr-only" for="site-search">Search all documentation</label><input id="site-search" type="search" autocomplete="off" placeholder="Search documentation…"><div id="search-results" class="search-results" hidden aria-label="Search results" aria-live="polite"></div></div></div>
 <main id="main" tabindex="-1"><div class="page-eyebrow">CERBERUS DEV BOARD <span>/</span> TECHNICAL REFERENCE</div><article><h1 id="expansion-add-ons">Expansion add-ons</h1>
-<p>Cerberus has one base board. The <strong>six-C5 bank</strong> and <strong>RF/NFC board</strong> are optional expansion add-ons. <strong>Both are in testing.</strong> Their GPIO assignments overlap, so each uses its own pin map and compatible firmware.</p>
+<p>Cerberus has one base board. The <strong>six-C5 bank</strong> and <strong>RF/NFC board</strong> are optional expansion add-ons. <strong>Both are in testing.</strong></p>
 <h2 id="six-c5-expansion-add-on-in-testing">Six-C5 expansion add-on — in testing</h2>
 <p>Adds six WROOM C5 radios to the onboard C5 using a shared SPI bus and individual chip selects. Each expansion module uses the same <code>c5-expansion-wroom</code> image; the S3 identifies it by chip-select slot. The memory baseline is 4 MB flash with no PSRAM per expansion C5.</p>
 <p>Six modules have passed programming verification. Assembled multi-radio operation and compatibility remain in testing.</p>
 <p><a href="pinouts.html#six-c5-expansion-add-on-in-testing">View the complete six-C5 add-on pinout</a> · <a href="assets/c5-expansion-pinout.csv">Download CSV</a></p>
-<h2 id="rfnfc-expansion-add-on-in-testing">RF/NFC expansion add-on — in testing</h2>
-<p>Adds an E07, two E01 radios, PN532, GPS, an additional CC1101, and a TCA9534A control expander. The current wiring reference uses shared SPI, PN532 in SPI mode, and the expander for the second E01's controls.</p>
-<p>Wiring, firmware integration, power, and assembled operation remain in testing. Confirm module suffixes and connector orientation against the board under test.</p>
-<p><a href="pinouts.html#rfnfc-expansion-add-on-in-testing">View the complete RF/NFC add-on pinout</a> · <a href="assets/rf-nfc-expansion-pinout.csv">Download CSV</a></p>
+<h2 id="rfnfc-expansion-add-on-early-testing">RF/NFC expansion add-on — early testing</h2>
+<p>Optional RF/NFC expansion board in early testing. Pin assignments and wiring details are not published at this stage.</p>
 <h2 id="shared-bus-integration">Shared-bus integration</h2>
 <ul>
 <li>Register each SPI device with its own CS, clock rate, mode, and bit order. The onboard C5's 40 MHz setting does not apply to every peripheral.</li>
 <li>Serialize complete request/response sequences where required by the device protocol, and preserve the C5 READY handshake when using its base-board link.</li>
 <li>Make unused selects inactive before starting the bus. Preserve S3 startup-strapping states when adding control circuitry.</li>
-<li>Set the TCA9534A output latch before enabling output directions. I²C expander outputs are for control signals, not SPI clocks or precise pulse capture.</li>
 <li>Use a supply sized for the exact radio modules. GPIOs provide logic signals, not module power.</li>
 <li>Power off before attaching or removing an add-on. Isolate circuitry using GPIO43 before programming the onboard C5.</li>
 </ul>

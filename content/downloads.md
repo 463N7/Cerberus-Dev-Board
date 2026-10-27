@@ -17,10 +17,9 @@ Use matched release images and each package's checksums and offsets. This refere
 | [Cerberus board pin header](https://github.com/463N7/Cerberus-Dev-Board/blob/main/examples/cerberus_board_pins.h) | S3 and onboard C5 signal constants | GPIO definitions |
 | [Read-only I²C identification example](https://github.com/463N7/Cerberus-Dev-Board/blob/main/examples/i2c-identify/main/main.c) | Probe GT911/MAX17048 addresses and log ACK results | Standalone ESP-IDF example; hardware testing pending |
 | [Six-C5 WROOM expansion CSV](assets/c5-expansion-pinout.csv) | S3 CS slots and WROOM expansion SPI mapping | Expansion add-on still in testing; GPIO assignments only |
-| [RF/NFC expansion CSV](assets/rf-nfc-expansion-pinout.csv) | Shared buses, module controls, and power/setup notes | Expansion add-on still in testing; GPIO assignments only |
 | [Expansion KiCad area](https://github.com/463N7/Cerberus-Dev-Board/tree/main/hardware/expansion) | Revision folders for expansion PCB/project files and footprints | Prepared; no CAD release uploaded yet |
 
-The RF/NFC board and six-C5 bank are expansion add-ons, and both are still in testing.
+The six-C5 bank is in testing. The RF/NFC add-on is in early testing and has no published pinout or download.
 
 ## What belongs here
 

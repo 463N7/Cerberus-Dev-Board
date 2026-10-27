@@ -2,9 +2,9 @@
 
 **GPIO numbers refer to the ESP32-S3 unless a C5 column says otherwise.** These are signal assignments, not physical connector positions.
 
-Jump to the [base board](#base-cerberus-board), [six-C5 expansion add-on](#six-c5-expansion-add-on-in-testing), or [RF/NFC expansion add-on](#rfnfc-expansion-add-on-in-testing). Both expansion add-ons are **in testing** and have separate pin maps.
+Jump to the [base board](#base-cerberus-board) or [six-C5 expansion add-on](#six-c5-expansion-add-on-in-testing). The RF/NFC add-on is in early testing and has no published pin map.
 
-<div class="table-filter"><label for="pin-filter">Find a pin or signal</label><input id="pin-filter" type="search" placeholder="Try GPIO44, touch, MOSI, PN532…"><p id="pin-filter-status" aria-live="polite"></p></div>
+<div class="table-filter"><label for="pin-filter">Find a pin or signal</label><input id="pin-filter" type="search" placeholder="Try GPIO44, touch, MOSI, charger…"><p id="pin-filter-status" aria-live="polite"></p></div>
 
 ## Base Cerberus board
 
@@ -34,7 +34,7 @@ Display setup: 320 × 480 portrait, RGB565, SPI2 at 40 MHz. Pixel orientation an
 | Touch RESET | Not connected | No dedicated reset GPIO |
 | GT911 address | `0x5D` | 7-bit I²C address |
 | MAX17048 fuel gauge | `0x36` on GPIO8/9 | Battery voltage and estimated percentage |
-| BQ25895 charger | `0x6A` | Charger control/status; host-bus routing pending confirmation |
+| BQ25895 charger | `0x6A` on GPIO8/9 | Shared I²C0: SDA GPIO8, SCL GPIO9; charger control/status |
 
 Register added I²C devices on the existing bus. Check address conflicts and combined pull-up strength.
 
@@ -108,59 +108,10 @@ Each expansion C5 uses the `c5-expansion-wroom` image; its radio identity follow
 
 Download the [six-C5 expansion pinout CSV](assets/c5-expansion-pinout.csv).
 
-## RF/NFC expansion add-on — in testing
-
-**Optional expansion add-on · In testing.** This board adds E07, two E01 radios, PN532, GPS, an additional CC1101, and a TCA9534A control expander. The assignments below are the current wiring reference under test.
-
-### Shared buses
-
-| Bus signal | S3 GPIO | Connected devices |
-| --- | --- | --- |
-| SPI MOSI | GPIO11 | Onboard C5 and RF/NFC SPI devices |
-| SPI SCLK | GPIO12 | Onboard C5 and RF/NFC SPI devices |
-| SPI MISO | GPIO13 | Onboard C5 and RF/NFC SPI devices |
-| I²C SDA | GPIO8 | Onboard I²C devices and TCA9534A |
-| I²C SCL | GPIO9 | Onboard I²C devices and TCA9534A |
-
-### Device control and data signals
-
-| Device | Signal | Connection | Notes |
-| --- | --- | --- | --- |
-| E07 | CSN | GPIO14 | Dedicated chip select |
-| E07 | GDO0 | GPIO2 | Direct S3 input |
-| E07 | GDO2 | GPIO47 | Direct S3 input |
-| E07 | TX_EN | GPIO45 | Startup strap; keep required reset state |
-| E07 | RX_EN | GPIO46 | Startup strap; keep required reset state |
-| E01 #1 | CSN | GPIO15 | Dedicated chip select |
-| E01 #1 | CE | GPIO3 | Startup strap; keep required reset state |
-| E01 #2 | CSN | TCA9534A P0 | Expander output |
-| E01 #2 | CE | TCA9534A P1 | Expander output |
-| PN532 | SS | GPIO42 | SPI mode |
-| GPS | TX → S3 RX | GPIO1 | GPS serial output |
-| GPS | RX ← S3 TX | GPIO48 | GPS serial input |
-| Additional CC1101 | CSN | GPIO43 | Shares C5 programming TX; isolate for flashing |
-| Additional CC1101 | GDO0 | GPIO38 | Expansion signal |
-| Additional CC1101 | GDO2 | GPIO41 | Expansion signal |
-| TCA9534A | I²C address | `0x38` | A0/A1/A2 low |
-
-### Module setup and power
-
-| Device / connection | Requirement |
-| --- | --- |
-| E07, both E01 modules, additional CC1101 | Regulated add-on 3.3 V rail and common GND; size the supply for the exact module suffixes |
-| PN532 | SPI interface; Elechouse V3 selector CH1 OFF / CH2 ON; verify the fitted module's supply rating |
-| GPS | Supply and logic levels must match the fitted receiver or breakout |
-| TCA9534A | 3.3 V and common GND; establish CSN high / CE low before enabling its output directions |
-| E01 IRQ / PN532 IRQ and reset | Not assigned in this wiring reference |
-
-E07 TX_EN and RX_EN must not be asserted together. The add-on requires compatible drivers and per-device SPI clock/mode settings. Its GPIO assignments overlap the six-C5 add-on, so use each add-on's own map and firmware configuration.
-
-Download the [RF/NFC expansion pinout CSV](assets/rf-nfc-expansion-pinout.csv).
-
 ## Connector orientation and developer files
 
 These tables provide GPIO-to-signal mappings. Physical connector pin order and power ratings are not listed.
 
 Download the [base-board pin header](https://github.com/463N7/Cerberus-Dev-Board/blob/main/examples/cerberus_board_pins.h). The [expansion add-ons page](expansion.md) has testing status, bus integration notes, and the expansion KiCad file area.
 
-Base-board source: [Cerberus pin definitions](https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/shared/cerberus_pins.h). Add-on mappings are documented separately above and remain in testing.
+Base-board source: [Cerberus pin definitions](https://github.com/463N7/Cerberus-Sentinel/blob/580c80d77e0eaa952028e65293b4b097be18c7cf/shared/cerberus_pins.h). The six-C5 expansion mapping above remains in testing.

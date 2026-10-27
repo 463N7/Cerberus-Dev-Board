@@ -15,7 +15,7 @@ The base Cerberus board uses an **ESP32-S3 N16R2** with one onboard **ESP32-C5**
 | microSD | 1-bit SDMMC, up to 40 MHz | CLK36 / CMD37 / DAT0 35; configure firmware for the 40 MHz maximum target |
 | USB | ESP32-S3 native USB | GPIO19 D− / GPIO20 D+; serial, programming, and firmware-dependent device modes |
 | Battery fuel gauge | MAX17048 | Shared I²C at `0x36`; voltage and state-of-charge estimate |
-| Battery charger | BQ25895 | I²C address `0x6A`; battery charging and power-path control |
+| Battery charger | BQ25895 | Shared I²C0: SDA GPIO8, SCL GPIO9, address `0x6A`; battery charging and power-path control |
 | Expansion | Shared SPI3 and additional GPIOs | RF/NFC and six-C5 expansion add-ons; both in testing |
 
 The C5 memory specification uses the smallest standard WROOM configuration listed by Espressif: **N4, with 4 MB Quad SPI flash and no PSRAM**. Firmware can use a smaller partition layout within that capacity.
@@ -29,7 +29,7 @@ The C5 silicon supports the listed radio families; an installed application may 
 | Display | SPI2 | 40 MHz, separate from the radio bus |
 | Onboard C5 + compatible expansion | SPI3 | Sentinel onboard link 40 MHz; other devices need their own settings |
 | microSD | SDMMC | 1-bit, up to 40 MHz; actual clock negotiated by card and firmware |
-| Touch + gauge | I²C0 | 400 kHz in Sentinel |
+| Touch + gauge + charger | I²C0 | SDA GPIO8 / SCL GPIO9; 400 kHz in Sentinel |
 | C5 programming | UART | 115200 baud, 8N1 through the temporary USB bridge |
 
 Configure firmware for 1-bit SDMMC with a 40 MHz maximum clock. See the [configuration example](programming.md#sdmmc-1-bit-40-mhz-configuration).
@@ -39,9 +39,9 @@ Configure firmware for 1-bit SDMMC with a 40 MHz maximum clock. See the [configu
 | Add-on | Features | Status |
 | --- | --- | --- |
 | Six-C5 bank | Six additional WROOM C5 radios with individual selects | **In testing** |
-| RF/NFC board | E01, E07, additional CC1101, PN532, GPS, and control expander | **In testing** |
+| RF/NFC board | Optional RF and NFC expansion | **Early testing; pin map not published** |
 
-Both connect to the same base Cerberus board. Their signal assignments are on the [pinouts page](pinouts.md), with integration and file locations on [Expansion add-ons](expansion.md).
+Both connect to the same base Cerberus board. The six-C5 signal assignments are on the [pinouts page](pinouts.md), with add-on status and file locations on [Expansion add-ons](expansion.md).
 
 ## Electrical and mechanical reference
 

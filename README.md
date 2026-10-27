@@ -12,7 +12,7 @@ This repository documents the device itself, independently of a particular firmw
 | --- | --- |
 | [Start here](content/getting-started.md) | Identify the board, install firmware, build, and recover USB |
 | [Hardware](content/hardware.md) | Base-board processors, memory, buses, and power devices |
-| [Pinouts](content/pinouts.md) | Base-board interfaces plus complete six-C5 and RF/NFC add-on maps |
+| [Pinouts](content/pinouts.md) | Base-board interfaces and six-C5 expansion pinout; RF/NFC map not published during early testing |
 | [Expansion add-ons](content/expansion.md) | Six-C5 bank and RF/NFC board; both in testing |
 | [Programming](content/programming.md) | Toolchain, source layout, memory setup, protocol, and bring-up |
 | [Batteries](content/batteries.md) | Tested batteries, “should fit” candidates, dimensions, polarity, and test evidence |

@@ -13,7 +13,7 @@ PAGES = [
     ("index", "Overview", "A developer reference for the Cerberus handheld."),
     ("getting-started", "Start here", "Identify, install, build, and recover your Cerberus."),
     ("hardware", "Hardware", "Processors, memory, built-in features, and electrical constraints."),
-    ("pinouts", "Pinouts", "Base-board GPIOs plus six-C5 and RF/NFC expansion add-on pinouts."),
+    ("pinouts", "Pinouts", "Base-board GPIOs and the six-C5 expansion add-on pinout."),
     ("expansion", "Expansion add-ons", "Six-C5 and RF/NFC add-ons, both in testing, plus expansion KiCad files."),
     ("programming", "Programming", "Toolchain, memory settings, drivers, protocol, and bring-up."),
     ("batteries", "Batteries", "Tested batteries and should-fit candidates, with evidence."),
@@ -112,9 +112,8 @@ def build():
         (output / f"{slug}.html").write_text(page, encoding="utf-8", newline="\n")
     (assets / "search-index.json").write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     export_addon_pinouts(assets, "Six-C5 expansion add-on — in testing", "c5-expansion-pinout.csv")
-    export_addon_pinouts(assets, "RF/NFC expansion add-on — in testing", "rf-nfc-expansion-pinout.csv")
     (output / "404.html").write_text('''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Page not found | Cerberus Dev Board</title><body style="font-family:system-ui;padding:3rem;max-width:40rem"><h1>Page not found</h1><p>That reference may have moved.</p><a href="/Cerberus-Dev-Board/">Open Cerberus Dev Board</a></body></html>''', encoding="utf-8")
-    print(f"Built {len(PAGES)} documentation pages and both expansion pinout CSVs.")
+    print(f"Built {len(PAGES)} documentation pages and the six-C5 expansion pinout CSV.")
 
 
 if __name__ == "__main__":

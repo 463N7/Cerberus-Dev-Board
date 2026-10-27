@@ -13,9 +13,9 @@ The C5 memory specification uses the smallest standard WROOM option, **N4: 4 MB 
 | Expansion add-on | Status | Completed checks | Testing scope |
 | --- | --- | --- | --- |
 | Six-C5 bank | **In testing** | Six 4 MB WROOM modules passed programming verification | Assembled multi-radio operation and integration |
-| RF/NFC board | **In testing** | Current signal map documented | Wiring, power, firmware integration, and assembled operation |
+| RF/NFC board | **Early testing** | No published pin map | Design and wiring development |
 
-Neither add-on is a different base-board model. Their signal assignments are listed separately on the [pinouts page](pinouts.md).
+Both are optional add-ons to the base board. The six-C5 signal assignments are listed on the [pinouts page](pinouts.md).
 
 ## Documentation changelog
 
@@ -23,6 +23,7 @@ Neither add-on is a different base-board model. Their signal assignments are lis
 | --- | --- |
 | 2026-10-27 | Initial Cerberus Dev Board hardware and programming reference |
 | 2026-10-27 | Set C5 memory baseline to WROOM N4: 4 MB flash, no PSRAM |
-| 2026-10-27 | Focused the reference on the base board; set SDMMC target to 40 MHz; consolidated both expansion add-on maps on Pinouts and marked both in testing |
+| 2026-10-27 | Focused the reference on the base board and set SDMMC target to 40 MHz |
+| 2026-10-27 | Confirmed BQ25895 on shared I²C0, GPIO8/9 at 0x6A; removed the RF/NFC map and download during early testing |
 
 Use the [documentation issue form](https://github.com/463N7/Cerberus-Dev-Board/issues/new?template=documentation.yml) for corrections and supporting evidence. Hardware results should identify the firmware, date, attached add-on, and test conditions.

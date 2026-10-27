@@ -1,6 +1,6 @@
 # Expansion add-ons
 
-Cerberus has one base board. The **six-C5 bank** and **RF/NFC board** are optional expansion add-ons. **Both are in testing.** Their GPIO assignments overlap, so each uses its own pin map and compatible firmware.
+Cerberus has one base board. The **six-C5 bank** and **RF/NFC board** are optional expansion add-ons. **Both are in testing.**
 
 ## Six-C5 expansion add-on — in testing
 
@@ -10,20 +10,15 @@ Six modules have passed programming verification. Assembled multi-radio operatio
 
 [View the complete six-C5 add-on pinout](pinouts.md#six-c5-expansion-add-on-in-testing) · [Download CSV](assets/c5-expansion-pinout.csv)
 
-## RF/NFC expansion add-on — in testing
+## RF/NFC expansion add-on — early testing
 
-Adds an E07, two E01 radios, PN532, GPS, an additional CC1101, and a TCA9534A control expander. The current wiring reference uses shared SPI, PN532 in SPI mode, and the expander for the second E01's controls.
-
-Wiring, firmware integration, power, and assembled operation remain in testing. Confirm module suffixes and connector orientation against the board under test.
-
-[View the complete RF/NFC add-on pinout](pinouts.md#rfnfc-expansion-add-on-in-testing) · [Download CSV](assets/rf-nfc-expansion-pinout.csv)
+Optional RF/NFC expansion board in early testing. Pin assignments and wiring details are not published at this stage.
 
 ## Shared-bus integration
 
 - Register each SPI device with its own CS, clock rate, mode, and bit order. The onboard C5's 40 MHz setting does not apply to every peripheral.
 - Serialize complete request/response sequences where required by the device protocol, and preserve the C5 READY handshake when using its base-board link.
 - Make unused selects inactive before starting the bus. Preserve S3 startup-strapping states when adding control circuitry.
-- Set the TCA9534A output latch before enabling output directions. I²C expander outputs are for control signals, not SPI clocks or precise pulse capture.
 - Use a supply sized for the exact radio modules. GPIOs provide logic signals, not module power.
 - Power off before attaching or removing an add-on. Isolate circuitry using GPIO43 before programming the onboard C5.
 
