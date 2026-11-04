@@ -11,7 +11,7 @@ Five battery packs have been tested with Cerberus. The list below identifies the
 | [PL 606090 pouch](https://link.amazon/B03sRODqo) | 3.7 V | 4000 mAh | Top; shown installed in the Cerberus enclosure |
 | PL 505573 pouch | 3.7 V | 2500 mAh | Lower left |
 | PL 695084 pouch | 3.7 V | 3200 mAh | Lower right; additional marking `2803` |
-| BATMAX BT-PS3 — PS3 DualShock 3 replacement battery | 3.7 V | 1800 mAh / 6.66 Wh | Small black pack |
+| [BATMAX BT-PS3 — PS3 DualShock 3 replacement battery](https://link.amazon/B03ZRYRxP) | 3.7 V | 1800 mAh / 6.66 Wh | Small black pack |
 | [Liter energy battery 306090](https://link.amazon/B0c9IX6TF) | 3.7 V | 3000 mAh | Not pictured in the reference photo |
 
 The **Liter energy battery 306090** listing specifies a lithium-polymer pack measuring **3 × 60 × 90 mm (T × W × L)**, with a **two-pin PH connector at 2.0 mm pitch**. These dimensions and connector details are seller-listed specifications.
