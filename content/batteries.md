@@ -1,23 +1,26 @@
 # Batteries
 
-Four battery packs have been tested with Cerberus. The list below identifies the tested packs by their printed labels and the reference photo.
+Five battery packs have been tested with Cerberus. The list below identifies them by their printed labels, reference photo, and product listings.
 
 ## Tested batteries
 
-**All four packs below are confirmed tested with Cerberus.** Voltage and capacity figures are the ratings printed on each pack.
+**All five packs below are confirmed tested with Cerberus.** Voltage and capacity figures are the ratings from the pack labels or linked product listings.
 
-| Battery / printed label | Nominal voltage | Labeled capacity | Identification in photo |
+| Battery / product link | Nominal voltage | Rated capacity | Identification / notes |
 | --- | --- | --- | --- |
-| PL 606090 pouch | 3.7 V | 4000 mAh | Top; shown installed in the Cerberus enclosure |
+| [PL 606090 pouch](https://link.amazon/B03sRODqo) | 3.7 V | 4000 mAh | Top; shown installed in the Cerberus enclosure |
 | PL 505573 pouch | 3.7 V | 2500 mAh | Lower left |
 | PL 695084 pouch | 3.7 V | 3200 mAh | Lower right; additional marking `2803` |
 | BATMAX BT-PS3 — PS3 DualShock 3 replacement battery | 3.7 V | 1800 mAh / 6.66 Wh | Small black pack |
+| [Liter energy battery 306090](https://link.amazon/B0c9IX6TF) | 3.7 V | 3000 mAh | Not pictured in the reference photo |
 
-The BATMAX label lists replacement references **LIP1359, LIP1859, and LIP1427**, with controller compatibility **CECHZC2E / CECHZC2U**. The pouch packs are identified by their printed PL codes; their manufacturer is not listed.
+The **Liter energy battery 306090** listing specifies a lithium-polymer pack measuring **3 × 60 × 90 mm (T × W × L)**, with a **two-pin PH connector at 2.0 mm pitch**. These dimensions and connector details are seller-listed specifications.
 
-<details class="connector-photo"><summary>View the tested battery photo</summary><figure><a href="assets/tested-batteries.jpg"><img src="assets/tested-batteries.jpg" alt="Four tested Cerberus batteries: PL 606090 4000 mAh installed at the top, PL 505573 2500 mAh at lower left, PL 695084 3200 mAh at lower right, and a black BATMAX BT-PS3 1800 mAh PS3 DualShock 3 replacement pack." width="4590" height="8160" loading="lazy"></a><figcaption>Tested packs and their printed labels. Select the photo to view it at full size.</figcaption></figure></details>
+The BATMAX label lists replacement references **LIP1359, LIP1859, and LIP1427**, with controller compatibility **CECHZC2E / CECHZC2U**. The pouch packs are identified by the PL codes printed on them.
 
-Measured dimensions, connector series and pin order, charger settings, measured capacity, and runtime are not yet recorded here. The pouch codes are identifiers, not measured dimensions. Only the 4000 mAh pack is shown installed in this photo.
+<details class="connector-photo"><summary>View the tested battery photo</summary><figure><a href="assets/tested-batteries.jpg"><img src="assets/tested-batteries.jpg" alt="Four tested Cerberus batteries: PL 606090 4000 mAh installed at the top, PL 505573 2500 mAh at lower left, PL 695084 3200 mAh at lower right, and a black BATMAX BT-PS3 1800 mAh PS3 DualShock 3 replacement pack." width="4590" height="8160" loading="lazy"></a><figcaption>Four of the five tested packs and their printed labels. The Liter energy 306090 is not pictured. Select the photo to view it at full size.</figcaption></figure></details>
+
+Measured pack dimensions and enclosure clearances, verified connector pin order, charger settings, measured capacity, and runtime are not yet recorded here. The PL codes on the photographed packs are identifiers, not measured dimensions. Only the 4000 mAh pack is shown installed in this photo.
 
 ## Should fit — untested candidates
 
@@ -27,7 +30,7 @@ No untested candidates are listed yet. Add a pack here once its dimensions and c
 | --- | --- | --- | --- | --- | --- |
 | Awaiting cavity + connector measurements | — | — | — | Chemistry, charge voltage/current, protection | Not evaluated |
 
-“Should fit” will mean a dimensional candidate only. It must remain in this section until charging, operation, and enclosure fit have been recorded on a named revision.
+“Should fit” describes a dimensional candidate, not a completed Cerberus test.
 
 ## What is known about battery support
 
