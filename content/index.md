@@ -6,6 +6,8 @@ One handheld. Two processors. A practical reference for writing firmware, connec
 
 <div class="stats"><div><strong>ESP32-S3</strong><span>Application + interface</span></div><div><strong>ESP32-C5</strong><span>Dual-band radio coprocessor</span></div><div><strong>320 × 480</strong><span>ST7796 + GT911 touch</span></div><div><strong>16 MB / 2 MB</strong><span>S3 flash / PSRAM</span></div></div>
 
+<figure class="pinout-overview"><a href="assets/cerberus-pinout.png"><img src="assets/cerberus-pinout.png" alt="Cerberus hardware pinout showing the left J2 and right J1 headers, ESP32-S3 and ESP32-C5 GPIOs, power rails, and peripheral functions." width="1536" height="1024"></a><figcaption>Cerberus hardware pinout. <a href="assets/cerberus-pinout.png">Open full-size image</a>.</figcaption></figure>
+
 ## Get Cerberus and join the community
 
 Visit the Cerberus store page for board details and ordering. Join the Discord community to discuss firmware, expansion boards, and your builds.
