@@ -4,7 +4,7 @@ The hardware and programming reference for the Cerberus handheld development boa
 
 **[Open the developer website](https://463n7.github.io/Cerberus-Dev-Board/)** · **[USB firmware installer](https://463n7.github.io/Cerberus-Flasher/)**
 
-[![Cerberus hardware pinout showing the left J2 and right J1 headers, ESP32-S3 and ESP32-C5 GPIOs, power rails, and peripheral functions.](site/cerberus-pinout.png)](site/cerberus-pinout.png)
+[![Cerberus hardware pinout showing the left J2 and right J1 headers, ESP32-S3 and ESP32-C5 GPIOs, power rails, and peripheral functions.](site/cerberus-pinout-corrected.png)](site/cerberus-pinout-corrected.png)
 
 This repository documents the device itself, independently of a particular firmware application. **No Cerberus main-device schematics, PCB sources, fabrication files, or netlists are included.** Expansion-board PCB files have a separate, clearly marked home under [`hardware/expansion/`](hardware/expansion/README.md). Schematic files are excluded from this repository.
 
