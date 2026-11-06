@@ -28,6 +28,14 @@ Optional RF/NFC expansion board in early testing. Pin assignments and wiring det
 
 ## Expansion KiCad files
 
+### Expansion starter project
+
+[Download the expansion starter ZIP](assets/cerberus-expansion-starter.zip) · [Browse the KiCad source files](https://github.com/463N7/Cerberus-Dev-Board/tree/main/hardware/expansion/starter)
+
+An editable **KiCad 10** project with an expansion PCB, four 20-pin connector footprints, a prototyping area, and the matching expansion connector schematic. Extract the ZIP and open **`Cerberus_Proto_Board.kicad_pro`**. Keep the `.kicad_pro`, `.kicad_pcb`, and `.kicad_sch` files together.
+
+The custom prototyping footprint is embedded in the PCB. Standard KiCad libraries provide the connectors and header 3D models. The [project README](https://github.com/463N7/Cerberus-Dev-Board/blob/main/hardware/expansion/starter/README.md) describes dependencies and validation status. These are starter files; a fabrication-validation report is not included.
+
 Use [`hardware/expansion/`](https://github.com/463N7/Cerberus-Dev-Board/tree/main/hardware/expansion) for expansion PCB/project files, footprints, and release notes. Keep the RF/NFC and six-C5 designs in separate folders with their own test records.
 
-No CAD files have been uploaded yet. Each design should identify the compatible Cerberus connector, KiCad version, power budget, assembly notes, license, and testing status. Cerberus main-device design files and all schematic files are excluded.
+Cerberus main-device design files remain excluded. The supplied starter's connector-only schematic is included with its expansion project.

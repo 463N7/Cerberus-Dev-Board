@@ -6,7 +6,9 @@ The hardware and programming reference for the Cerberus handheld development boa
 
 [![Cerberus hardware pinout showing the left J2 and right J1 headers, ESP32-S3 and ESP32-C5 GPIOs, power rails, and peripheral functions.](site/cerberus-pinout-corrected.png)](site/cerberus-pinout-corrected.png)
 
-This repository documents the device itself, independently of a particular firmware application. **No Cerberus main-device schematics, PCB sources, fabrication files, or netlists are included.** Expansion-board PCB files have a separate, clearly marked home under [`hardware/expansion/`](hardware/expansion/README.md). Schematic files are excluded from this repository.
+This repository documents the device itself, independently of a particular firmware application. **No Cerberus main-device schematics, PCB sources, fabrication files, or netlists are included.** Expansion files have a separate, clearly marked home under [`hardware/expansion/`](hardware/expansion/README.md). The supplied expansion starter includes its connector-only schematic.
+
+**[Expansion starter KiCad project](hardware/expansion/starter/)** · **[Download starter ZIP](https://463n7.github.io/Cerberus-Dev-Board/assets/cerberus-expansion-starter.zip)** — KiCad 10 project, PCB, and expansion connector schematic.
 
 ## Developer reference
 
@@ -36,7 +38,7 @@ python tools/check_site.py
 python -m http.server 8765 --directory docs
 ```
 
-Open `http://localhost:8765/`. Commit both the Markdown sources and generated `docs/`. GitHub Pages serves `main:/docs`. The repository check verifies generated content, local links, and the no-schematics boundary.
+Open `http://localhost:8765/`. Commit both the Markdown sources and generated `docs/`. GitHub Pages serves `main:/docs`. The repository check verifies generated content, local links, and the boundary excluding main-device design files.
 
 ## Compatibility reports
 

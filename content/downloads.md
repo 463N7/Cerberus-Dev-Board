@@ -20,12 +20,13 @@ Use matched release images and each package's checksums and offsets. This refere
 | [Expansion breakout photo](assets/expansion-breakout.jpg) | Labeled face and GPIO group orientation | Full-size JPEG |
 | [Tested battery photo](assets/tested-batteries.jpg) | Four tested packs and their printed labels | Full-size JPEG; see the [battery list](batteries.md#tested-batteries) |
 | [Six-C5 WROOM expansion CSV](assets/c5-expansion-pinout.csv) | S3 CS slots and WROOM expansion SPI mapping | Expansion add-on still in testing; GPIO assignments only |
-| [Expansion KiCad area](https://github.com/463N7/Cerberus-Dev-Board/tree/main/hardware/expansion) | Revision folders for expansion PCB/project files and footprints | Prepared; no CAD release uploaded yet |
+| [Expansion starter ZIP](assets/cerberus-expansion-starter.zip) | KiCad project, expansion PCB, connector schematic, and opening instructions | KiCad 10; editable starter design |
+| [Expansion KiCad source](https://github.com/463N7/Cerberus-Dev-Board/tree/main/hardware/expansion) | Starter source files and folders for future expansion designs | Starter available; RF/NFC and six-C5 CAD not uploaded |
 
 The six-C5 bank is in testing. The RF/NFC add-on is in early testing and has no published pinout or download.
 
 ## What belongs here
 
-The repository accepts development documentation, reviewed pin definitions, examples, compatibility records, and explicitly identified expansion PCB files. Main-device schematics, PCB files, netlists, Gerbers, and board fabrication archives are outside this publication. Schematic files are excluded throughout the repository.
+The repository accepts development documentation, reviewed pin definitions, examples, compatibility records, and explicitly identified expansion files. Main-device schematics, PCB files, netlists, Gerbers, and board fabrication archives are outside this publication. The supplied expansion starter's connector-only schematic is included with that project.
 
 Before adding a manufacturing download, identify the exact expansion revision, supported Cerberus revision, connector orientation, KiCad version, license, and test status. Only mark a layout ready for fabrication when its review and validation records support that claim.

@@ -4,6 +4,7 @@ import csv
 import html
 import json
 import re
+from zipfile import ZipFile, ZipInfo
 from html.parser import HTMLParser
 
 import markdown
@@ -98,6 +99,18 @@ def export_breakout_pinouts(assets):
         writer.writerows(rows)
 
 
+def export_expansion_starter(assets):
+    """Package the supplied expansion project with reproducible ZIP metadata."""
+    starter = ROOT / "hardware" / "expansion" / "starter"
+    names = ("README.md", "Cerberus_Proto_Board.kicad_pro", "Cerberus_Proto_Board.kicad_pcb", "Cerberus_Proto_Board.kicad_sch")
+    with ZipFile(assets / "cerberus-expansion-starter.zip", "w") as archive:
+        for name in names:
+            entry = ZipInfo("Cerberus_Proto_Board/" + name, date_time=(1980, 1, 1, 0, 0, 0))
+            entry.create_system = 3
+            entry.external_attr = 0o100644 << 16
+            archive.writestr(entry, (starter / name).read_bytes())
+
+
 def build():
     output = ROOT / "docs"
     assets = output / "assets"
@@ -134,8 +147,9 @@ def build():
     (assets / "search-index.json").write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     export_addon_pinouts(assets, "Six-C5 expansion add-on — in testing", "c5-expansion-pinout.csv")
     export_breakout_pinouts(assets)
+    export_expansion_starter(assets)
     (output / "404.html").write_text('''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Page not found | Cerberus Dev Board</title><link rel="icon" href="https://463n7.github.io/Cerberus-Dev-Board/assets/cerberus-logo.svg?v=green" type="image/svg+xml"><body style="font-family:system-ui;padding:3rem;max-width:40rem"><h1>Page not found</h1><p>That reference may have moved.</p><a href="/Cerberus-Dev-Board/">Open Cerberus Dev Board</a></body></html>''', encoding="utf-8")
-    print(f"Built {len(PAGES)} pages, the 25-GPIO breakout CSV, and six-C5 pinout CSV.")
+    print(f"Built {len(PAGES)} pages, pinout CSVs, and the expansion starter ZIP.")
 
 
 if __name__ == "__main__":

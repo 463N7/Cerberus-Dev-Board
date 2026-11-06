@@ -47,10 +47,11 @@ def main():
             elif url.fragment and target in parsed and unquote(url.fragment) not in parsed[target].ids:
                 errors.append(f"Missing anchor: {file.name} -> {link}")
     banned = {".kicad_sch", ".sch", ".net", ".dsn", ".brd", ".gbr", ".gerber"}
+    starter_schematic = ROOT / "hardware" / "expansion" / "starter" / "Cerberus_Proto_Board.kicad_sch"
     for path in ROOT.rglob("*"):
         if not path.is_file() or ".git" in path.relative_to(ROOT).parts:
             continue
-        if path.suffix.lower() in banned:
+        if path.suffix.lower() in banned and path != starter_schematic:
             errors.append(f"Excluded design file: {path.relative_to(ROOT)}")
         if path.suffix.lower() in {".kicad_pcb", ".kicad_pro", ".kicad_mod", ".kicad_sym"}:
             if not path.is_relative_to(ROOT / "hardware" / "expansion"):

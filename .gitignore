@@ -8,6 +8,8 @@ Thumbs.db
 fp-info-cache
 # Main-device schematics are never part of this publication.
 *.kicad_sch
+# The supplied expansion starter contains a connector-only schematic.
+!hardware/expansion/starter/Cerberus_Proto_Board.kicad_sch
 *.sch
 *.net
 *.dsn
